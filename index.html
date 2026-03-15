@@ -3,39 +3,55 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Portafolio | Juan Pérez</title>
+  <title>Portafolio | Yosef Puetate</title>
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     crossorigin="anonymous"
     referrerpolicy="no-referrer"
   />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header class="sticky-header">
-    <div class="header-left">
-      <h1 class="logo">Juan Pérez</h1>
-    </div>
-    <nav class="header-center">
-      <ul class="nav-list">
-        <li data-section="hero" class="nav-item active">Inicio</li>
-        <li data-section="historia" class="nav-item">Mi Historia</li>
-        <li data-section="logros" class="nav-item">Logros</li>
-        <li data-section="certificados" class="nav-item">Certificados</li>
-        <li data-section="herramientas" class="nav-item">Herramientas</li>
-      </ul>
-    </nav>
-    <div class="header-right">
-      <a href="#" id="whatsapp" class="social"><i class="fab fa-whatsapp"></i></a>
-      <a href="#" id="instagram" class="social"><i class="fab fa-instagram"></i></a>
-      <a href="#" id="linkedin" class="social"><i class="fab fa-linkedin"></i></a>
-    </div>
-  </header>
-
   <main id="main-content" class="main-container">
     <!-- Contenido dinámico -->
   </main>
+
+  <footer class="site-footer">
+    <div class="footer-brand">
+      <span class="footer-name">Yosef Puetate</span>
+      <span class="footer-role">Ingeniería de Software</span>
+    </div>
+    <div class="footer-socials">
+      <a href="#" class="social-link" data-social="whatsapp" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+      <a href="#" class="social-link" data-social="instagram" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="#" class="social-link" data-social="linkedin" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+    </div>
+  </footer>
+
+  <nav class="bottom-dock" aria-label="Secciones del portafolio">
+    <a href="#" class="nav-link active" data-section="hero" aria-label="Inicio" title="Inicio">
+      <i class="fa-solid fa-house"></i>
+    </a>
+    <a href="#" class="nav-link" data-section="historia" aria-label="Mi historia" title="Mi historia">
+      <i class="fa-solid fa-user"></i>
+    </a>
+    <a href="#" class="nav-link" data-section="logros" aria-label="Logros" title="Logros">
+      <i class="fa-solid fa-trophy"></i>
+    </a>
+    <a href="#" class="nav-link" data-section="certificados" aria-label="Certificados" title="Certificados">
+      <i class="fa-solid fa-certificate"></i>
+    </a>
+    <a href="#" class="nav-link" data-section="proyectos" aria-label="Proyectos" title="Proyectos">
+      <i class="fa-solid fa-briefcase"></i>
+    </a>
+    <a href="#" class="nav-link" data-section="herramientas" aria-label="Herramientas" title="Herramientas">
+      <i class="fa-solid fa-layer-group"></i>
+    </a>
+  </nav>
 
   <script src="script.js" defer></script>
 </body>
