@@ -1,60 +1,86 @@
 {
-  "nombre": "Juan Pérez",
-  "carrera": "Ingeniería de Software",
-  "descripcionBreve": "Estudiante apasionado por el desarrollo web y las tecnologías modernas. Especializado en frontend y comprometido con crear experiencias digitales increíbles.",
-  "historia": "Desde niño me fascinó cómo funcionaban las aplicaciones y los sitios web. A los 12 años descubrí HTML y CSS, y desde entonces estoy obsesionado con aprender cada tecnología nueva que sale. Empecé programando pequeños juegos en JavaScript puro, luego avancé hacia proyectos más complejos.\n\nActualmente estudio Ingeniería de Software y me dedico a mejorar mis habilidades en desarrollo frontend. Mi objetivo es crear interfaces intuitivas, accesibles y hermosas que resuelvan problemas reales. Creo que el buen código no solo funciona bien, sino que es fácil de mantener y escalar.\n\nFuera de la programación, disfruto leyendo sobre UX/UI design, contribuyendo a proyectos open source y compartiendo conocimiento con la comunidad de desarrolladores. Mi filosofía es que el aprendizaje nunca termina, y cada proyecto es una oportunidad para crecer.",
-  "logros": [
-    "🏆 Primer lugar en hackathon universitario TechNova 2024",
-    "⭐ Proyecto Open Source destacado en GitHub con 500+ stars",
-    "🎖 Mención honorífica en concurso internacional de algoritmos",
-    "📱 Desarrollo de aplicación mobile con 10k+ descargas",
-    "🔗 Contribuidor en 3 proyectos open source reconocidos",
-    "🎓 GPA académico de 4.0 en curso de programación"
-  ],
-  "certificados": [
-    {
-      "nombre": "JavaScript Moderno: ES6+, ES2024",
-      "institucion": "Platzi",
-      "link": "#"
-    },
-    {
-      "nombre": "Responsive Design & Mobile First",
-      "institucion": "Coursera",
-      "link": "#"
-    },
-    {
-      "nombre": "Advanced CSS: Layout, Flexbox & Grid",
-      "institucion": "Udemy",
-      "link": "#"
-    },
-    {
-      "nombre": "Data Structures & Algorithms",
-      "institucion": "FreeCodeCamp",
-      "link": "#"
-    },
-    {
-      "nombre": "Git & GitHub Avanzado",
-      "institucion": "Platzi",
-      "link": "#"
-    }
-  ],
-  "herramientas": [
-    "HTML5",
-    "CSS3",
-    "JavaScript ES6+",
-    "Git & GitHub",
-    "VS Code",
-    "Figma",
-    "Webpack",
-    "API REST",
-    "DOM Manipulation",
-    "Responsive Design",
-    "Terminal/CLI",
-    "JSON"
-  ],
-  "redes": {
-    "whatsapp": "https://wa.me/1234567890",
-    "instagram": "https://instagram.com/usuario",
-    "linkedin": "https://linkedin.com/in/usuario"
-  }
+	"nombre": "Yosef Puetate",
+	"carrera": "Ingenieria de Software",
+	"descripcionBreve": "Estudiante apasionado por el desarrollo web y las tecnologias modernas. Especializado en frontend y comprometido con crear experiencias digitales increibles.",
+	"historia": "Desde nino me fascino como funcionaban las aplicaciones y los sitios web. A los 12 anos descubri HTML y CSS, y desde entonces estoy obsesionado con aprender cada tecnologia nueva que sale. Empece programando pequenos juegos en JavaScript puro, luego avance hacia proyectos mas complejos.\n\nActualmente estudio Ingenieria de Software y me dedico a mejorar mis habilidades en desarrollo frontend. Mi objetivo es crear interfaces intuitivas, accesibles y hermosas que resuelvan problemas reales. Creo que el buen codigo no solo funciona bien, sino que es facil de mantener y escalar.\n\nFuera de la programacion, disfruto leyendo sobre UX/UI design, contribuyendo a proyectos open source y compartiendo conocimiento con la comunidad de desarrolladores. Mi filosofia es que el aprendizaje nunca termina, y cada proyecto es una oportunidad para crecer.",
+	"logros": [
+		"Primer lugar en hackathon universitario TechNova 2024",
+		"Proyecto open source destacado en GitHub",
+		"Mencion honorifica en concurso de algoritmos",
+		"Desarrollo de aplicacion mobile con miles de descargas"
+	],
+	"certificados": [
+		{
+			"nombre": "JavaScript Moderno: ES6+",
+			"institucion": "Platzi",
+			"link": "#"
+		},
+		{
+			"nombre": "Responsive Design & Mobile First",
+			"institucion": "Coursera",
+			"link": "#"
+		},
+		{
+			"nombre": "Advanced CSS",
+			"institucion": "Udemy",
+			"link": "#"
+		}
+	],
+	"proyectos": [
+		{
+			"name": "Tuenti",
+			"description": "Proyecto desarrollado como practica de desarrollo web",
+			"technologies": ["HTML", "CSS", "JavaScript"],
+			"url": "proyectos/tuenti/index.html",
+			"image": "https://via.placeholder.com/640x360?text=Tuenti",
+			"tags": ["Frontend", "Dashboard"]
+		},
+		{
+			"name": "Facebook Clone",
+			"description": "Clon de Facebook maquetado en HTML, CSS y JavaScript con estructura responsive.",
+			"technologies": ["HTML", "CSS", "JavaScript", "JSON"],
+			"url": "proyectos/Facebook/index.html",
+			"image": "https://via.placeholder.com/640x360?text=Facebook+Clone",
+			"tags": ["Frontend", "Social UI", "Responsive"]
+		},
+		{
+			"name": "Youtube",
+			"description": "Clon de YouTube con header, menus laterales, filtros y cards responsive.",
+			"technologies": ["HTML", "CSS", "JavaScript", "JSON"],
+			"url": "proyectos/Youtube/index.html",
+			"image": "https://via.placeholder.com/640x360?text=Youtube+Clone",
+			"tags": ["Frontend", "Streaming UI", "Responsive"]
+		},
+		{
+			"name": "Animacion Carrusel",
+			"description": "Practica creativa de animacion tipo intro cinematica con keyframes e imagenes en mascara tipografica.",
+			"technologies": ["HTML", "CSS", "JavaScript"],
+			"url": "proyectos/animacion/index.html",
+			"image": "https://via.placeholder.com/640x360?text=Animacion+Carrusel",
+			"tags": ["Animation", "Creative", "Carousel"]
+		},
+		{
+			"name": "Twitch Clone",
+			"description": "Clon de Twitch con layout responsive, buscador, filtros por categoria y tarjetas dinamicas desde JSON.",
+			"technologies": ["HTML", "CSS", "JavaScript", "JSON"],
+			"url": "proyectos/Twitch/index.html",
+			"image": "https://via.placeholder.com/640x360?text=Twitch+Clone",
+			"tags": ["Frontend", "Streaming UI", "Responsive"]
+		}
+	],
+	"herramientas": [
+		"HTML5",
+		"CSS3",
+		"JavaScript ES6+",
+		"Git & GitHub",
+		"VS Code",
+		"Figma",
+		"API REST",
+		"Responsive Design"
+	],
+	"redes": {
+		"whatsapp": "https://wa.me/1234567890",
+		"instagram": "https://instagram.com/usuario",
+		"linkedin": "https://linkedin.com/in/usuario"
+	}
 }
