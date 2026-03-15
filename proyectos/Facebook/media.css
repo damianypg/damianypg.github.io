@@ -1,0 +1,271 @@
+@media (min-width: 1500px) {
+    .layout {
+        grid-template-columns: 300px minmax(740px, 780px) 340px;
+        gap: 24px;
+        padding: 20px 24px;
+    }
+
+    .story-card {
+        flex-basis: 126px;
+        min-height: 228px;
+    }
+}
+
+@media (min-width: 1200px) and (max-width: 1499px) {
+    .layout {
+        grid-template-columns: 280px minmax(620px, 680px) 300px;
+        gap: 16px;
+        padding: 14px;
+    }
+
+    .story-card {
+        flex-basis: 118px;
+        min-height: 214px;
+    }
+}
+
+@media (min-width: 1024px) and (max-width: 1199px) {
+    .topbar {
+        grid-template-columns: minmax(220px, 1fr) auto auto;
+        padding: 0 10px;
+        gap: 10px;
+    }
+
+    .topbar__nav .icon-button:nth-child(5) {
+        display: none;
+    }
+
+    .search-button {
+        width: min(100%, 320px);
+    }
+
+    .layout {
+        grid-template-columns: minmax(620px, 1fr) 300px;
+        gap: 12px;
+        padding: 12px;
+    }
+
+    .icon-button--drawer {
+        display: none;
+    }
+
+    .sidebar--left {
+        display: none;
+    }
+
+    .sidebar--right {
+        display: flex;
+    }
+
+    .story-card {
+        flex-basis: 114px;
+        min-height: 206px;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1023px) {
+    body {
+        overflow: auto;
+    }
+
+    .facebook-app {
+        height: auto;
+        min-height: 100vh;
+    }
+
+    .topbar {
+        grid-template-columns: auto 1fr auto;
+        gap: 8px;
+        padding: 0 8px;
+    }
+
+    .topbar__actions .icon-button:nth-child(1),
+    .topbar__nav .icon-button:nth-child(n + 4) {
+        display: none;
+    }
+
+    .topbar__brand-search {
+        justify-content: flex-start;
+        min-width: 0;
+        gap: 8px;
+    }
+
+    .search-button {
+        width: min(100%, 100%);
+    }
+
+    .layout {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 10px;
+        padding: 10px;
+    }
+
+    .icon-button--drawer {
+        display: inline-flex;
+    }
+
+    .sidebar--left {
+        position: fixed;
+        top: 56px;
+        left: 0;
+        bottom: 0;
+        width: min(320px, 88vw);
+        z-index: 56;
+        background: var(--page);
+        box-shadow: 10px 0 24px rgba(0, 0, 0, 0.2);
+        transform: translateX(-110%);
+        transition: transform 0.24s ease;
+    }
+
+    body.left-menu-open::before {
+        content: "";
+        position: fixed;
+        inset: 56px 0 0;
+        background: rgba(0, 0, 0, 0.36);
+        z-index: 55;
+    }
+
+    body.left-menu-open .sidebar--left {
+        transform: translateX(0);
+    }
+
+    .sidebar--right {
+        display: none;
+    }
+
+    .story-card {
+        flex-basis: 108px;
+        min-height: 198px;
+    }
+
+    .post__stats,
+    .post__header {
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        overflow: auto;
+    }
+
+    .facebook-app {
+        height: auto;
+        min-height: 100vh;
+    }
+
+    .topbar {
+        grid-template-columns: auto 1fr auto;
+        gap: 6px;
+        padding: 0 8px;
+        height: 54px;
+    }
+
+    .topbar__actions,
+    .topbar__nav {
+        gap: 6px;
+    }
+
+    .topbar__nav .icon-button:nth-child(n + 4) {
+        display: none;
+    }
+
+    .topbar__brand-search {
+        justify-content: flex-start;
+        min-width: 0;
+        gap: 8px;
+    }
+
+    .search-button {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .search-button__input {
+        font-size: 14px;
+    }
+
+    .layout {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding: 10px 8px;
+    }
+
+    .icon-button--drawer {
+        display: none;
+    }
+
+    .sidebar--left {
+        display: none;
+    }
+
+    .sidebar--right {
+        display: none;
+    }
+
+    .feed__scroll {
+        overflow: visible;
+        padding-right: 0;
+    }
+
+    .composer,
+    .stories,
+    .post {
+        padding: 12px;
+    }
+
+    .composer__actions {
+        padding-left: 0;
+    }
+
+    .story-card {
+        flex-basis: 108px;
+        min-height: 194px;
+    }
+
+    .post__stats,
+    .post__header {
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 480px) {
+    .topbar__actions .icon-button:nth-child(2),
+    .topbar__nav .icon-button:nth-child(3) {
+        display: none;
+    }
+
+    .brand__badge {
+        width: 34px;
+        height: 34px;
+        font-size: 28px;
+    }
+
+    .search-button {
+        height: 36px;
+        padding: 0 10px;
+    }
+
+    .search-button__input {
+        font-size: 13px;
+    }
+
+    .post__action span {
+        font-size: 13px;
+    }
+
+    .post__action {
+        gap: 6px;
+    }
+
+    .story-card {
+        flex-basis: 106px;
+        min-height: 188px;
+    }
+
+    .post__media {
+        min-height: 200px;
+    }
+}

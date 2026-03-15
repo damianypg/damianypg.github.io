@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Proyecto Tuenti</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="main-container">
+      <div class="app">
+        <div class="app-body">
+          <section class="header">
+            <div class="cont-header">
+              <h1 class="title">
+                ¡Hola, Yosef!
+                <span class="subtitle">097-897-2191</span>
+              </h1>
+              <div class="num-icon">
+                <span class="number">3</span>
+                <span class="icon" aria-hidden="true">🔔</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="section anuncios">
+            <div class="anuncios-container">
+              <div class="carousel" id="carousel">
+                <a href="#perfil" class="carousel-item">
+                  <img src="../../img/anuncio.png" alt="Anuncio Tuenti" />
+                </a>
+                <a href="#perfil" class="carousel-item">
+                  <img src="../../img/anuncio.png" alt="Anuncio Tuenti" />
+                </a>
+                <a href="#perfil" class="carousel-item">
+                  <img src="../../img/anuncio.png" alt="Anuncio Tuenti" />
+                </a>
+              </div>
+            </div>
+          </section>
+
+          <section class="section banner">
+            <div class="card promo-card">
+              <h2 class="promo-title">eSIM Tuenti</h2>
+              <p class="promo-subtitle">Pídela aquí</p>
+            </div>
+          </section>
+
+          <section class="section plan-card">
+            <div class="plan-card">
+              <div class="plan-balance">
+                <div class="plan-balance-info">
+                  <h3 class="plan-title">Tu saldo</h3>
+                  <p class="plan-amount">$0.00</p>
+                </div>
+                <button class="btn-comprar-mas">Comprar más</button>
+              </div>
+
+              <div class="plan-info">
+                <p class="plan-expiry">Vence: 02/03/2026</p>
+                <div class="plan-services">
+                  <span class="plan-service">💬 WhatsApp</span>
+                  <span class="plan-service">🎵 Música</span>
+                  <span class="plan-service">📺 Videos</span>
+                </div>
+              </div>
+
+              <div class="plan-usage">
+                <div class="dashboards-carousel">
+                  <div class="dashboards-track">
+                    <div class="dashboard-card" data-type="datos" data-progress="0.334">
+                      <div class="usage-title">DATOS</div>
+                      <div class="tuenti-circle-container">
+                        <svg class="tuenti-circle-svg" viewBox="0 0 120 120">
+                          <circle class="tuenti-circle-bg" cx="60" cy="60" r="50"></circle>
+                          <circle class="tuenti-circle-progress" cx="60" cy="60" r="50" stroke-dasharray="314.16" stroke-dashoffset="314.16"></circle>
+                        </svg>
+                        <div class="tuenti-circle-content">
+                          <span class="tuenti-circle-main">3.34</span>
+                          <span class="tuenti-circle-unit">GB</span>
+                          <span class="tuenti-circle-sub">de 10 GB</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="dashboard-card" data-type="voz" data-progress="0.836">
+                      <div class="usage-title">VOZ</div>
+                      <div class="tuenti-circle-container">
+                        <svg class="tuenti-circle-svg" viewBox="0 0 120 120">
+                          <circle class="tuenti-circle-bg" cx="60" cy="60" r="50"></circle>
+                          <circle class="tuenti-circle-progress" cx="60" cy="60" r="50" stroke-dasharray="314.16" stroke-dashoffset="314.16"></circle>
+                        </svg>
+                        <div class="tuenti-circle-content">
+                          <span class="tuenti-circle-main">163</span>
+                          <span class="tuenti-circle-unit"></span>
+                          <span class="tuenti-circle-sub">de 195 min</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="dashboard-card" data-type="sms" data-progress="0.45">
+                      <div class="usage-title">SMS</div>
+                      <div class="tuenti-circle-container">
+                        <svg class="tuenti-circle-svg" viewBox="0 0 120 120">
+                          <circle class="tuenti-circle-bg" cx="60" cy="60" r="50"></circle>
+                          <circle class="tuenti-circle-progress" cx="60" cy="60" r="50" stroke-dasharray="314.16" stroke-dashoffset="314.16"></circle>
+                        </svg>
+                        <div class="tuenti-circle-content">
+                          <span class="tuenti-circle-main">45</span>
+                          <span class="tuenti-circle-unit"></span>
+                          <span class="tuenti-circle-sub">de 100</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="dashboards-dots">
+                  <button class="dashboard-dot dashboard-dot--active" data-index="0"></button>
+                  <button class="dashboard-dot" data-index="1"></button>
+                  <button class="dashboard-dot" data-index="2"></button>
+                </div>
+
+                <div class="usage-detail">
+                  <a href="#" class="usage-detail-link">Ver detalle</a>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="section servicios">
+            <h2 class="section-title">Servicios adicionales</h2>
+            <div class="services-grid" id="services-grid">
+              <!-- Se rellena dinámicamente -->
+            </div>
+          </section>
+        </div>
+
+        <nav class="menu-nav">
+          <button class="nav-btn active">
+            <span class="icon">🏠</span>
+            <span class="label">Cuenta</span>
+          </button>
+          <button class="nav-btn">
+            <span class="icon">👤</span>
+            <span class="label">Perfil</span>
+          </button>
+          <button class="nav-btn">
+            <span class="icon">☰</span>
+            <span class="label">Menú</span>
+          </button>
+          <button class="nav-btn">
+            <span class="icon">⚡</span>
+            <span class="label">Servicios</span>
+          </button>
+          <button class="nav-btn">
+            <span class="icon">❓</span>
+            <span class="label">Ayuda</span>
+          </button>
+        </nav>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

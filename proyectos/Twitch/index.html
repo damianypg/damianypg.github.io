@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Twitch Clone</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="media.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-left">
+      <div class="brand-wrap">
+        <div class="brand-box" aria-label="Twitch logo">
+          <i class="bi bi-twitch"></i>
+        </div>
+        <button class="explore-btn" type="button">Explorar</button>
+      </div>
+    </div>
+
+    <form class="search-wrap" role="search">
+      <input id="searchInput" type="search" placeholder="Buscar streamers o categorias" aria-label="Buscar" />
+      <button type="submit"><i class="bi bi-search"></i> Buscar</button>
+    </form>
+
+    <div class="topbar-right">
+      <button class="top-icon-btn crown-btn" type="button" aria-label="Corona"><i class="bi bi-trophy-fill"></i></button>
+      <button class="ghost-btn">Iniciar sesion</button>
+      <button class="solid-btn">Registrarse</button>
+      <button class="top-icon-btn" type="button" aria-label="Perfil"><i class="bi bi-person"></i></button>
+    </div>
+  </header>
+
+  <div class="shell">
+    <aside class="left-sidebar panel">
+      <div class="panel-title-row">
+        <h2><i class="bi bi-heart-fill"></i> Siguiendo</h2>
+      </div>
+      <ul id="followingSidebar" class="following-list"></ul>
+      <button class="show-more-inline" type="button">Mostrar mas</button>
+
+      <div class="panel-title-row live-block-title">
+        <h2><i class="bi bi-broadcast-pin"></i> En vivo ahora</h2>
+        <span class="live-dot"></span>
+      </div>
+      <ul id="liveChannels" class="channel-list"></ul>
+      <button class="show-more-inline" type="button">Mostrar mas</button>
+
+      <div class="panel-title-row live-block-title">
+        <h2><i class="bi bi-grid-3x3-gap-fill"></i> Categorias recomendadas</h2>
+      </div>
+      <ul id="recommendedCats" class="category-side-list"></ul>
+      <button class="show-more-inline" type="button">Mostrar mas</button>
+    </aside>
+
+    <main class="content">
+      <section class="hero">
+        <p class="hero-kicker">Streaming en vivo</p>
+        <h2>Descubre comunidades, juegos y creadores en tiempo real</h2>
+        <p class="hero-copy">Clon inspirado en Twitch con interfaz responsive, listas dinamicas desde JSON y estilos personalizados.</p>
+
+        <div class="hero-carousel" aria-label="Carrusel de streams destacados">
+          <div id="heroTrack" class="hero-track"></div>
+          <div class="hero-nav-row">
+            <button id="heroPrev" class="hero-nav hero-prev" type="button" aria-label="Anterior"><i class="bi bi-chevron-left"></i> Previo</button>
+            <button id="heroNext" class="hero-nav hero-next" type="button" aria-label="Siguiente">Next <i class="bi bi-chevron-right"></i></button>
+          </div>
+        </div>
+      </section>
+
+      <section class="category-block">
+        <div class="section-head">
+          <h3>Explorar por categoria</h3>
+        </div>
+        <div id="categoryChips" class="chips"></div>
+      </section>
+
+      <section class="streams-block">
+        <div class="section-head">
+          <h3>Explora streams por categorias</h3>
+          <p id="streamCount"></p>
+        </div>
+        <div id="streamSections" class="stream-sections"></div>
+      </section>
+    </main>
+  </div>
+
+  <aside class="join-banner" aria-label="Invitacion a registrarse">
+    <p class="join-banner-text">Unete a la comunidad de Twitch</p>
+    <button class="join-banner-btn" type="button">Registrarse</button>
+  </aside>
+
+  <script src="script.js"></script>
+</body>
+</html>

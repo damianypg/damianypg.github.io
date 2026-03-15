@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Animación — Carrusel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="scene">
+
+    <!-- Barras cinemáticas (letterbox) -->
+    <div class="letterbox top"></div>
+    <div class="letterbox bottom"></div>
+
+    <!--
+      CAPA 1 — Slideshow
+      El fondo animado cicla las 13 imágenes con @keyframes.
+      Cada porcentaje lleva la ruta de una imagen distinta.
+    -->
+    <div class="slideshow"></div>
+
+    <!--
+      CAPA 2 — Máscara de texto (mix-blend-mode: multiply)
+      Fondo negro + texto blanco.
+      El modo multiply hace que los píxeles blancos (letras)
+      dejen «pasar» el slideshow de abajo, y el negro lo bloquee.
+      Resultado: las imágenes se ven SOLO dentro del relleno de las letras.
+    -->
+    <div class="text-mask">
+      <h1 aria-label="EL SENOR DE LOS ANILLOS">
+        <span>EL SENOR</span>
+        <span>DE LOS</span>
+        <span>ANILLOS</span>
+      </h1>
+    </div>
+
+    <!--
+      CAPA 3 — Contorno del texto
+      Relleno transparente + solo borde visible.
+      Se superpone sobre la máscara para dar el efecto de letras huecas con marco.
+    -->
+    <div class="text-stroke">
+      <h1 aria-label="EL SENOR DE LOS ANILLOS">
+        <span>EL SENOR</span>
+        <span>DE LOS</span>
+        <span>ANILLOS</span>
+      </h1>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

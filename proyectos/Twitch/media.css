@@ -1,0 +1,145 @@
+@media (max-width: 1200px) {
+  .shell {
+    grid-template-columns: 230px 1fr;
+  }
+
+  .left-sidebar {
+    max-height: calc(100vh - 102px);
+  }
+
+  .right-sidebar {
+    display: none;
+  }
+
+  .stream-row {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 920px) {
+  .topbar {
+    height: auto;
+    padding: 12px;
+    flex-wrap: wrap;
+  }
+
+  .search-wrap {
+    order: 3;
+    flex-basis: 100%;
+    max-width: none;
+  }
+
+  .shell {
+    grid-template-columns: 1fr;
+  }
+
+  .left-sidebar {
+    order: 2;
+    position: static;
+    max-height: none;
+  }
+
+  .channel-list {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  }
+
+  .stream-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hero-stage {
+    position: static;
+    height: auto;
+    display: grid;
+    grid-template-columns: 92px minmax(0, 1fr) 92px;
+    gap: 8px;
+  }
+
+  .hero-side {
+    position: relative;
+    top: auto;
+    width: auto;
+    height: auto;
+    filter: none;
+    transform: none;
+    opacity: 0.9;
+  }
+
+  .hero-track {
+    min-height: 150px;
+  }
+
+  .featured-stream {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    height: auto;
+    width: 100%;
+    max-width: none;
+  }
+
+  .featured-media {
+    border-radius: 14px 14px 0 0;
+    border-right: 1px solid rgba(255, 255, 255, 0.18);
+    min-height: 150px;
+    width: 100%;
+    height: auto;
+  }
+
+  .featured-info {
+    border-radius: 0 0 14px 14px;
+    border-top: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .topbar-right {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .ghost-btn,
+  .solid-btn,
+  .search-wrap button {
+    height: 38px;
+    font-size: 0.85rem;
+  }
+
+  .hero {
+    padding: 18px;
+  }
+
+  .hero-stage {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-side {
+    display: none;
+  }
+
+  .stream-row {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-carousel {
+    gap: 8px;
+  }
+
+  .featured-media {
+    min-height: 130px;
+  }
+
+  .player-controls {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
+  .player-volume {
+    width: 70px;
+  }
+
+  .hero-nav {
+    min-width: 82px;
+    height: 38px;
+    font-size: 0.74rem;
+  }
+}

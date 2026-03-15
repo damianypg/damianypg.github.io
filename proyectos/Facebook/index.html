@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Facebook Clone</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="media.css">
+</head>
+<body>
+	<div class="facebook-app">
+		<header class="topbar">
+			<div class="topbar__brand-search">
+				<a class="brand" href="#" aria-label="Inicio de Facebook">
+					<span class="brand__badge">f</span>
+				</a>
+
+				<label class="search-button" aria-label="Buscar en Facebook">
+					<span class="search-button__icon"><i class="bi bi-search"></i></span>
+					<input class="search-button__input" type="text" placeholder="Buscar en Facebook">
+				</label>
+			</div>
+
+			<nav class="topbar__nav" aria-label="Navegacion principal">
+				<button class="icon-button icon-button--active" type="button" aria-label="Inicio" data-screen="home">
+					<i class="bi bi-house-door-fill"></i>
+				</button>
+				<button class="icon-button" type="button" aria-label="Watch" data-screen="watch">
+					<i class="bi bi-collection-play-fill"></i>
+				</button>
+				<button class="icon-button" type="button" aria-label="Marketplace" data-screen="marketplace">
+					<i class="bi bi-shop"></i>
+				</button>
+				<button class="icon-button" type="button" aria-label="Grupos" data-screen="groups">
+					<i class="bi bi-people-fill"></i>
+				</button>
+				<button class="icon-button" type="button" aria-label="Gaming" data-screen="gaming">
+					<i class="bi bi-controller"></i>
+				</button>
+			</nav>
+
+			<div class="topbar__actions" aria-label="Acciones">
+				<button class="icon-button" type="button" aria-label="Mensajes">
+					<i class="bi bi-messenger"></i>
+				</button>
+				<button class="icon-button" type="button" aria-label="Notificaciones">
+					<i class="bi bi-bell-fill"></i>
+				</button>
+				<button class="icon-button" id="themeToggle" type="button" aria-label="Cambiar modo oscuro o claro">
+					<i class="bi bi-moon-stars-fill" id="themeToggleIcon"></i>
+				</button>
+				<button class="icon-button icon-button--active" type="button" aria-label="Perfil">
+					<i class="bi bi-person-circle"></i>
+				</button>
+				<button class="icon-button icon-button--drawer" id="leftMenuToggle" type="button" aria-label="Abrir menu lateral" aria-expanded="false">
+					<i class="bi bi-list"></i>
+				</button>
+			</div>
+		</header>
+
+		<main class="layout">
+			<aside class="sidebar sidebar--left" aria-label="Atajos del usuario">
+				<section class="profile-panel" id="profilePanel"></section>
+
+				<section class="shortcuts-panel">
+					<div class="shortcut-list" id="shortcutList"></div>
+				</section>
+			</aside>
+
+			<section class="feed" aria-label="Contenido principal">
+				<div class="feed__scroll">
+					<section class="screen screen--active" id="screenHome" aria-label="Pantalla inicio">
+						<section class="composer">
+							<div class="composer__top">
+								<div class="avatar avatar--blue" id="composerAvatar"></div>
+								<button class="composer__input" type="button">Que estas pensando?</button>
+								<div class="composer__actions" aria-label="Acciones rapidas">
+									<button type="button" class="composer__action composer__action--video" aria-label="Live video">
+										<i class="bi bi-camera-video-fill composer__action-icon"></i>
+									</button>
+									<button type="button" class="composer__action composer__action--photo" aria-label="Subir foto">
+										<i class="bi bi-image-fill composer__action-icon"></i>
+									</button>
+									<button type="button" class="composer__action composer__action--emoji" aria-label="Emoji">
+										<i class="bi bi-emoji-smile-fill composer__action-icon"></i>
+									</button>
+								</div>
+							</div>
+						</section>
+
+						<section class="stories">
+							<div class="panel__header">
+								<h2>Historias</h2>
+								<div class="stories__controls">
+									<button class="stories__control" id="storiesPrev" type="button" aria-label="Historia anterior"><i class="bi bi-chevron-left"></i></button>
+									<button class="stories__control" id="storiesNext" type="button" aria-label="Siguiente historia"><i class="bi bi-chevron-right"></i></button>
+								</div>
+							</div>
+							<div class="story-carousel" id="storyCarousel">
+								<div class="story-list" id="storyList"></div>
+							</div>
+						</section>
+
+						<section class="post-list" id="postList" aria-label="Publicaciones"></section>
+					</section>
+
+					<section class="screen screen--hidden" id="screenWatch" aria-label="Pantalla watch"></section>
+					<section class="screen screen--hidden" id="screenMarketplace" aria-label="Pantalla marketplace"></section>
+					<section class="screen screen--hidden" id="screenGroups" aria-label="Pantalla grupos"></section>
+					<section class="screen screen--hidden" id="screenGaming" aria-label="Pantalla gaming"></section>
+				</div>
+			</section>
+
+			<aside class="sidebar sidebar--right" aria-label="Panel derecho">
+				<section class="ads-panel">
+					<div class="panel__header">
+						<h2>Publicidad</h2>
+					</div>
+					<div class="ad-card" id="adCard"></div>
+				</section>
+
+				<section class="birthdays-panel">
+					<div class="panel__header">
+						<h2>Cumpleaños</h2>
+					</div>
+					<div class="birthday-list" id="birthdayList"></div>
+				</section>
+
+				<section class="contacts-panel">
+					<div class="panel__header">
+						<h2>Amigos conectados</h2>
+						<span class="panel__meta" id="onlineCount">0 en linea</span>
+					</div>
+					<div class="contact-list" id="contactList"></div>
+				</section>
+			</aside>
+		</main>
+	</div>
+
+	<script src="script.js"></script>
+</body>
+</html>

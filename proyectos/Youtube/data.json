@@ -1,0 +1,298 @@
+{
+	"categories": [
+		"Todos",
+		"Musica",
+		"Programacion",
+		"Gaming",
+		"Podcasts",
+		"Noticias",
+		"En vivo",
+		"UX/UI",
+		"Frontend"
+	],
+	"sidebar": {
+		"principal": [
+			{ "label": "Inicio", "icon": "bi-house-door-fill" },
+			{ "label": "Shorts", "image": "img/short.png" }
+		],
+		"suscripciones": [
+			{ "label": "DW Espanol", "image": "img/dw-logo.png" },
+			{ "label": "Enchufetv", "image": "img/enchufe-logo.png" }
+		],
+		"tu": [
+			{ "label": "Historial", "icon": "bi-clock-history" },
+			{ "label": "Lista de reproduccion", "icon": "bi-collection-play" },
+			{ "label": "Ver mas tarde", "icon": "bi-clock" },
+			{ "label": "Videos que me gustan", "icon": "bi-hand-thumbs-up" },
+			{ "label": "Mis videos", "icon": "bi-camera-video" }
+		],
+		"explorar": [
+			{ "label": "Musica", "icon": "bi-music-note-beamed" },
+			{ "label": "Videojuegos", "icon": "bi-controller" },
+			{ "label": "Deportes", "icon": "bi-trophy" }
+		],
+		"masDeYoutube": [
+			{ "label": "YouTube Premium", "icon": "bi-youtube" },
+			{ "label": "YouTube Studio", "icon": "bi-badge-ad" }
+		],
+		"configuracion": [
+			{ "label": "Configuracion", "icon": "bi-gear" },
+			{ "label": "Historial de denuncias", "icon": "bi-flag" }
+		],
+		"legal": [
+			"Acerca de",
+			"Prensa",
+			"Derechos de autor",
+			"Contactanos",
+			"Creadores",
+			"Publicidad",
+			"Desarrolladores",
+			"Terminos",
+			"Privacidad",
+			"Politicas y seguridad",
+			"Como funciona YouTube",
+			"Probar funciones nuevas"
+		]
+	},
+	"shorts": [
+		{
+			"title": "Atajos de VS Code que te ahorran horas",
+			"views": "1.1 M",
+			"label": "Tips",
+			"gradient": ["#0f2027", "#203a43"],
+			"previewVideo": "img/short-1.mp4",
+			"poster": "img/portada-1.png",
+			"url": "https://www.youtube.com/shorts"
+		},
+		{
+			"title": "CSS Grid en 30 segundos",
+			"views": "456 mil",
+			"label": "CSS",
+			"gradient": ["#42275a", "#734b6d"],
+			"poster": "img/portada-2.png",
+			"url": "https://www.youtube.com/shorts"
+		},
+		{
+			"title": "3 trucos de JavaScript moderno",
+			"views": "739 mil",
+			"label": "JS",
+			"gradient": ["#2b5876", "#4e4376"],
+			"poster": "img/portada-3.png",
+			"url": "https://www.youtube.com/shorts"
+		},
+		{
+			"title": "Setup minimalista para programar",
+			"views": "302 mil",
+			"label": "Desk",
+			"gradient": ["#1d4350", "#a43931"],
+			"poster": "img/portada-4.png",
+			"url": "https://www.youtube.com/shorts"
+		},
+		{
+			"title": "Debug rapido en el navegador",
+			"views": "518 mil",
+			"label": "DevTools",
+			"gradient": ["#000428", "#004e92"],
+			"poster": "img/portada-1.png",
+			"url": "https://www.youtube.com/shorts"
+		},
+		{
+			"title": "Como centrar cualquier div sin pelear con CSS",
+			"views": "842 mil",
+			"label": "Layout",
+			"gradient": ["#1e3c72", "#2a5298"],
+			"poster": "img/portada-2.png",
+			"url": "https://www.youtube.com/shorts"
+		},
+		{
+			"title": "3 efectos visuales para hacer tu web mas pro",
+			"views": "1.4 M",
+			"label": "FX",
+			"gradient": ["#42275a", "#734b6d"],
+			"poster": "img/portada-3.png",
+			"url": "https://www.youtube.com/shorts"
+		},
+		{
+			"title": "Atajo mental para entender Flexbox en 1 minuto",
+			"views": "627 mil",
+			"label": "Flex",
+			"gradient": ["#134e5e", "#71b280"],
+			"poster": "img/portada-4.png",
+			"url": "https://www.youtube.com/shorts"
+		},
+		{
+			"title": "Setup de escritorio para programar comodo y rapido",
+			"views": "389 mil",
+			"label": "Setup",
+			"gradient": ["#0f2027", "#203a43"],
+			"poster": "img/portada-1.png",
+			"url": "https://www.youtube.com/shorts"
+		},
+		{
+			"title": "Animaciones suaves con solo unas lineas de CSS",
+			"views": "973 mil",
+			"label": "Motion",
+			"gradient": ["#2b5876", "#4e4376"],
+			"poster": "img/portada-2.png",
+			"url": "https://www.youtube.com/shorts"
+		}
+	],
+	"videos": [
+		{
+			"title": "Nueva interfaz de YouTube 2026: cambios y mejoras",
+			"channel": "Mundo Tech",
+			"channelInitial": "MT",
+			"views": "82 mil",
+			"timeAgo": "hace 2 dias",
+			"duration": "12:34",
+			"category": "Noticias",
+			"label": "Update UI",
+			"gradient": ["#3e5151", "#decba4"],
+			"poster": "img/portada-1.png",
+			"url": "https://www.youtube.com"
+		},
+		{
+			"title": "Crea un clon de YouTube con HTML CSS y JavaScript",
+			"channel": "Codigo360",
+			"channelInitial": "C3",
+			"views": "151 mil",
+			"timeAgo": "hace 1 semana",
+			"duration": "28:12",
+			"category": "Programacion",
+			"label": "Code Lab",
+			"gradient": ["#0f2027", "#2c5364"],
+			"poster": "img/portada-2.png",
+			"url": "https://www.youtube.com"
+		},
+		{
+			"title": "Playlist LoFi para estudiar y programar",
+			"channel": "Wave Beats",
+			"channelInitial": "WB",
+			"views": "1.2 M",
+			"timeAgo": "hace 3 semanas",
+			"duration": "1:59:05",
+			"category": "Musica",
+			"label": "LoFi Mix",
+			"gradient": ["#1a2a6c", "#b21f1f"],
+			"poster": "img/portada-3.png",
+			"url": "https://www.youtube.com"
+		},
+		{
+			"title": "Disena un sistema de tarjetas responsive desde cero",
+			"channel": "Design Nest",
+			"channelInitial": "DN",
+			"views": "39 mil",
+			"timeAgo": "hace 5 dias",
+			"duration": "18:42",
+			"category": "UX/UI",
+			"label": "UI System",
+			"gradient": ["#41295a", "#2f0743"],
+			"poster": "img/portada-4.png",
+			"url": "https://www.youtube.com"
+		},
+		{
+			"title": "Directo: arquitectura frontend para proyectos reales",
+			"channel": "Codigo360",
+			"channelInitial": "C3",
+			"views": "14 mil",
+			"timeAgo": "hace 8 horas",
+			"duration": "1:24:10",
+			"category": "En vivo",
+			"label": "LIVE",
+			"gradient": ["#1d4350", "#a43931"],
+			"poster": "img/portada-1.png",
+			"url": "https://www.youtube.com"
+		},
+		{
+			"title": "Top 10 juegos competitivos para 2026",
+			"channel": "Gamer Axis",
+			"channelInitial": "GA",
+			"views": "503 mil",
+			"timeAgo": "hace 4 dias",
+			"duration": "15:21",
+			"category": "Gaming",
+			"label": "Gaming",
+			"gradient": ["#000428", "#004e92"],
+			"poster": "img/portada-2.png",
+			"url": "https://www.youtube.com"
+		},
+		{
+			"title": "Podcast: como crecer en desarrollo web en 2026",
+			"channel": "Dev Talks",
+			"channelInitial": "DT",
+			"views": "65 mil",
+			"timeAgo": "hace 10 dias",
+			"duration": "48:09",
+			"category": "Podcasts",
+			"label": "Podcast",
+			"gradient": ["#134e5e", "#71b280"],
+			"poster": "img/portada-3.png",
+			"url": "https://www.youtube.com"
+		},
+		{
+			"title": "Grid avanzado: domina layouts modernos en minutos",
+			"channel": "Frontend Lab",
+			"channelInitial": "FL",
+			"views": "28 mil",
+			"timeAgo": "hace 1 dia",
+			"duration": "10:44",
+			"category": "Frontend",
+			"label": "CSS Grid",
+			"gradient": ["#42275a", "#734b6d"],
+			"poster": "img/portada-4.png",
+			"url": "https://www.youtube.com"
+		},
+		{
+			"title": "Aprende componentes reutilizables en JavaScript puro",
+			"channel": "Codigo360",
+			"channelInitial": "C3",
+			"views": "22 mil",
+			"timeAgo": "hace 11 horas",
+			"duration": "21:03",
+			"category": "Programacion",
+			"label": "Vanilla JS",
+			"gradient": ["#2b5876", "#4e4376"],
+			"poster": "img/portada-1.png",
+			"url": "https://www.youtube.com"
+		},
+		{
+			"title": "Breaking: tendencias tecnicas que dominan este ano",
+			"channel": "Mundo Tech",
+			"channelInitial": "MT",
+			"views": "91 mil",
+			"timeAgo": "hace 6 horas",
+			"duration": "9:51",
+			"category": "Noticias",
+			"label": "Tech News",
+			"gradient": ["#000000", "#434343"],
+			"poster": "img/portada-2.png",
+			"url": "https://www.youtube.com"
+		},
+		{
+			"title": "Arquitectura de componentes para interfaces escalables",
+			"channel": "Frontend Lab",
+			"channelInitial": "FL",
+			"views": "44 mil",
+			"timeAgo": "hace 3 dias",
+			"duration": "16:18",
+			"category": "Frontend",
+			"label": "Components",
+			"gradient": ["#2c3e50", "#4ca1af"],
+			"poster": "img/portada-3.png",
+			"url": "https://www.youtube.com"
+		},
+		{
+			"title": "Como maquetar dashboards modernos sin frameworks",
+			"channel": "Codigo360",
+			"channelInitial": "C3",
+			"views": "73 mil",
+			"timeAgo": "hace 9 dias",
+			"duration": "19:47",
+			"category": "Programacion",
+			"label": "Dashboard",
+			"gradient": ["#141e30", "#243b55"],
+			"poster": "img/portada-4.png",
+			"url": "https://www.youtube.com"
+		}
+	]
+}

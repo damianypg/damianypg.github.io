@@ -1,0 +1,195 @@
+{
+	"user": {
+		"name": "Yosef Puetate",
+		"role": "Disenador frontend y creador de contenido",
+		"initials": "YS",
+		"avatar": "../../img/img-yo.png",
+		"friends": 842,
+		"groups": 18,
+		"photos": 126
+	},
+	"shortcuts": [
+		{
+			"icon": "metaAI",
+			"title": "Meta AI",
+			"meta": "Asistente inteligente"
+		},
+		{
+			"icon": "friends",
+			"title": "Amigos",
+			"meta": "Solicitudes y sugerencias"
+		},
+		{
+			"icon": "groups",
+			"title": "Grupos",
+			"meta": "Comunidades y conversaciones"
+		},
+		{
+			"icon": "saved",
+			"title": "Guardado",
+			"meta": "Contenido guardado"
+		},
+		{
+			"icon": "memories",
+			"title": "Recuerdos",
+			"meta": "Publicaciones de otros anos"
+		},
+		{
+			"icon": "events",
+			"title": "Eventos",
+			"meta": "Actividades cercanas"
+		},
+		{
+			"icon": "marketplaceBrand",
+			"title": "Marketplace",
+			"meta": "Compra y venta local"
+		}
+	],
+	"stories": [
+		{
+			"initials": "YS",
+			"title": "Tu historia",
+			"image": "../../img/img-yo.png"
+		},
+		{
+			"initials": "AL",
+			"title": "Ana Lopez",
+			"image": "../../img/2.png"
+		},
+		{
+			"initials": "MR",
+			"title": "Marco Ruiz",
+			"image": "../../img/3.png"
+		},
+		{
+			"initials": "SP",
+			"title": "Sofia Perez",
+			"image": "../../img/5.png"
+		},
+		{
+			"initials": "DG",
+			"title": "Diego Gomez",
+			"image": "../../img/6.png"
+		},
+		{
+			"initials": "LM",
+			"title": "Laura Mora",
+			"image": "../../img/7.png"
+		}
+	],
+	"posts": [
+		{
+			"author": "Yosef Puetate",
+			"initials": "YP",
+			"avatar": "../../img/img-yo.png",
+			"time": "Hace 32 min",
+			"caption": "Cerrando una landing con enfoque mobile first. El detalle en el espaciado cambia todo.",
+			"image": "../../img/img-1.jpg",
+			"reactions": ["like", "love", "care", "wow"],
+			"likes": "3.2 mil",
+			"comments": 184,
+			"shares": 41
+		},
+		{
+			"author": "Ana Lopez",
+			"initials": "AL",
+			"avatar": "../../img/2.png",
+			"time": "Hace 1 h",
+			"caption": "Domingo de cafe y mockups. Hoy me inspire en una interfaz mas limpia y rapida.",
+			"image": "../../img/img-2.webp",
+			"reactions": ["like", "love", "haha"],
+			"likes": "1.8 mil",
+			"comments": 73,
+			"shares": 12
+		},
+		{
+			"author": "Marco Ruiz",
+			"initials": "MR",
+			"avatar": "../../img/3.png",
+			"time": "Hace 2 h",
+			"caption": "Nuevo setup para edicion de video. Fluido, silencioso y listo para reels.",
+			"image": "../../img/img-3.jpg",
+			"reactions": ["like", "love", "care"],
+			"likes": "2.4 mil",
+			"comments": 96,
+			"shares": 29
+		},
+		{
+			"author": "Sofia Perez",
+			"initials": "SP",
+			"avatar": "../../img/5.png",
+			"time": "Hace 4 h",
+			"caption": "Mini shooting de producto para redes. Luz natural + edicion ligera.",
+			"image": "../../img/img-4.jpg",
+			"reactions": ["like", "love", "wow"],
+			"likes": "956",
+			"comments": 38,
+			"shares": 7
+		},
+		{
+			"author": "Diego Gomez",
+			"initials": "DG",
+			"avatar": "../../img/6.png",
+			"time": "Ayer a las 21:10",
+			"caption": "Checklist de publicacion: copy claro, visual fuerte y CTA directo.",
+			"image": "../../img/img-5.webp",
+			"reactions": ["like", "haha", "wow"],
+			"likes": "1.1 mil",
+			"comments": 52,
+			"shares": 16
+		}
+	],
+	"advertisement": {
+		"eyebrow": "Patrocinado",
+		"title": "Impulsa tu marca",
+		"text": "Lanza campanas con alcance local y conversiones medibles en minutos."
+	},
+	"birthdays": [
+		{
+			"name": "Andrea Rojas",
+			"meta": "Cumple hoy"
+		},
+		{
+			"name": "Jose Medina",
+			"meta": "Cumple en 2 dias"
+		}
+	],
+	"contacts": [
+		{
+			"initials": "AR",
+			"name": "Andrea Rojas",
+			"avatar": "../../img/2.png",
+			"status": "Activa ahora"
+		},
+		{
+			"initials": "JM",
+			"name": "Jose Medina",
+			"avatar": "../../img/3.png",
+			"status": "Activo hace 5 min"
+		},
+		{
+			"initials": "LP",
+			"name": "Laura Pineda",
+			"avatar": "../../img/5.png",
+			"status": "Activo hace 1 min"
+		}
+	],
+	"screens": {
+		"watch": {
+			"title": "Watch",
+			"description": "Explora videos y transmisiones recomendadas para ti."
+		},
+		"marketplace": {
+			"title": "Marketplace",
+			"description": "Compra y vende productos cerca de tu ubicacion."
+		},
+		"groups": {
+			"title": "Grupos",
+			"description": "Descubre comunidades y conversaciones por intereses."
+		},
+		"gaming": {
+			"title": "Gaming",
+			"description": "Sigue streamings, clips y actividades gaming."
+		}
+	}
+}

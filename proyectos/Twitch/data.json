@@ -1,0 +1,102 @@
+{
+  "liveChannels": [
+    {
+      "name": "NightRaven",
+      "game": "Valorant",
+      "viewers": "21.4K",
+      "video": "https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+    },
+    {
+      "name": "PixelLuna",
+      "game": "Minecraft",
+      "viewers": "18.7K",
+      "video": "https://storage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
+    },
+    {
+      "name": "RetroFox",
+      "game": "League of Legends",
+      "viewers": "15.1K",
+      "video": "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4"
+    },
+    {"name": "CraftMonk", "game": "Just Chatting", "viewers": "9.8K"},
+    {"name": "AquaVibe", "game": "Fortnite", "viewers": "7.2K"}
+  ],
+  "categories": [
+    "FPS",
+    "MOBA",
+    "Survival",
+    "Just Chatting",
+    "E-Sports",
+    "Speedruns",
+    "RPG",
+    "Sandbox"
+  ],
+  "streams": [
+    {
+      "title": "Ranked Immortal grind con la squad",
+      "streamer": "NightRaven",
+      "game": "Valorant",
+      "viewers": "21.4K espectadores",
+      "category": "FPS",
+      "accent": "#9147ff",
+      "video": "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+      "thumbnail": "https://picsum.photos/seed/night-raven/960/540"
+    },
+    {
+      "title": "Mega survival hardcore dia 42",
+      "streamer": "PixelLuna",
+      "game": "Minecraft",
+      "viewers": "18.7K espectadores",
+      "category": "Survival",
+      "accent": "#17b169",
+      "video": "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
+      "thumbnail": "https://picsum.photos/seed/pixel-luna/960/540"
+    },
+    {
+      "title": "SoloQ to challenger - noche larga",
+      "streamer": "RetroFox",
+      "game": "League of Legends",
+      "viewers": "15.1K espectadores",
+      "category": "MOBA",
+      "accent": "#2b6fff",
+      "video": "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
+      "thumbnail": "https://picsum.photos/seed/retro-fox/960/540"
+    },
+    {
+      "title": "Charlando de hardware y setups",
+      "streamer": "CraftMonk",
+      "game": "Just Chatting",
+      "viewers": "9.8K espectadores",
+      "category": "Just Chatting",
+      "accent": "#ff6b6b",
+      "video": "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
+      "thumbnail": "https://picsum.photos/seed/craft-monk/960/540"
+    },
+    {
+      "title": "Scrims privadas y tips competitivos",
+      "streamer": "AquaVibe",
+      "game": "Fortnite",
+      "viewers": "7.2K espectadores",
+      "category": "E-Sports",
+      "accent": "#f4b400",
+      "video": "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4",
+      "thumbnail": "https://picsum.photos/seed/aqua-vibe/960/540"
+    },
+    {
+      "title": "Run perfecta Any% intentando record",
+      "streamer": "ZenKite",
+      "game": "Hades",
+      "viewers": "5.9K espectadores",
+      "category": "Speedruns",
+      "accent": "#ff8c42",
+      "video": "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMobster.mp4",
+      "thumbnail": "https://picsum.photos/seed/zen-kite/960/540"
+    }
+  ],
+  "following": [
+    "NightRaven",
+    "PixelLuna",
+    "CraftMonk",
+    "ZenKite"
+  ]
+}

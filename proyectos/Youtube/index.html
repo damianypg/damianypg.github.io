@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>YouTube Clone</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,400;8..144,500;8..144,700&display=swap" rel="stylesheet" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+	<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+	<div class="yt-app">
+		<header class="yt-topbar">
+			<div class="topbar-left">
+				<button class="icon-btn" id="menuToggle" type="button" aria-label="Abrir menu lateral">
+					<i class="bi bi-list"></i>
+				</button>
+				<a class="yt-brand" href="#" aria-label="Ir al inicio de YouTube">
+					<span class="yt-logo"><i class="bi bi-play-fill"></i></span>
+					<span class="yt-name">YouTube</span>
+					<span class="yt-country">EC</span>
+				</a>
+			</div>
+
+			<form class="topbar-search" id="searchForm" role="search" aria-label="Buscar videos">
+				<div class="search-shell">
+					<input id="searchInput" type="search" placeholder="Buscar" autocomplete="off" />
+					<button class="search-btn" type="submit" aria-label="Buscar">
+						<i class="bi bi-search"></i>
+					</button>
+				</div>
+				<button class="icon-btn mic-btn" type="button" aria-label="Buscar por voz">
+					<i class="bi bi-mic-fill"></i>
+				</button>
+			</form>
+
+			<div class="topbar-actions">
+				<button class="icon-btn" type="button" aria-label="Crear">
+					<i class="bi bi-camera-video"></i>
+				</button>
+				<button class="icon-btn" type="button" aria-label="Notificaciones">
+					<i class="bi bi-bell"></i>
+				</button>
+				<button class="profile-chip" type="button" aria-label="Perfil">YP</button>
+			</div>
+		</header>
+
+		<div class="yt-layout">
+			<aside class="yt-sidebar" id="ytSidebar" aria-label="Menu principal"></aside>
+
+			<main class="yt-content">
+				<section class="chips-row" id="chipsRow" aria-label="Categorias de videos"></section>
+				<section class="video-grid" id="videoGridTop" aria-live="polite"></section>
+				<section class="shorts-row" id="shortsRow" aria-label="YouTube Shorts"></section>
+				<section class="video-grid" id="videoGridBottom" aria-live="polite"></section>
+			</main>
+		</div>
+		<div class="sidebar-backdrop" id="sidebarBackdrop" aria-hidden="true"></div>
+
+		<nav class="mobile-nav" aria-label="Navegacion movil">
+			<button type="button"><i class="bi bi-house-door-fill"></i><span>Inicio</span></button>
+			<button type="button"><i class="bi bi-play-btn"></i><span>Shorts</span></button>
+			<button type="button"><i class="bi bi-plus-circle"></i><span>Crear</span></button>
+			<button type="button"><i class="bi bi-collection-play"></i><span>Suscripciones</span></button>
+			<button type="button"><i class="bi bi-person-circle"></i><span>Tu</span></button>
+		</nav>
+	</div>
+
+	<script src="script.js"></script>
+</body>
+</html>
