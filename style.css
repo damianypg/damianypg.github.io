@@ -22,6 +22,8 @@
   --gutter: clamp(1rem, 4vw, 3.5rem);
   --section-y: clamp(5rem, 11vw, 9rem);
   --max: 1320px;
+  /* Margen lateral común: todas las secciones alinean su borde izquierdo aquí */
+  --page-x: max(var(--gutter), (100% - var(--max)) / 2);
 
   color-scheme: dark;
 }
@@ -165,7 +167,7 @@ ul {
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding: 1rem var(--gutter);
+  padding: 1rem var(--page-x);
   transition: background-color 0.3s;
 }
 
@@ -223,9 +225,7 @@ ul {
   grid-template-columns: minmax(0, 8fr) minmax(0, 5fr);
   grid-template-rows: 1fr auto;
   min-height: 100svh;
-  max-width: var(--max);
-  margin: 0 auto;
-  padding: 7rem var(--gutter) 3.5rem;
+  padding: 7rem var(--page-x) 3.5rem;
   column-gap: 2rem;
 }
 
@@ -269,8 +269,8 @@ ul {
 .hero-disc {
   position: absolute;
   left: 50%;
-  bottom: 16%;
-  width: 82%;
+  bottom: 24%;
+  width: 78%;
   aspect-ratio: 1;
   border-radius: 50%;
   background: var(--uv);
@@ -282,6 +282,10 @@ ul {
   position: relative;
   width: 100%;
   height: auto;
+  -webkit-mask-image: linear-gradient(to bottom, #000 72%, transparent 98%), linear-gradient(to right, transparent 0, #000 14%);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(to bottom, #000 72%, transparent 98%), linear-gradient(to right, transparent 0, #000 14%);
+  mask-composite: intersect;
   max-height: calc(100svh - 6rem);
   object-fit: contain;
   object-position: bottom;
@@ -300,7 +304,7 @@ ul {
 
 .hero-status {
   display: inline-flex;
-  align-items: center;
+  align-items: baseline;
   gap: 0.6rem;
   font-size: 0.95rem;
   color: var(--on-ink-muted);
@@ -308,6 +312,7 @@ ul {
 }
 
 .pulse {
+  flex: none;
   width: 0.6rem;
   height: 0.6rem;
   border-radius: 50%;
@@ -401,12 +406,7 @@ ul {
   position: relative;
   z-index: 4;
   background: var(--ink);
-  padding: var(--section-y) var(--gutter);
-}
-
-.projects > * {
-  max-width: var(--max);
-  margin-inline: auto;
+  padding: var(--section-y) var(--page-x);
 }
 
 .section-head {
@@ -560,7 +560,7 @@ ul {
   row-gap: 2.5rem;
   background: var(--paper);
   color: var(--on-paper);
-  padding: var(--section-y) max(var(--gutter), (100% - var(--max)) / 2);
+  padding: var(--section-y) var(--page-x);
 }
 
 .about .display-2 {
@@ -623,7 +623,7 @@ ul {
 .record {
   background: var(--lilac);
   color: var(--on-paper);
-  padding: var(--section-y) max(var(--gutter), (100% - var(--max)) / 2);
+  padding: var(--section-y) var(--page-x);
 }
 
 .record-cols {
@@ -697,8 +697,8 @@ ul {
   gap: 1rem;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-  padding: 0 max(var(--gutter), (100% - var(--max)) / 2) 1rem;
-  scroll-padding-inline: max(var(--gutter), (100% - var(--max)) / 2);
+  padding: 0 var(--page-x) 1rem;
+  scroll-padding-inline: var(--page-x);
   scrollbar-width: thin;
   scrollbar-color: var(--uv) transparent;
 }
@@ -730,7 +730,7 @@ ul {
 
 .contact {
   background: var(--uv);
-  padding: var(--section-y) max(var(--gutter), (100% - var(--max)) / 2);
+  padding: var(--section-y) var(--page-x);
 }
 
 .contact-title {
@@ -807,7 +807,7 @@ ul {
   align-items: center;
   justify-content: space-between;
   gap: 0.5rem 2rem;
-  padding: 2rem max(var(--gutter), (100% - var(--max)) / 2);
+  padding: 2rem var(--page-x);
   font-size: 0.9rem;
   color: var(--on-ink-muted);
 }

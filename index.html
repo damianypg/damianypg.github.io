@@ -37,15 +37,26 @@
         <span class="hero-line hero-line--last">Puetate</span>
       </h1>
 
-      <div class="hero-figure" aria-hidden="true">
-        <div class="hero-disc"></div>
-        <img src="./img/yosef-cutout.webp" alt="" class="hero-photo" width="1013" height="978" />
+      <div class="hero-figure">
+        <div class="hero-disc" aria-hidden="true"></div>
+        <img
+          src="./img/yosef-cutout.webp"
+          srcset="./img/yosef-cutout-600.webp 600w, ./img/yosef-cutout.webp 1013w"
+          sizes="(max-width: 900px) min(100vw, 30rem), 40vw"
+          alt="Yosef Puetate sonriendo, sentado frente a un teclado, con camisa negra"
+          class="hero-photo"
+          width="1013"
+          height="978"
+          fetchpriority="high"
+        />
       </div>
 
       <div class="hero-intro">
-        <p class="hero-status"><span class="pulse" aria-hidden="true"></span>Disponible para proyectos y prácticas</p>
-        <p class="hero-lead">Diseño y construyo interfaces web rápidas, accesibles y con carácter.</p>
-        <p class="hero-sub">Estudiante apasionado por el desarrollo web y las tecnologías modernas. Especializado en frontend y comprometido con crear experiencias digitales increíbles.</p>
+        <p class="hero-status"><span class="pulse" aria-hidden="true"></span>Buscando práctica o puesto junior frontend · Disponible para proyectos freelance</p>
+        <!-- TODO: si usas TypeScript, agrégalo aquí: "con React, Next.js y TypeScript". -->
+        <p class="hero-lead">Desarrollador frontend. Construyo sitios y aplicaciones web con React y Next.js.</p>
+        <!-- TODO: agrega tu semestre o año de graduación, ej. "Estudio X semestre de…". -->
+        <p class="hero-sub">Estudio Ingeniería de Software en la ESPOCH (Riobamba, Ecuador). Soy Chair de la Rama Estudiantil IEEE ESPOCH y parte del equipo organizador de CONESLAT 2026.</p>
         <div class="hero-actions">
           <a class="btn btn-solid" href="#proyectos">Ver proyectos</a>
           <a class="btn btn-ghost" href="./assets/Yosef-Puetate-CV.pdf" target="_blank" rel="noopener noreferrer">Ver CV</a>
