@@ -657,34 +657,17 @@ button.btn {
   grid-column: 1 / 6;
 }
 
-.about-quote {
-  grid-column: 6 / -1;
-  font-family: var(--display);
-  font-weight: 600;
-  font-variation-settings: 'wdth' 80;
-  font-size: clamp(1.75rem, 3.4vw, 2.9rem);
-  line-height: 1.08;
-  letter-spacing: -0.01em;
-  color: var(--uv-deep);
-}
-
 .about-body {
   grid-column: 6 / -1;
   display: grid;
   gap: 1.1rem;
   max-width: 62ch;
-  color: var(--on-paper-muted);
-}
-
-.about-body p:first-child {
-  color: var(--on-paper);
-  font-size: 1.2rem;
-  line-height: 1.55;
+  font-size: 1.15rem;
+  line-height: 1.6;
 }
 
 .tools {
   grid-column: 6 / -1;
-  margin-top: 1rem;
 }
 
 .tools-title {
@@ -700,6 +683,7 @@ button.btn {
 }
 
 .tool-list li {
+  white-space: nowrap;
   padding: 0.45rem 1rem;
   border-radius: 999px;
   background: var(--ink);
@@ -957,8 +941,11 @@ button.btn {
     grid-template-columns: minmax(0, 1fr);
   }
 
+  .about {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
   .about .display-2,
-  .about-quote,
   .about-body,
   .tools {
     grid-column: 1 / -1;
