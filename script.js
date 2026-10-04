@@ -24,7 +24,10 @@ function setupDemos() {
     trigger.addEventListener('click', () => {
       const url = trigger.dataset.demo;
       title.textContent = trigger.dataset.title || 'Demo';
-      frame.title = `Demo de ${trigger.dataset.title || 'proyecto'}`;
+      const isEnglish = document.documentElement.lang === 'en';
+      frame.title = isEnglish
+        ? `${trigger.dataset.title || 'Project'} demo`
+        : `Demo de ${trigger.dataset.title || 'proyecto'}`;
       openLink.href = url;
       frame.src = url;
       dialog.showModal();

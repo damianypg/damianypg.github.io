@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://damianypg.github.io/sitemap.xml
