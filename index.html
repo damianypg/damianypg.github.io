@@ -3,55 +3,118 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Portafolio | Yosef Puetate</title>
+  <title>Yosef Puetate | Desarrollo frontend</title>
+  <meta name="description" content="Portafolio de Yosef Puetate, desarrollador frontend y estudiante de Ingeniería de Software." />
+  <meta name="theme-color" content="#1B0A3C" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,400..900&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     crossorigin="anonymous"
     referrerpolicy="no-referrer"
   />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <main id="main-content" class="main-container">
-    <!-- Contenido dinámico -->
+  <a class="skip-link" href="#proyectos">Saltar a los proyectos</a>
+
+  <header class="topbar">
+    <a href="#inicio" class="brand" aria-label="Volver al inicio">YP</a>
+    <nav class="topnav" aria-label="Secciones">
+      <a href="#proyectos">Proyectos</a>
+      <a href="#sobre-mi">Sobre mí</a>
+      <a href="#trayectoria">Trayectoria</a>
+      <a href="#contacto" class="topnav-cta">Hablemos</a>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <section id="inicio" class="hero">
+      <h1 class="hero-name" aria-label="Yosef Puetate">
+        <span class="hero-line hero-line--first" data-name-first>Yosef</span>
+        <span class="hero-line hero-line--last" data-name-last>Puetate</span>
+      </h1>
+
+      <div class="hero-figure" aria-hidden="true">
+        <div class="hero-disc"></div>
+        <img src="./img/yosef-cutout.webp" alt="" class="hero-photo" width="1013" height="978" />
+      </div>
+
+      <div class="hero-intro">
+        <p class="hero-status"><span class="pulse" aria-hidden="true"></span>Disponible para proyectos y prácticas</p>
+        <p class="hero-lead">Diseño y construyo interfaces web rápidas, accesibles y con carácter.</p>
+        <p class="hero-sub" data-bind="descripcionBreve"></p>
+        <div class="hero-actions">
+          <a class="btn btn-solid" href="#proyectos">Ver proyectos</a>
+          <a class="btn btn-ghost" href="./img/cv-yo.pdf" download="cv-yosef-puetate.pdf">Descargar CV</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="proyectos" class="projects" aria-labelledby="projects-title">
+      <div class="section-head">
+        <h2 id="projects-title" class="display-2">Proyectos</h2>
+        <p class="section-note">Cada vista previa es el proyecto real funcionando. Abre cualquiera para probarlo.</p>
+      </div>
+      <div class="project-grid" data-projects></div>
+    </section>
+
+    <section id="sobre-mi" class="about" aria-labelledby="about-title">
+      <h2 id="about-title" class="display-2">Sobre mí</h2>
+      <blockquote class="about-quote">El aprendizaje nunca termina, y cada proyecto es una oportunidad para crecer.</blockquote>
+      <div class="about-body" data-story></div>
+      <div class="tools">
+        <h3 class="tools-title">Con qué trabajo</h3>
+        <ul class="tool-list" data-tools></ul>
+      </div>
+    </section>
+
+    <section id="trayectoria" class="record" aria-labelledby="record-title">
+      <h2 id="record-title" class="display-2">Trayectoria</h2>
+      <div class="record-cols">
+        <div>
+          <h3 class="record-title">Logros</h3>
+          <ul class="achievement-list" data-achievements></ul>
+        </div>
+        <div>
+          <h3 class="record-title">Certificaciones</h3>
+          <ul class="cert-list" data-certs></ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="offcode" aria-labelledby="offcode-title">
+      <div class="offcode-head">
+        <h2 id="offcode-title" class="display-3">Cuando no estoy programando</h2>
+        <p>Veo anime. Mucho. Estas historias me enseñaron más sobre ritmo visual y composición que cualquier tutorial.</p>
+      </div>
+      <ul class="anime-strip" data-anime></ul>
+    </section>
+
+    <section id="contacto" class="contact" aria-labelledby="contact-title">
+      <h2 id="contact-title" class="contact-title">¿Construimos algo juntos?</h2>
+      <p class="contact-copy">Cuéntame tu idea o tu vacante y te respondo pronto.</p>
+      <div class="contact-links">
+        <a class="contact-link" data-social="whatsapp" href="#" target="_blank" rel="noopener noreferrer">
+          <i class="fab fa-whatsapp" aria-hidden="true"></i><span>Escribir por WhatsApp</span>
+        </a>
+        <a class="contact-link" data-social="linkedin" href="#" target="_blank" rel="noopener noreferrer">
+          <i class="fab fa-linkedin-in" aria-hidden="true"></i><span>Conectar en LinkedIn</span>
+        </a>
+        <a class="contact-link" data-social="instagram" href="#" target="_blank" rel="noopener noreferrer">
+          <i class="fab fa-instagram" aria-hidden="true"></i><span>Seguir en Instagram</span>
+        </a>
+      </div>
+    </section>
   </main>
 
   <footer class="site-footer">
-    <div class="footer-brand">
-      <span class="footer-name">Yosef Puetate</span>
-      <span class="footer-role">Ingeniería de Software</span>
-    </div>
-    <div class="footer-socials">
-      <a href="#" class="social-link" data-social="whatsapp" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-      <a href="#" class="social-link" data-social="instagram" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-      <a href="#" class="social-link" data-social="linkedin" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-    </div>
+    <span data-bind="nombre">Yosef Puetate</span>
+    <span data-bind="carrera">Ingeniería de Software</span>
+    <span>© <span data-year></span></span>
   </footer>
-
-  <nav class="bottom-dock" aria-label="Secciones del portafolio">
-    <a href="#" class="nav-link active" data-section="hero" aria-label="Inicio" title="Inicio">
-      <i class="fa-solid fa-house"></i>
-    </a>
-    <a href="#" class="nav-link" data-section="historia" aria-label="Mi historia" title="Mi historia">
-      <i class="fa-solid fa-user"></i>
-    </a>
-    <a href="#" class="nav-link" data-section="logros" aria-label="Logros" title="Logros">
-      <i class="fa-solid fa-trophy"></i>
-    </a>
-    <a href="#" class="nav-link" data-section="certificados" aria-label="Certificados" title="Certificados">
-      <i class="fa-solid fa-certificate"></i>
-    </a>
-    <a href="#" class="nav-link" data-section="proyectos" aria-label="Proyectos" title="Proyectos">
-      <i class="fa-solid fa-briefcase"></i>
-    </a>
-    <a href="#" class="nav-link" data-section="herramientas" aria-label="Herramientas" title="Herramientas">
-      <i class="fa-solid fa-layer-group"></i>
-    </a>
-  </nav>
 
   <script src="script.js" defer></script>
 </body>
