@@ -410,15 +410,14 @@ ul {
   text-decoration-color: var(--orchid);
 }
 
+/* Sin opacity: el nombre es el LCP y debe pintarse desde el primer frame */
 @keyframes stretch {
   from {
     font-variation-settings: 'wdth' 50;
-    opacity: 0;
     letter-spacing: 0.04em;
   }
   to {
     font-variation-settings: 'wdth' 150;
-    opacity: 1;
   }
 }
 
