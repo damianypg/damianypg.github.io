@@ -8,38 +8,40 @@ const state = {
   streamerAvatars: {}
 };
 
+// Videos de muestra: películas animadas de la Blender Foundation (CC BY 3.0)
 const HERO_VIDEO_FALLBACKS = [
   'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4',
-  'https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
-  'https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4',
-  'https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4',
-  'https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4',
-  'https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4'
+  'https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+  'https://storage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
+  'https://storage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4'
 ];
 
-const STREAM_THUMB_FALLBACKS = [
-  'https://picsum.photos/seed/stream-one/960/540',
-  'https://picsum.photos/seed/stream-two/960/540',
-  'https://picsum.photos/seed/stream-three/960/540',
-  'https://picsum.photos/seed/stream-four/960/540',
-  'https://picsum.photos/seed/stream-five/960/540',
-  'https://picsum.photos/seed/stream-six/960/540'
-];
+// Avatares, miniaturas y categorías se generan como SVG: sin fotos de personas reales
+// ni imágenes de terceros.
+const PALETTE = ['#9147ff', '#17b169', '#2b6fff', '#ff6b6b', '#f4b400', '#ff8c42', '#00b5ad'];
 
-const PROFILE_AVATAR_PATHS = [
-  '../../img/2.png',
-  '../../img/3.png',
-  '../../img/5.png',
-  '../../img/6.png',
-  '../../img/7.png'
-];
-const CATEGORY_IMAGE_PATHS = [
-  '../../img/2.png',
-  '../../img/3.png',
-  '../../img/5.png',
-  '../../img/6.png',
-  '../../img/7.png'
-];
+function hashString(value) {
+  return [...String(value || '')].reduce((acc, char) => (acc * 31 + char.charCodeAt(0)) >>> 0, 7);
+}
+
+function svgDataUri(svg) {
+  return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+}
+
+function escapeSvg(text) {
+  return String(text).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+}
+
+function makeAvatar(name) {
+  const color = PALETTE[hashString(name) % PALETTE.length];
+  const initials = String(name).replace(/[^A-Z]/g, '').slice(0, 2) || String(name).slice(0, 2).toUpperCase();
+  return svgDataUri(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" fill="${color}"/><text x="32" y="41" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#fff" text-anchor="middle">${escapeSvg(initials)}</text></svg>`);
+}
+
+function makeCover(label, accent, width = 960, height = 540) {
+  const base = accent || PALETTE[hashString(label) % PALETTE.length];
+  return svgDataUri(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${base}"/><stop offset="1" stop-color="#18181b"/></linearGradient></defs><rect width="${width}" height="${height}" fill="url(#g)"/><circle cx="${width * 0.78}" cy="${height * 0.3}" r="${height * 0.32}" fill="#fff" fill-opacity=".08"/><text x="${width * 0.06}" y="${height * 0.86}" font-family="Arial, sans-serif" font-size="${Math.round(height * 0.11)}" font-weight="700" fill="#fff">${escapeSvg(label)}</text></svg>`);
+}
 
 const refs = {
   liveChannels: document.getElementById('liveChannels'),
@@ -60,16 +62,16 @@ const STREAM_SECTION_DEFS = [
     pick: () => true,
   },
   {
-    title: 'QSMP',
-    pick: (stream) => /minecraft|qsmp|survival/i.test(`${stream.title} ${stream.game} ${stream.category}`),
+    title: 'Supervivencia',
+    pick: (stream) => /bloques|survival/i.test(`${stream.title} ${stream.game} ${stream.category}`),
   },
   {
     title: 'MOBA',
-    pick: (stream) => /moba|league|dota/i.test(`${stream.title} ${stream.game} ${stream.category}`),
+    pick: (stream) => /moba|torres/i.test(`${stream.title} ${stream.game} ${stream.category}`),
   },
   {
     title: 'Categorias que podrian interesarte',
-    pick: (stream) => /fps|rpg|speedruns|e-sports|fortnite|valorant|hades/i.test(`${stream.title} ${stream.game} ${stream.category}`),
+    pick: (stream) => /fps|rpg|speedruns|e-sports|tormenta|neon|inframundo/i.test(`${stream.title} ${stream.game} ${stream.category}`),
   },
 ];
 
@@ -112,22 +114,18 @@ function buildStreamerAvatarMap() {
   });
 
   const orderedNames = [...streamerNames].sort((a, b) => a.localeCompare(b));
-  state.streamerAvatars = orderedNames.reduce((acc, name, index) => {
-    acc[name] = PROFILE_AVATAR_PATHS[index % PROFILE_AVATAR_PATHS.length];
+  state.streamerAvatars = orderedNames.reduce((acc, name) => {
+    acc[name] = makeAvatar(name);
     return acc;
   }, {});
 }
 
 function getAvatarForStreamer(streamerName) {
-  return state.streamerAvatars[streamerName] || PROFILE_AVATAR_PATHS[0];
+  return state.streamerAvatars[streamerName] || makeAvatar(streamerName);
 }
 
-function getCategoryImage(categoryName, index = 0) {
-  const safeName = String(categoryName || '').trim();
-  const chars = [...safeName];
-  const hash = chars.reduce((acc, char) => acc + char.charCodeAt(0), 0);
-  const imageIndex = (hash + index) % CATEGORY_IMAGE_PATHS.length;
-  return CATEGORY_IMAGE_PATHS[imageIndex];
+function getCategoryImage(categoryName) {
+  return makeCover(String(categoryName || '').trim(), null, 300, 400);
 }
 
 function bindEvents() {
@@ -449,8 +447,8 @@ function renderRecommendedCategories() {
     .join('');
 }
 
-function getThumbnailForStream(stream, index) {
-  return stream.thumbnail || STREAM_THUMB_FALLBACKS[index % STREAM_THUMB_FALLBACKS.length];
+function getThumbnailForStream(stream) {
+  return makeCover(stream.game, stream.accent);
 }
 
 function getStreamCategoryList(stream) {

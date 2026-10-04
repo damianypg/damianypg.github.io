@@ -73,93 +73,145 @@
     <section id="proyectos" class="projects" aria-labelledby="projects-title">
       <div class="section-head">
         <h2 id="projects-title" class="display-2">Proyectos</h2>
-        <p class="section-note">Cada vista previa es el proyecto real funcionando. Abre cualquiera para probarlo.</p>
+        <p class="section-note">Haz clic en una captura para probar la demo sin salir de la página.</p>
       </div>
-      <div class="project-grid">
-        <article class="project project--feature">
-          <a class="project-link" href="https://coneslat-2026.vercel.app/" target="_blank" rel="noopener noreferrer">
-            <div class="browser" aria-hidden="true">
-              <div class="browser-bar"><span></span><span></span><span></span></div>
-              <div class="browser-view"><iframe data-src="https://coneslat-2026.vercel.app/" title="" tabindex="-1"></iframe></div>
-            </div>
+
+      <article class="project project--feature">
+        <button class="shot" type="button" data-demo="https://coneslat-2026.vercel.app/" data-title="CONESLAT 2026" aria-label="Ver demo de CONESLAT 2026">
+          <span class="browser-bar" aria-hidden="true"><span></span><span></span><span></span></span>
+          <img
+            src="assets/shots/coneslat-800.webp"
+            srcset="assets/shots/coneslat-800.webp 800w, assets/shots/coneslat-1600.webp 1600w"
+            sizes="(max-width: 900px) 100vw, 60vw"
+            width="1600" height="1000" loading="lazy"
+            alt="Portada de CONESLAT 2026: fechas del 16 al 20 de noviembre, horario, modalidad virtual y cuenta regresiva"
+          />
+        </button>
+        <div class="project-info">
+          <h3 class="project-name">CONESLAT 2026</h3>
+          <!-- TODO: agrega "Sitio oficial" solo si este es el sitio oficial del congreso. -->
+          <p class="project-goal">Reunir en un solo sitio el programa, los ponentes y cómo conectarse al congreso, y llevar a la gente a inscribirse.</p>
+          <dl class="project-facts">
+            <!-- TODO: tu rol concreto en el sitio (ej. "Diseño y desarrollo frontend"). -->
+            <div><dt>Rol</dt><dd>Equipo organizador</dd></div>
+            <div><dt>Fecha</dt><dd>2026</dd></div>
+          </dl>
+          <!-- TODO: 1-2 métricas reales (ej. inscritos, visitas, ponentes publicados). -->
+          <ul class="project-tech" aria-label="Tecnologías"><li>Next.js</li><li>React</li><li>Vercel</li></ul>
+          <div class="project-actions">
+            <button class="btn btn-solid btn-sm" type="button" data-demo="https://coneslat-2026.vercel.app/" data-title="CONESLAT 2026">Ver demo</button>
+            <a class="btn btn-ghost btn-sm" href="https://coneslat-2026.vercel.app/" target="_blank" rel="noopener noreferrer">Visitar sitio</a>
+            <!-- TODO: si el repositorio es público:
+            <a class="btn btn-ghost btn-sm" href="URL_DEL_REPO" target="_blank" rel="noopener noreferrer">Ver código</a>
+            -->
+          </div>
+        </div>
+      </article>
+
+      <!-- TODO: proyecto original en React/TypeScript. Duplica este bloque cuando lo tengas:
+      <article class="project project--feature">
+        <button class="shot" type="button" data-demo="URL_DEMO" data-title="NOMBRE" aria-label="Ver demo de NOMBRE">
+          <span class="browser-bar" aria-hidden="true"><span></span><span></span><span></span></span>
+          <img src="assets/shots/NOMBRE-800.webp" srcset="assets/shots/NOMBRE-800.webp 800w, assets/shots/NOMBRE-1600.webp 1600w" sizes="(max-width: 900px) 100vw, 60vw" width="1600" height="1000" loading="lazy" alt="DESCRIPCIÓN DE LA CAPTURA" />
+        </button>
+        <div class="project-info">
+          <h3 class="project-name">NOMBRE</h3>
+          <p class="project-goal">PROBLEMA U OBJETIVO EN UNA LÍNEA</p>
+          <dl class="project-facts"><div><dt>Rol</dt><dd>ROL</dd></div><div><dt>Fecha</dt><dd>FECHA</dd></div></dl>
+          <ul class="project-tech" aria-label="Tecnologías"><li>React</li><li>TypeScript</li></ul>
+          <div class="project-actions">
+            <button class="btn btn-solid btn-sm" type="button" data-demo="URL_DEMO" data-title="NOMBRE">Ver demo</button>
+            <a class="btn btn-ghost btn-sm" href="URL_REPO" target="_blank" rel="noopener noreferrer">Ver código</a>
+          </div>
+        </div>
+      </article>
+      -->
+
+      <div class="practice">
+        <div class="practice-group practice-group--exercises">
+          <h3 class="practice-title">Ejercicios de maquetación</h3>
+          <div class="practice-grid">
+            <article class="project project--small">
+              <button class="shot" type="button" data-demo="proyectos/Twitch/index.html" data-title="Clon de Twitch" aria-label="Ver demo del clon de Twitch">
+                <span class="browser-bar" aria-hidden="true"><span></span><span></span><span></span></span>
+                <img
+                  src="assets/shots/twitch-800.webp"
+                  srcset="assets/shots/twitch-800.webp 800w, assets/shots/twitch-1600.webp 1600w"
+                  sizes="(max-width: 900px) 100vw, 30vw"
+                  width="1600" height="1000" loading="lazy"
+                  alt="Clon de Twitch: filtros por categoría y tarjetas de transmisiones en vivo con canales ficticios"
+                />
+              </button>
+              <div class="project-info">
+                <h4 class="project-name">Clon de Twitch</h4>
+                <p class="project-goal">Practicar el layout de una plataforma de streaming: barra lateral, carrusel destacado, búsqueda y filtros con datos desde JSON.</p>
+                <dl class="project-facts">
+                  <div><dt>Rol</dt><dd>Práctica individual</dd></div>
+                  <div><dt>Fecha</dt><dd>Mar 2026</dd></div>
+                </dl>
+                <ul class="project-tech" aria-label="Tecnologías"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>JSON</li></ul>
+                <div class="project-actions">
+                  <button class="btn btn-solid btn-sm" type="button" data-demo="proyectos/Twitch/index.html" data-title="Clon de Twitch">Ver demo</button>
+                  <a class="btn btn-ghost btn-sm" href="https://github.com/damianypg/damianypg.github.io/tree/main/proyectos/Twitch" target="_blank" rel="noopener noreferrer">Ver código</a>
+                </div>
+              </div>
+            </article>
+            <article class="project project--small">
+              <button class="shot" type="button" data-demo="proyectos/tuenti/index.html" data-title="App de operadora (Tuenti)" aria-label="Ver demo de la app de operadora">
+                <span class="browser-bar" aria-hidden="true"><span></span><span></span><span></span></span>
+                <img
+                  src="assets/shots/tuenti-800.webp"
+                  srcset="assets/shots/tuenti-800.webp 800w, assets/shots/tuenti-1600.webp 1600w"
+                  sizes="(max-width: 900px) 100vw, 30vw"
+                  width="1600" height="1000" loading="lazy"
+                  alt="App móvil de operadora: saldo, promociones y consumo de datos y voz en gráficos circulares"
+                />
+              </button>
+              <div class="project-info">
+                <h4 class="project-name">App de operadora (Tuenti)</h4>
+                <p class="project-goal">Recrear el panel móvil de una operadora: saldo, consumo de datos y voz, promociones y servicios adicionales.</p>
+                <dl class="project-facts">
+                  <div><dt>Rol</dt><dd>Práctica individual</dd></div>
+                  <div><dt>Fecha</dt><dd>Mar 2026</dd></div>
+                </dl>
+                <ul class="project-tech" aria-label="Tecnologías"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>SVG</li></ul>
+                <div class="project-actions">
+                  <button class="btn btn-solid btn-sm" type="button" data-demo="proyectos/tuenti/index.html" data-title="App de operadora (Tuenti)">Ver demo</button>
+                  <a class="btn btn-ghost btn-sm" href="https://github.com/damianypg/damianypg.github.io/tree/main/proyectos/tuenti" target="_blank" rel="noopener noreferrer">Ver código</a>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div class="practice-group">
+          <h3 class="practice-title">Experimentos de CSS/JS</h3>
+          <article class="project project--small">
+            <button class="shot" type="button" data-demo="proyectos/animacion/index.html" data-title="Máscara tipográfica cinematográfica" aria-label="Ver demo de la máscara tipográfica cinematográfica">
+              <span class="browser-bar" aria-hidden="true"><span></span><span></span><span></span></span>
+              <img
+                src="assets/shots/mascara-tipografica-800.webp"
+                srcset="assets/shots/mascara-tipografica-800.webp 800w, assets/shots/mascara-tipografica-1600.webp 1600w"
+                sizes="(max-width: 900px) 100vw, 30vw"
+                width="1600" height="1000" loading="lazy"
+                alt="Título en letras grandes con imágenes que se ven solo dentro de las letras, sobre fondo negro"
+              />
+            </button>
             <div class="project-info">
-              <h3 class="project-name">CONESLAT 2026</h3>
-              <p class="project-desc">Sitio oficial del Congreso Estudiantil Latinoamericano de las Ramas Estudiantiles IEEE de la Región 9: programa, ponentes, cuenta regresiva e inscripción.</p>
-              <ul class="project-tech" aria-label="Tecnologías"><li>Next.js</li><li>React</li><li>Vercel</li></ul>
-              <span class="project-open">Abrir proyecto<span class="visually-hidden"> CONESLAT 2026 en una pestaña nueva</span></span>
+              <h4 class="project-name">Máscara tipográfica cinematográfica</h4>
+              <p class="project-goal">Intro tipo tráiler: un slideshow visible solo dentro de las letras con mix-blend-mode y cortes generados con JavaScript.</p>
+              <dl class="project-facts">
+                <div><dt>Rol</dt><dd>Práctica individual</dd></div>
+                <div><dt>Fecha</dt><dd>Mar 2026</dd></div>
+              </dl>
+              <ul class="project-tech" aria-label="Tecnologías"><li>CSS keyframes</li><li>mix-blend-mode</li><li>JavaScript</li></ul>
+              <div class="project-actions">
+                <button class="btn btn-solid btn-sm" type="button" data-demo="proyectos/animacion/index.html" data-title="Máscara tipográfica cinematográfica">Ver demo</button>
+                <a class="btn btn-ghost btn-sm" href="https://github.com/damianypg/damianypg.github.io/tree/main/proyectos/animacion" target="_blank" rel="noopener noreferrer">Ver código</a>
+              </div>
             </div>
-          </a>
-        </article>
-        <article class="project">
-          <a class="project-link" href="proyectos/Twitch/index.html" target="_blank" rel="noopener noreferrer">
-            <div class="browser" aria-hidden="true">
-              <div class="browser-bar"><span></span><span></span><span></span></div>
-              <div class="browser-view"><iframe data-src="proyectos/Twitch/index.html" title="" tabindex="-1"></iframe></div>
-            </div>
-            <div class="project-info">
-              <h3 class="project-name">Twitch Clone</h3>
-              <p class="project-desc">Clon de Twitch con layout responsive, buscador, filtros por categoría y tarjetas dinámicas desde JSON.</p>
-              <ul class="project-tech" aria-label="Tecnologías"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>JSON</li></ul>
-              <span class="project-open">Abrir proyecto<span class="visually-hidden"> Twitch Clone en una pestaña nueva</span></span>
-            </div>
-          </a>
-        </article>
-        <article class="project">
-          <a class="project-link" href="proyectos/Youtube/index.html" target="_blank" rel="noopener noreferrer">
-            <div class="browser" aria-hidden="true">
-              <div class="browser-bar"><span></span><span></span><span></span></div>
-              <div class="browser-view"><iframe data-src="proyectos/Youtube/index.html" title="" tabindex="-1"></iframe></div>
-            </div>
-            <div class="project-info">
-              <h3 class="project-name">YouTube Clone</h3>
-              <p class="project-desc">Clon de YouTube con header, menús laterales, filtros y cards responsive.</p>
-              <ul class="project-tech" aria-label="Tecnologías"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>JSON</li></ul>
-              <span class="project-open">Abrir proyecto<span class="visually-hidden"> YouTube Clone en una pestaña nueva</span></span>
-            </div>
-          </a>
-        </article>
-        <article class="project">
-          <a class="project-link" href="proyectos/Facebook/index.html" target="_blank" rel="noopener noreferrer">
-            <div class="browser" aria-hidden="true">
-              <div class="browser-bar"><span></span><span></span><span></span></div>
-              <div class="browser-view"><iframe data-src="proyectos/Facebook/index.html" title="" tabindex="-1"></iframe></div>
-            </div>
-            <div class="project-info">
-              <h3 class="project-name">Facebook Clone</h3>
-              <p class="project-desc">Clon de Facebook maquetado en HTML, CSS y JavaScript con estructura responsive.</p>
-              <ul class="project-tech" aria-label="Tecnologías"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>JSON</li></ul>
-              <span class="project-open">Abrir proyecto<span class="visually-hidden"> Facebook Clone en una pestaña nueva</span></span>
-            </div>
-          </a>
-        </article>
-        <article class="project">
-          <a class="project-link" href="proyectos/tuenti/index.html" target="_blank" rel="noopener noreferrer">
-            <div class="browser" aria-hidden="true">
-              <div class="browser-bar"><span></span><span></span><span></span></div>
-              <div class="browser-view"><iframe data-src="proyectos/tuenti/index.html" title="" tabindex="-1"></iframe></div>
-            </div>
-            <div class="project-info">
-              <h3 class="project-name">Tuenti</h3>
-              <p class="project-desc">Recreación de la red social Tuenti como práctica de maquetación y estructura de datos.</p>
-              <ul class="project-tech" aria-label="Tecnologías"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
-              <span class="project-open">Abrir proyecto<span class="visually-hidden"> Tuenti en una pestaña nueva</span></span>
-            </div>
-          </a>
-        </article>
-        <article class="project project--feature">
-          <a class="project-link" href="proyectos/animacion/index.html" target="_blank" rel="noopener noreferrer">
-            <div class="browser" aria-hidden="true">
-              <div class="browser-bar"><span></span><span></span><span></span></div>
-              <div class="browser-view"><iframe data-src="proyectos/animacion/index.html" title="" tabindex="-1"></iframe></div>
-            </div>
-            <div class="project-info">
-              <h3 class="project-name">Animación Carrusel</h3>
-              <p class="project-desc">Intro cinematográfica con keyframes e imágenes dentro de una máscara tipográfica.</p>
-              <ul class="project-tech" aria-label="Tecnologías"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
-              <span class="project-open">Abrir proyecto<span class="visually-hidden"> Animación Carrusel en una pestaña nueva</span></span>
-            </div>
-          </a>
-        </article>
+          </article>
+        </div>
       </div>
     </section>
 
@@ -257,6 +309,15 @@
       <li><a href="./assets/Yosef-Puetate-CV.pdf" target="_blank" rel="noopener noreferrer">CV</a></li>
     </ul>
   </footer>
+
+  <dialog class="demo-dialog" aria-labelledby="demo-title">
+    <div class="demo-head">
+      <h2 id="demo-title" class="demo-title">Demo</h2>
+      <a class="demo-open" href="#inicio" target="_blank" rel="noopener noreferrer">Abrir en pestaña nueva</a>
+      <button class="demo-close" type="button" aria-label="Cerrar demo"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+    </div>
+    <iframe class="demo-frame" title="Demo del proyecto"></iframe>
+  </dialog>
 
   <script src="script.js" defer></script>
 </body>

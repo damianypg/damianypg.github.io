@@ -125,10 +125,37 @@ h1.title {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.carousel-item img {
-  width: 100%;
-  height: auto;
-  display: block;
+.promo-slide {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 4px;
+  aspect-ratio: 722 / 294;
+  padding: 14px 16px;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.promo-slide strong {
+  font-size: 1.3rem;
+  line-height: 1.1;
+}
+
+.promo-slide span {
+  font-size: 0.8rem;
+  opacity: 0.9;
+}
+
+.promo-slide--one {
+  background: linear-gradient(135deg, #ff1f8e, #6c2bd9);
+}
+
+.promo-slide--two {
+  background: linear-gradient(135deg, #6c2bd9, #1fb6ff);
+}
+
+.promo-slide--three {
+  background: linear-gradient(135deg, #ff7a00, #ff1f8e);
 }
 
 .carousel-item.active {

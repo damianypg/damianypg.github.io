@@ -4,37 +4,40 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  setupPreviews();
+  setupDemos();
   setupActiveNav();
 });
 
 /**
- * Las vistas previas son los proyectos reales dentro de un iframe.
- * Se cargan al acercarse a la pantalla y se escalan para que el
- * proyecto se vea como en un escritorio de 1280px de ancho.
+ * Las tarjetas muestran capturas estáticas. La demo real (un iframe)
+ * se carga solo cuando alguien la pide, dentro de un <dialog>.
  */
-function setupPreviews() {
-  const DESKTOP_WIDTH = 1280;
-  const views = document.querySelectorAll('.browser-view');
+function setupDemos() {
+  const dialog = document.querySelector('.demo-dialog');
+  if (!dialog) return;
+  const frame = dialog.querySelector('.demo-frame');
+  const title = dialog.querySelector('.demo-title');
+  const openLink = dialog.querySelector('.demo-open');
 
-  const resize = new ResizeObserver((entries) => {
-    entries.forEach(({ target, contentRect }) => {
-      target.style.setProperty('--scale', contentRect.width / DESKTOP_WIDTH);
+  document.querySelectorAll('[data-demo]').forEach((trigger) => {
+    trigger.addEventListener('click', () => {
+      const url = trigger.dataset.demo;
+      title.textContent = trigger.dataset.title || 'Demo';
+      frame.title = `Demo de ${trigger.dataset.title || 'proyecto'}`;
+      openLink.href = url;
+      frame.src = url;
+      dialog.showModal();
     });
   });
 
-  const loader = new IntersectionObserver((entries) => {
-    entries.forEach(({ isIntersecting, target }) => {
-      if (!isIntersecting) return;
-      const frame = target.querySelector('iframe');
-      frame.src = frame.dataset.src;
-      loader.unobserve(target);
-    });
-  }, { rootMargin: '400px 0px' });
-
-  views.forEach((view) => {
-    resize.observe(view);
-    loader.observe(view);
+  dialog.querySelector('.demo-close').addEventListener('click', () => dialog.close());
+  // Clic fuera del contenido (en el fondo) también cierra
+  dialog.addEventListener('click', (event) => {
+    if (event.target === dialog) dialog.close();
+  });
+  // Al cerrar se descarga la demo para que no siga consumiendo recursos
+  dialog.addEventListener('close', () => {
+    frame.removeAttribute('src');
   });
 }
 
