@@ -15,6 +15,7 @@
   --on-ink-muted: #b9a8e6;
   --on-paper: var(--ink);
   --on-paper-muted: #5b4a85;
+  --on-lilac-muted: #3f2f66;
 
   --display: 'Anybody', 'Arial Black', sans-serif;
   --body: 'Instrument Sans', system-ui, sans-serif;
@@ -700,48 +701,67 @@ button.btn {
   padding: var(--section-y) var(--page-x);
 }
 
-.record-cols {
+.timeline {
+  margin: clamp(2.5rem, 5vw, 4rem) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.timeline-item {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 3rem clamp(2rem, 6vw, 6rem);
-  margin-top: clamp(2.5rem, 5vw, 4rem);
-}
-
-.record-title {
-  font-size: 1rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-}
-
-.achievement-list li,
-.cert {
-  padding: 1.1rem 0;
+  grid-template-columns: minmax(9rem, 1fr) minmax(0, 3fr);
+  gap: 0.5rem clamp(1.5rem, 4vw, 4rem);
+  padding: 1.6rem 0;
   border-top: 1.5px solid rgb(27 10 60 / 0.25);
 }
 
-.achievement-list li {
+.timeline-date {
   font-family: var(--display);
-  font-weight: 600;
+  font-weight: 650;
   font-variation-settings: 'wdth' 100;
-  font-size: clamp(1.15rem, 1.8vw, 1.45rem);
-  line-height: 1.25;
+  font-size: 1.05rem;
 }
 
-.cert {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 0.25rem 1rem;
+.timeline-body {
+  display: grid;
+  gap: 0.35rem;
+  max-width: 62ch;
 }
 
-.cert-name {
+.timeline-kind {
+  font-size: 0.85rem;
   font-weight: 600;
-  font-size: 1.1rem;
+  color: var(--on-lilac-muted);
 }
 
-.cert-org {
-  color: var(--on-paper-muted);
+.timeline-title {
+  font-family: var(--display);
+  font-weight: 700;
+  font-variation-settings: 'wdth' 110;
+  font-size: clamp(1.3rem, 2.2vw, 1.75rem);
+  line-height: 1.1;
+}
+
+.timeline-role {
+  font-weight: 600;
+}
+
+.timeline-links a {
+  font-weight: 600;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.3em;
+}
+
+.courses {
+  margin-top: 1rem;
+  padding-top: 1.6rem;
+  border-top: 1.5px solid rgb(27 10 60 / 0.25);
+  font-size: 0.95rem;
+  color: var(--on-lilac-muted);
+}
+
+.courses strong {
+  color: var(--on-paper);
 }
 
 /* ---------- Fuera del código ---------- */
@@ -951,7 +971,6 @@ button.btn {
     grid-column: 1 / -1;
   }
 
-  .record-cols,
   .offcode-head {
     grid-template-columns: minmax(0, 1fr);
   }
@@ -960,6 +979,10 @@ button.btn {
 @media (max-width: 600px) {
   .topnav a:not(.topnav-cta) {
     display: none;
+  }
+
+  .timeline-item {
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .display-2 {
