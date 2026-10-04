@@ -767,57 +767,107 @@ button.btn {
 /* ---------- Fuera del código ---------- */
 
 .offcode {
-  padding: var(--section-y) 0;
+  padding: clamp(3.5rem, 7vw, 5.5rem) 0;
 }
 
 .offcode-head {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 1rem 3rem;
+  display: flex;
+  flex-wrap: wrap;
   align-items: end;
+  justify-content: space-between;
+  gap: 1rem 3rem;
   width: min(var(--max), 100% - 2 * var(--gutter));
-  margin: 0 auto 2.5rem;
+  margin: 0 auto 2rem;
 }
 
 .offcode-head p {
+  margin-top: 0.75rem;
   color: var(--on-ink-muted);
-  max-width: 48ch;
+  max-width: 52ch;
+}
+
+.strip-controls {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.strip-btn {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1.5px solid var(--lilac);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--paper);
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s, opacity 0.2s;
+}
+
+.strip-btn:hover:not(:disabled) {
+  background: var(--lilac);
+  color: var(--ink);
+}
+
+.strip-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+/* Sin desbordamiento (todo cabe) los botones sobran */
+.offcode.is-static .strip-controls {
+  display: none;
 }
 
 .anime-strip {
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: clamp(15rem, 24vw, 20rem);
+  grid-auto-columns: clamp(10.5rem, 17vw, 14rem);
   gap: 1rem;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-  padding: 0 var(--page-x) 1rem;
+  scroll-behavior: smooth;
+  padding: 0 var(--page-x) 0.5rem;
   scroll-padding-inline: var(--page-x);
-  scrollbar-width: thin;
-  scrollbar-color: var(--uv) transparent;
+  scrollbar-width: none;
+}
+
+.anime-strip::-webkit-scrollbar {
+  display: none;
 }
 
 .anime {
   scroll-snap-align: start;
 }
 
-.anime img {
+/* Tratamiento uniforme: mismo formato, borde y tinte violeta */
+.anime-frame {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 0.6rem;
+}
+
+.anime-frame::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--uv);
+  mix-blend-mode: color;
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.anime-frame img {
   width: 100%;
+  height: auto;
   aspect-ratio: 4 / 5;
   object-fit: cover;
-  border-radius: 10px;
-  margin-bottom: 0.75rem;
 }
 
 .anime-title {
   display: block;
   font-weight: 600;
-}
-
-.anime-note {
-  display: block;
-  font-size: 0.9rem;
-  color: var(--on-ink-muted);
 }
 
 /* ---------- Contacto ---------- */
@@ -971,9 +1021,6 @@ button.btn {
     grid-column: 1 / -1;
   }
 
-  .offcode-head {
-    grid-template-columns: minmax(0, 1fr);
-  }
 }
 
 @media (max-width: 600px) {
@@ -1005,7 +1052,8 @@ button.btn {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html {
+  html,
+  .anime-strip {
     scroll-behavior: auto;
   }
 

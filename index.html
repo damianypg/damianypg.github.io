@@ -298,15 +298,20 @@
 
     <section class="offcode" aria-labelledby="offcode-title">
       <div class="offcode-head">
-        <h2 id="offcode-title" class="display-3">Cuando no estoy programando</h2>
-        <p>Veo anime. Mucho. Estas historias me enseñaron más sobre ritmo visual y composición que cualquier tutorial.</p>
+        <div>
+          <h2 id="offcode-title" class="display-3">Fuera del código</h2>
+          <p>Veo anime con ojo de frontend: me fijo en el ritmo de la animación, el encuadre y cómo cada plano guía la mirada.</p>
+        </div>
+        <div class="strip-controls">
+          <button class="strip-btn" type="button" data-strip="-1" aria-label="Anterior" aria-controls="anime-strip"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
+          <button class="strip-btn" type="button" data-strip="1" aria-label="Siguiente" aria-controls="anime-strip"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
+        </div>
       </div>
-      <ul class="anime-strip">
-        <li class="anime"><img src="img/img-1.jpg" alt="One Piece" loading="lazy" /><span class="anime-title">One Piece</span><span class="anime-note">Aventura en alta mar</span></li>
-        <li class="anime"><img src="img/img-2.webp" alt="Naruto" loading="lazy" /><span class="anime-title">Naruto</span><span class="anime-note">El camino del ninja</span></li>
-        <li class="anime"><img src="img/img-3.jpg" alt="Bleach" loading="lazy" /><span class="anime-title">Bleach</span><span class="anime-note">Poder de shinigami</span></li>
-        <li class="anime"><img src="img/img-4.jpg" alt="Black Clover" loading="lazy" /><span class="anime-title">Black Clover</span><span class="anime-note">Magia y voluntad</span></li>
-        <li class="anime"><img src="img/img-5.webp" alt="Hunter x Hunter" loading="lazy" /><span class="anime-title">Hunter x Hunter</span><span class="anime-note">Cazadores y Nen</span></li>
+      <ul class="anime-strip" id="anime-strip" tabindex="0" aria-label="Animes favoritos">
+        <li class="anime"><div class="anime-frame"><img src="assets/anime/one-piece.webp" alt="Luffy de One Piece con el brazo estirado hacia el frente" width="480" height="600" loading="lazy" /></div><span class="anime-title">One Piece</span></li>
+        <li class="anime"><div class="anime-frame"><img src="assets/anime/naruto.webp" alt="El equipo 7 de Naruto: Kakashi, Sasuke, Sakura y Naruto" width="480" height="600" loading="lazy" /></div><span class="anime-title">Naruto</span></li>
+        <li class="anime"><div class="anime-frame"><img src="assets/anime/black-clover.webp" alt="Yami y Asta de Black Clover en pose de combate" width="480" height="600" loading="lazy" /></div><span class="anime-title">Black Clover</span></li>
+        <li class="anime"><div class="anime-frame"><img src="assets/anime/hunter-x-hunter.webp" alt="Gon de Hunter x Hunter mirando al horizonte" width="480" height="600" loading="lazy" /></div><span class="anime-title">Hunter x Hunter</span></li>
       </ul>
     </section>
 
