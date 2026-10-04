@@ -33,8 +33,8 @@
   <main id="main-content">
     <section id="inicio" class="hero">
       <h1 class="hero-name" aria-label="Yosef Puetate">
-        <span class="hero-line hero-line--first" data-name-first>Yosef</span>
-        <span class="hero-line hero-line--last" data-name-last>Puetate</span>
+        <span class="hero-line hero-line--first">Yosef</span>
+        <span class="hero-line hero-line--last">Puetate</span>
       </h1>
 
       <div class="hero-figure" aria-hidden="true">
@@ -45,11 +45,17 @@
       <div class="hero-intro">
         <p class="hero-status"><span class="pulse" aria-hidden="true"></span>Disponible para proyectos y prácticas</p>
         <p class="hero-lead">Diseño y construyo interfaces web rápidas, accesibles y con carácter.</p>
-        <p class="hero-sub" data-bind="descripcionBreve"></p>
+        <p class="hero-sub">Estudiante apasionado por el desarrollo web y las tecnologías modernas. Especializado en frontend y comprometido con crear experiencias digitales increíbles.</p>
         <div class="hero-actions">
           <a class="btn btn-solid" href="#proyectos">Ver proyectos</a>
-          <a class="btn btn-ghost" href="./img/cv-yo.pdf" download="cv-yosef-puetate.pdf">Descargar CV</a>
+          <a class="btn btn-ghost" href="./assets/Yosef-Puetate-CV.pdf" target="_blank" rel="noopener noreferrer">Ver CV</a>
         </div>
+        <ul class="hero-links" aria-label="Perfiles">
+          <li><a href="https://github.com/damianypg" target="_blank" rel="noopener noreferrer"><i class="fab fa-github" aria-hidden="true"></i>GitHub</a></li>
+          <!-- TODO: email. Descomenta y reemplaza TU_EMAIL:
+          <li><a href="mailto:TU_EMAIL"><i class="fa-solid fa-envelope" aria-hidden="true"></i>Email</a></li>
+          -->
+        </ul>
       </div>
     </section>
 
@@ -58,16 +64,107 @@
         <h2 id="projects-title" class="display-2">Proyectos</h2>
         <p class="section-note">Cada vista previa es el proyecto real funcionando. Abre cualquiera para probarlo.</p>
       </div>
-      <div class="project-grid" data-projects></div>
+      <div class="project-grid">
+        <article class="project project--feature">
+          <a class="project-link" href="https://coneslat-2026.vercel.app/" target="_blank" rel="noopener noreferrer">
+            <div class="browser" aria-hidden="true">
+              <div class="browser-bar"><span></span><span></span><span></span></div>
+              <div class="browser-view"><iframe data-src="https://coneslat-2026.vercel.app/" title="" tabindex="-1"></iframe></div>
+            </div>
+            <div class="project-info">
+              <h3 class="project-name">CONESLAT 2026</h3>
+              <p class="project-desc">Sitio oficial del Congreso Estudiantil Latinoamericano de las Ramas Estudiantiles IEEE de la Región 9: programa, ponentes, cuenta regresiva e inscripción.</p>
+              <ul class="project-tech" aria-label="Tecnologías"><li>Next.js</li><li>React</li><li>Vercel</li></ul>
+              <span class="project-open">Abrir proyecto<span class="visually-hidden"> CONESLAT 2026 en una pestaña nueva</span></span>
+            </div>
+          </a>
+        </article>
+        <article class="project">
+          <a class="project-link" href="proyectos/Twitch/index.html" target="_blank" rel="noopener noreferrer">
+            <div class="browser" aria-hidden="true">
+              <div class="browser-bar"><span></span><span></span><span></span></div>
+              <div class="browser-view"><iframe data-src="proyectos/Twitch/index.html" title="" tabindex="-1"></iframe></div>
+            </div>
+            <div class="project-info">
+              <h3 class="project-name">Twitch Clone</h3>
+              <p class="project-desc">Clon de Twitch con layout responsive, buscador, filtros por categoría y tarjetas dinámicas desde JSON.</p>
+              <ul class="project-tech" aria-label="Tecnologías"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>JSON</li></ul>
+              <span class="project-open">Abrir proyecto<span class="visually-hidden"> Twitch Clone en una pestaña nueva</span></span>
+            </div>
+          </a>
+        </article>
+        <article class="project">
+          <a class="project-link" href="proyectos/Youtube/index.html" target="_blank" rel="noopener noreferrer">
+            <div class="browser" aria-hidden="true">
+              <div class="browser-bar"><span></span><span></span><span></span></div>
+              <div class="browser-view"><iframe data-src="proyectos/Youtube/index.html" title="" tabindex="-1"></iframe></div>
+            </div>
+            <div class="project-info">
+              <h3 class="project-name">YouTube Clone</h3>
+              <p class="project-desc">Clon de YouTube con header, menús laterales, filtros y cards responsive.</p>
+              <ul class="project-tech" aria-label="Tecnologías"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>JSON</li></ul>
+              <span class="project-open">Abrir proyecto<span class="visually-hidden"> YouTube Clone en una pestaña nueva</span></span>
+            </div>
+          </a>
+        </article>
+        <article class="project">
+          <a class="project-link" href="proyectos/Facebook/index.html" target="_blank" rel="noopener noreferrer">
+            <div class="browser" aria-hidden="true">
+              <div class="browser-bar"><span></span><span></span><span></span></div>
+              <div class="browser-view"><iframe data-src="proyectos/Facebook/index.html" title="" tabindex="-1"></iframe></div>
+            </div>
+            <div class="project-info">
+              <h3 class="project-name">Facebook Clone</h3>
+              <p class="project-desc">Clon de Facebook maquetado en HTML, CSS y JavaScript con estructura responsive.</p>
+              <ul class="project-tech" aria-label="Tecnologías"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>JSON</li></ul>
+              <span class="project-open">Abrir proyecto<span class="visually-hidden"> Facebook Clone en una pestaña nueva</span></span>
+            </div>
+          </a>
+        </article>
+        <article class="project">
+          <a class="project-link" href="proyectos/tuenti/index.html" target="_blank" rel="noopener noreferrer">
+            <div class="browser" aria-hidden="true">
+              <div class="browser-bar"><span></span><span></span><span></span></div>
+              <div class="browser-view"><iframe data-src="proyectos/tuenti/index.html" title="" tabindex="-1"></iframe></div>
+            </div>
+            <div class="project-info">
+              <h3 class="project-name">Tuenti</h3>
+              <p class="project-desc">Recreación de la red social Tuenti como práctica de maquetación y estructura de datos.</p>
+              <ul class="project-tech" aria-label="Tecnologías"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
+              <span class="project-open">Abrir proyecto<span class="visually-hidden"> Tuenti en una pestaña nueva</span></span>
+            </div>
+          </a>
+        </article>
+        <article class="project project--feature">
+          <a class="project-link" href="proyectos/animacion/index.html" target="_blank" rel="noopener noreferrer">
+            <div class="browser" aria-hidden="true">
+              <div class="browser-bar"><span></span><span></span><span></span></div>
+              <div class="browser-view"><iframe data-src="proyectos/animacion/index.html" title="" tabindex="-1"></iframe></div>
+            </div>
+            <div class="project-info">
+              <h3 class="project-name">Animación Carrusel</h3>
+              <p class="project-desc">Intro cinematográfica con keyframes e imágenes dentro de una máscara tipográfica.</p>
+              <ul class="project-tech" aria-label="Tecnologías"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
+              <span class="project-open">Abrir proyecto<span class="visually-hidden"> Animación Carrusel en una pestaña nueva</span></span>
+            </div>
+          </a>
+        </article>
+      </div>
     </section>
 
     <section id="sobre-mi" class="about" aria-labelledby="about-title">
       <h2 id="about-title" class="display-2">Sobre mí</h2>
       <blockquote class="about-quote">El aprendizaje nunca termina, y cada proyecto es una oportunidad para crecer.</blockquote>
-      <div class="about-body" data-story></div>
+      <div class="about-body">
+        <p>Desde niño me fascinó cómo funcionaban las aplicaciones y los sitios web. A los 12 años descubrí HTML y CSS, y desde entonces estoy obsesionado con aprender cada tecnología nueva que sale. Empecé programando pequeños juegos en JavaScript puro, luego avancé hacia proyectos más complejos.</p>
+        <p>Actualmente estudio Ingeniería de Software y me dedico a mejorar mis habilidades en desarrollo frontend. Mi objetivo es crear interfaces intuitivas, accesibles y hermosas que resuelvan problemas reales. Creo que el buen código no solo funciona bien, sino que es fácil de mantener y escalar.</p>
+        <p>Fuera de la programación, disfruto leyendo sobre UX/UI design, contribuyendo a proyectos open source y compartiendo conocimiento con la comunidad de desarrolladores. Mi filosofía es que el aprendizaje nunca termina, y cada proyecto es una oportunidad para crecer.</p>
+      </div>
       <div class="tools">
         <h3 class="tools-title">Con qué trabajo</h3>
-        <ul class="tool-list" data-tools></ul>
+        <ul class="tool-list">
+          <li>HTML5</li><li>CSS3</li><li>JavaScript ES6+</li><li>Git &amp; GitHub</li><li>VS Code</li><li>Figma</li><li>API REST</li><li>Responsive Design</li>
+        </ul>
       </div>
     </section>
 
@@ -76,11 +173,20 @@
       <div class="record-cols">
         <div>
           <h3 class="record-title">Logros</h3>
-          <ul class="achievement-list" data-achievements></ul>
+          <ul class="achievement-list">
+            <li>Primer lugar en hackathon universitario TechNova 2024</li>
+            <li>Proyecto open source destacado en GitHub</li>
+            <li>Mención honorífica en concurso de algoritmos</li>
+            <li>Desarrollo de aplicación mobile con miles de descargas</li>
+          </ul>
         </div>
         <div>
           <h3 class="record-title">Certificaciones</h3>
-          <ul class="cert-list" data-certs></ul>
+          <ul class="cert-list">
+            <li class="cert"><span class="cert-name">JavaScript Moderno: ES6+</span><span class="cert-org">Platzi</span></li>
+            <li class="cert"><span class="cert-name">Responsive Design &amp; Mobile First</span><span class="cert-org">Coursera</span></li>
+            <li class="cert"><span class="cert-name">Advanced CSS</span><span class="cert-org">Udemy</span></li>
+          </ul>
         </div>
       </div>
     </section>
@@ -90,30 +196,55 @@
         <h2 id="offcode-title" class="display-3">Cuando no estoy programando</h2>
         <p>Veo anime. Mucho. Estas historias me enseñaron más sobre ritmo visual y composición que cualquier tutorial.</p>
       </div>
-      <ul class="anime-strip" data-anime></ul>
+      <ul class="anime-strip">
+        <li class="anime"><img src="img/img-1.jpg" alt="One Piece" loading="lazy" /><span class="anime-title">One Piece</span><span class="anime-note">Aventura en alta mar</span></li>
+        <li class="anime"><img src="img/img-2.webp" alt="Naruto" loading="lazy" /><span class="anime-title">Naruto</span><span class="anime-note">El camino del ninja</span></li>
+        <li class="anime"><img src="img/img-3.jpg" alt="Bleach" loading="lazy" /><span class="anime-title">Bleach</span><span class="anime-note">Poder de shinigami</span></li>
+        <li class="anime"><img src="img/img-4.jpg" alt="Black Clover" loading="lazy" /><span class="anime-title">Black Clover</span><span class="anime-note">Magia y voluntad</span></li>
+        <li class="anime"><img src="img/img-5.webp" alt="Hunter x Hunter" loading="lazy" /><span class="anime-title">Hunter x Hunter</span><span class="anime-note">Cazadores y Nen</span></li>
+      </ul>
     </section>
 
     <section id="contacto" class="contact" aria-labelledby="contact-title">
       <h2 id="contact-title" class="contact-title">¿Construimos algo juntos?</h2>
       <p class="contact-copy">Cuéntame tu idea o tu vacante y te respondo pronto.</p>
       <div class="contact-links">
-        <a class="contact-link" data-social="whatsapp" href="#" target="_blank" rel="noopener noreferrer">
+        <!-- TODO: email. Descomenta y reemplaza TU_EMAIL:
+        <a class="contact-link" href="mailto:TU_EMAIL">
+          <i class="fa-solid fa-envelope" aria-hidden="true"></i><span>Escribir un email</span>
+        </a>
+        -->
+        <!-- TODO: WhatsApp. Descomenta y reemplaza NUMERO por tu número con código de país, sin + ni espacios (ej. 593...):
+        <a class="contact-link" href="https://wa.me/NUMERO?text=Hola%20Yosef%2C%20vi%20tu%20portafolio%20y%20me%20gustar%C3%ADa%20hablar%20contigo%20sobre%20un%20proyecto." target="_blank" rel="noopener noreferrer">
           <i class="fab fa-whatsapp" aria-hidden="true"></i><span>Escribir por WhatsApp</span>
         </a>
-        <a class="contact-link" data-social="linkedin" href="#" target="_blank" rel="noopener noreferrer">
+        -->
+        <!-- TODO: LinkedIn. Descomenta y reemplaza TU_USUARIO:
+        <a class="contact-link" href="https://www.linkedin.com/in/TU_USUARIO/" target="_blank" rel="noopener noreferrer">
           <i class="fab fa-linkedin-in" aria-hidden="true"></i><span>Conectar en LinkedIn</span>
         </a>
-        <a class="contact-link" data-social="instagram" href="#" target="_blank" rel="noopener noreferrer">
-          <i class="fab fa-instagram" aria-hidden="true"></i><span>Seguir en Instagram</span>
+        -->
+        <a class="contact-link" href="https://github.com/damianypg" target="_blank" rel="noopener noreferrer">
+          <i class="fab fa-github" aria-hidden="true"></i><span>Ver mi GitHub</span>
+        </a>
+        <a class="contact-link contact-link--ghost" href="./assets/Yosef-Puetate-CV.pdf" target="_blank" rel="noopener noreferrer">
+          <i class="fa-solid fa-file-lines" aria-hidden="true"></i><span>Ver CV</span>
         </a>
       </div>
+      <!-- TODO: Instagram (opcional). Si quieres mostrarlo, va como enlace secundario pequeño:
+      <p class="contact-minor"><a href="https://www.instagram.com/TU_USUARIO/" target="_blank" rel="noopener noreferrer">Instagram</a></p>
+      -->
     </section>
   </main>
 
   <footer class="site-footer">
-    <span data-bind="nombre">Yosef Puetate</span>
-    <span data-bind="carrera">Ingeniería de Software</span>
-    <span>© <span data-year></span></span>
+    <p>© 2026 Yosef Puetate</p>
+    <ul class="footer-links" aria-label="Enlaces">
+      <li><a href="https://github.com/damianypg" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+      <!-- TODO: <li><a href="https://www.linkedin.com/in/TU_USUARIO/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li> -->
+      <!-- TODO: <li><a href="mailto:TU_EMAIL">Email</a></li> -->
+      <li><a href="./assets/Yosef-Puetate-CV.pdf" target="_blank" rel="noopener noreferrer">CV</a></li>
+    </ul>
   </footer>
 
   <script src="script.js" defer></script>
