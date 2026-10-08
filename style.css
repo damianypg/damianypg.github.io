@@ -286,6 +286,7 @@ svg[hidden] {
 .hero-name {
   grid-column: 1 / -1;
   grid-row: 1;
+  align-self: start;
   position: relative;
   z-index: 1;
   font-family: var(--display);
