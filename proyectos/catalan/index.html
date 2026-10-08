@@ -511,13 +511,15 @@ function dibujar(n, pares, o = {}){
   let manos = '';
   curvas.forEach((c, i) => {
     const anima = o.animar === 'todo' || (o.animar === 'ultima' && i === pares.length-1);
-    const dl = o.animar === 'todo' ? i*.16 : 0;
+    // o.ritmo < 1 comprime todos los tiempos (al reproducir, para que la animación termine antes del siguiente paso)
+    const k = o.ritmo ?? 1;
+    const dl = o.animar === 'todo' ? i*.16*k : 0;
     const cls = anima ? 'dibuja' : '';
     // brillo = segundo trazo grueso y translúcido debajo (sin filter: una recta vertical tiene bbox de ancho 0 y desaparecería)
     h += `<g class="apreton" data-a="${pares[i][0]}" data-b="${pares[i][1]}">
-      <path d="${c.d}" pathLength="1" class="halo ${cls}" stroke="url(#dg${i})" style="animation-delay:${dl}s"/>
-      <path d="${c.d}" pathLength="1" class="curva ${cls}" stroke="url(#dg${i})" style="animation-delay:${dl}s"/></g>`;
-    manos += `<text class="mano ${anima ? 'pop' : ''}" data-a="${pares[i][0]}" data-b="${pares[i][1]}" x="${c.mx.toFixed(1)}" y="${c.my.toFixed(1)}" style="animation-delay:${dl+.5}s">🤝</text>`;
+      <path d="${c.d}" pathLength="1" class="halo ${cls}" stroke="url(#dg${i})" style="animation-delay:${dl}s; animation-duration:${.75*k}s"/>
+      <path d="${c.d}" pathLength="1" class="curva ${cls}" stroke="url(#dg${i})" style="animation-delay:${dl}s; animation-duration:${.75*k}s"/></g>`;
+    manos += `<text class="mano ${anima ? 'pop' : ''}" data-a="${pares[i][0]}" data-b="${pares[i][1]}" x="${c.mx.toFixed(1)}" y="${c.my.toFixed(1)}" style="animation-delay:${dl+.5*k}s; animation-duration:${.55*k}s">🤝</text>`;
   });
   const lugar = lugarLetrero(curvas, !!o.centro);
   h += `</g><g class="letrero" transform="translate(${lugar.x} ${lugar.y})"><rect x="-88" y="-24" width="176" height="48" rx="24"/>
@@ -659,7 +661,9 @@ function verIr(i){
   const sols = soluciones(S.n), L = sols.length;
   i = ((i % L) + L) % L;
   S.ver.idx = i;
-  dibujar(S.n, sols[i], {animar:'todo'});
+  // al reproducir, la animación completa (escalonado + trazo + 🤝) debe caber en ~0.85 s del intervalo de 1.1 s
+  const total = (S.n-1)*.16 + 1.05;
+  dibujar(S.n, sols[i], {animar:'todo', ritmo: S.ver.play ? Math.min(1, .85/total) : 1});
   leyenda(`${2*S.n} personas · ${S.n} ${S.n > 1 ? 'apretones' : 'apretón'}`);
   const num = $('#vIdx'); num.textContent = i+1; saltar(num);
   $('#vPares').innerHTML = textoPares(sols[i]);
