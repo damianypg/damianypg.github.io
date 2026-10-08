@@ -478,7 +478,7 @@ ul {
   margin-top: clamp(4rem, 8vw, 6rem);
 }
 
-/* Captura del proyecto dentro de un marco de ventana. Es un botón: abre la demo. */
+/* Captura del proyecto dentro de un marco de ventana. Es un enlace: abre el proyecto en otra pestaña. */
 .shot {
   display: block;
   width: 100%;
@@ -619,74 +619,6 @@ button.btn {
 
 .project--small .project-info {
   margin-top: 1.1rem;
-}
-
-/* ---------- Diálogo de demo ---------- */
-
-.demo-dialog {
-  width: min(1200px, 100vw - 2rem);
-  height: min(800px, 100svh - 2rem);
-  padding: 0;
-  border: 1px solid rgb(205 185 255 / 0.3);
-  border-radius: 14px;
-  background: var(--ink-2);
-  color: var(--on-ink);
-  overflow: hidden;
-}
-
-.demo-dialog[open] {
-  display: flex;
-  flex-direction: column;
-}
-
-.demo-dialog::backdrop {
-  background: rgb(27 10 60 / 0.8);
-  backdrop-filter: blur(4px);
-}
-
-.demo-head {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 0.5rem 0.5rem 0.5rem 1.1rem;
-}
-
-.demo-title {
-  flex: 1;
-  font-size: 1rem;
-  font-weight: 600;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.demo-open {
-  font-size: 0.9rem;
-  text-underline-offset: 0.3em;
-}
-
-.demo-close {
-  display: grid;
-  place-items: center;
-  width: 2.75rem;
-  height: 2.75rem;
-  border: 0;
-  border-radius: 50%;
-  background: transparent;
-  color: inherit;
-  font-size: 1.2rem;
-  cursor: pointer;
-}
-
-.demo-close:hover {
-  background: rgb(205 185 255 / 0.15);
-}
-
-.demo-frame {
-  flex: 1;
-  width: 100%;
-  border: 0;
-  background: #fff;
 }
 
 /* ---------- Servicios ---------- */

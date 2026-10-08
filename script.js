@@ -4,46 +4,9 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  setupDemos();
   setupActiveNav();
   setupStrip();
 });
-
-/**
- * Las tarjetas muestran capturas estáticas. La demo real (un iframe)
- * se carga solo cuando alguien la pide, dentro de un <dialog>.
- */
-function setupDemos() {
-  const dialog = document.querySelector('.demo-dialog');
-  if (!dialog) return;
-  const frame = dialog.querySelector('.demo-frame');
-  const title = dialog.querySelector('.demo-title');
-  const openLink = dialog.querySelector('.demo-open');
-
-  document.querySelectorAll('[data-demo]').forEach((trigger) => {
-    trigger.addEventListener('click', () => {
-      const url = trigger.dataset.demo;
-      title.textContent = trigger.dataset.title || 'Demo';
-      const isEnglish = document.documentElement.lang === 'en';
-      frame.title = isEnglish
-        ? `${trigger.dataset.title || 'Project'} demo`
-        : `Demo de ${trigger.dataset.title || 'proyecto'}`;
-      openLink.href = url;
-      frame.src = url;
-      dialog.showModal();
-    });
-  });
-
-  dialog.querySelector('.demo-close').addEventListener('click', () => dialog.close());
-  // Clic fuera del contenido (en el fondo) también cierra
-  dialog.addEventListener('click', (event) => {
-    if (event.target === dialog) dialog.close();
-  });
-  // Al cerrar se descarga la demo para que no siga consumiendo recursos
-  dialog.addEventListener('close', () => {
-    frame.removeAttribute('src');
-  });
-}
 
 function setupActiveNav() {
   const links = [...document.querySelectorAll('.topnav a[href^="#"]')];
