@@ -474,6 +474,10 @@ ul {
   gap: clamp(1.5rem, 4vw, 3.5rem);
 }
 
+.project--feature + .project--feature {
+  margin-top: clamp(4rem, 8vw, 6rem);
+}
+
 /* Captura del proyecto dentro de un marco de ventana. Es un botón: abre la demo. */
 .shot {
   display: block;
