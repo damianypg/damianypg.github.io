@@ -91,6 +91,11 @@ ul {
   fill: currentColor;
 }
 
+/* "hidden" no aplica a elementos SVG: sin esto el sprite ocupa 300×150 px */
+svg[hidden] {
+  display: none;
+}
+
 .visually-hidden {
   position: absolute;
   width: 1px;
@@ -268,21 +273,24 @@ ul {
   position: relative;
   display: grid;
   grid-template-columns: minmax(0, 8fr) minmax(0, 5fr);
-  grid-template-rows: 1fr auto;
-  min-height: 100svh;
-  padding: 7rem var(--page-x) 3.5rem;
+  /* 1fr absorbe el alto extra de la foto para que el texto no se separe del nombre */
+  grid-template-rows: auto 1fr;
+  align-items: start;
+  align-content: start;
+  justify-content: start;
+  /* La barra superior es fija (4.5rem): el aire real sobre el nombre es el clamp */
+  padding: calc(4.5rem + clamp(24px, 5vh, 56px)) var(--page-x) 3.5rem;
   column-gap: 2rem;
 }
 
 .hero-name {
   grid-column: 1 / -1;
   grid-row: 1;
-  align-self: end;
   position: relative;
   z-index: 1;
   font-family: var(--display);
   font-weight: 900;
-  font-size: clamp(3.6rem, 7.5vw, 7.75rem);
+  font-size: clamp(3.5rem, 8vw, 7.5rem);
   line-height: 0.84;
   letter-spacing: -0.035em;
 }
@@ -342,7 +350,7 @@ ul {
   grid-row: 2;
   position: relative;
   z-index: 3;
-  padding-top: 2.5rem;
+  padding-top: 1.75rem;
   max-width: 36rem;
   animation: fade-up 0.9s 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
