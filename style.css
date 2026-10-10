@@ -671,11 +671,15 @@ button.btn {
   line-height: 1.1;
 }
 
-.service .service-price {
+/* Botón de WhatsApp al pie de cada tarjeta, alineado aunque el texto varíe */
+.service .service-cta {
+  gap: 0.6rem;
+  align-self: flex-start;
   margin-top: auto;
-  padding-top: 0.75rem;
-  font-weight: 600;
-  color: var(--paper);
+}
+
+.service-cta .icon {
+  font-size: 1.15rem;
 }
 
 .process-title {
