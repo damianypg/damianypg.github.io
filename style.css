@@ -22,6 +22,7 @@
 
   --gutter: clamp(1rem, 4vw, 3.5rem);
   --section-y: clamp(5rem, 11vw, 9rem);
+  --compact-y: clamp(2.5rem, 6vh, 4.5rem);
   --max: 1320px;
   /* Margen lateral común: todas las secciones alinean su borde izquierdo aquí */
   --page-x: max(var(--gutter), (100% - var(--max)) / 2);
@@ -777,7 +778,7 @@ button.btn {
 .record {
   background: var(--lilac);
   color: var(--on-paper);
-  padding: var(--section-y) var(--page-x);
+  padding: var(--compact-y) var(--page-x);
 }
 
 .timeline {
@@ -825,6 +826,26 @@ button.btn {
   font-weight: 600;
 }
 
+/* Varios roles dentro de una misma organización, el más reciente primero */
+.timeline-roles {
+  display: grid;
+  gap: 0.9rem;
+  margin: 0.2rem 0 0;
+  padding: 0 0 0 1rem;
+  list-style: none;
+  border-left: 1.5px solid rgb(27 10 60 / 0.25);
+}
+
+.timeline-roles li {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.timeline-subdate {
+  font-size: 0.92rem;
+  color: var(--on-lilac-muted);
+}
+
 .timeline-links a {
   font-weight: 600;
   text-decoration-thickness: 2px;
@@ -846,7 +867,7 @@ button.btn {
 /* ---------- Fuera del código ---------- */
 
 .offcode {
-  padding: clamp(3.5rem, 7vw, 5.5rem) 0;
+  padding: var(--compact-y) 0;
 }
 
 .offcode-head {
@@ -856,7 +877,7 @@ button.btn {
   justify-content: space-between;
   gap: 1rem 3rem;
   width: min(var(--max), 100% - 2 * var(--gutter));
-  margin: 0 auto 2rem;
+  margin: 0 auto 1.25rem;
 }
 
 .offcode-head p {
@@ -898,16 +919,16 @@ button.btn {
   display: none;
 }
 
+/* Las tarjetas ocupan todo el contenedor; con 4 o 2 columnas nunca desborda
+   y script.js oculta los botones anterior/siguiente (.is-static) */
 .anime-strip {
   display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: clamp(10.5rem, 17vw, 14rem);
-  gap: 1rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(1rem, 1.5vw, 1.5rem);
+  width: min(var(--max), 100% - 2 * var(--gutter));
+  margin: 0 auto;
+  padding: 0;
   overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  padding: 0 var(--page-x) 0.5rem;
-  scroll-padding-inline: var(--page-x);
   scrollbar-width: none;
 }
 
@@ -953,11 +974,11 @@ button.btn {
 .chess {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 22rem);
-  align-items: center;
-  gap: 2rem clamp(2rem, 6vw, 5rem);
+  align-items: start;
+  gap: 1.5rem clamp(2rem, 6vw, 5rem);
   width: min(var(--max), 100% - 2 * var(--gutter));
-  margin: clamp(3rem, 6vw, 4.5rem) auto 0;
-  padding-top: clamp(2.5rem, 5vw, 3.5rem);
+  margin: 2rem auto 0;
+  padding-top: 1.5rem;
   border-top: 1px solid rgb(205 185 255 / 0.2);
 }
 
@@ -1243,6 +1264,10 @@ button.chess-play {
     grid-row: 3;
     padding-top: 0;
     margin-top: -1rem;
+  }
+
+  .anime-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .project--feature,
