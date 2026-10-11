@@ -1,0 +1,13 @@
+Bibliotecas de terceros incluidas en esta carpeta (se usan tal cual, sin cambios):
+
+- qrcode.js: "qrcode-generator" 2.0.4, licencia MIT.
+  https://github.com/kazuhikoarase/qrcode-generator
+  Genera el código QR de la credencial.
+
+- jsQR.js: "jsQR" 1.4.0, licencia Apache-2.0.
+  https://github.com/cozmo/jsQR
+  Lee el código QR desde la cámara en la vista Puerta.
+
+Fuentes (en fonts/), con licencia SIL Open Font License 1.1:
+- Archivo (Omnibus-Type), vía @fontsource-variable/archivo.
+- Spline Sans Mono (Spline Sans Mono Project Authors), vía @fontsource/spline-sans-mono.

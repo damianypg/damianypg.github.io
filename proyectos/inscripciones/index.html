@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Inscripciones con credencial QR | Yosef Puetate</title>
+  <meta name="description" content="Demo de un sistema de inscripciones para congresos: formulario con credencial en vivo, código QR, control de asistencia en la puerta y panel del organizador. Datos ficticios, funciona sin servidor." />
+  <meta name="theme-color" content="#2438d6" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232438d6'/%3E%3Crect x='9' y='7' width='14' height='18' rx='3' fill='%23fff'/%3E%3Crect x='14' y='9' width='4' height='2' rx='1' fill='%232438d6'/%3E%3Crect x='12' y='15' width='8' height='7' fill='%230e1330'/%3E%3C/svg%3E" />
+  <link rel="preload" href="fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-view="inscripcion">
+  <a class="skip-link" href="#app">Saltar al contenido</a>
+
+  <header class="top">
+    <div class="top-inner">
+      <a class="back" href="../../#proyectos">Volver al portafolio</a>
+      <p class="brand">Jornadas de Software Chimborazo <span class="demo-tag">Demo con datos ficticios</span></p>
+      <nav class="roles" aria-label="Vista por rol">
+        <a href="#/inscripcion" data-route="inscripcion">Inscripción</a>
+        <a href="#/asistente" data-route="asistente">Mi acceso</a>
+        <a href="#/puerta" data-route="puerta">Puerta</a>
+        <a href="#/organizador" data-route="organizador">Organizador <span class="badge" id="badge-count" hidden></span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="app" tabindex="-1"></main>
+
+  <div id="live" class="visually-hidden" role="status" aria-live="polite"></div>
+  <dialog id="dlg" aria-labelledby="dlg-title"></dialog>
+
+  <noscript><p class="nojs">Este sitio necesita JavaScript para funcionar.</p></noscript>
+
+  <script src="vendor/qrcode.js"></script>
+  <script src="vendor/jsQR.js"></script>
+  <script src="data.js"></script>
+  <script src="logic.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

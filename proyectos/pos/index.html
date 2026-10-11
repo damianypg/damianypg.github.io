@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Panel POS para restaurante | Yosef Puetate</title>
+  <meta name="description" content="Demo de un panel de punto de venta para restaurante: toma de pedidos con comanda, tablero de cocina en vivo y reportes de ventas. Datos ficticios, funciona sin servidor." />
+  <meta name="theme-color" content="#13202a" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2313202a'/%3E%3Cpath d='M9 8h14v16l-3-2-2 2-2-2-2 2-2-2-3 2z' fill='%23f2a900'/%3E%3C/svg%3E" />
+  <link rel="preload" href="fonts/schibsted-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-view="mesero">
+  <a class="skip-link" href="#app">Saltar al contenido</a>
+
+  <header class="top">
+    <div class="top-inner">
+      <a class="back" href="../../#proyectos">Volver al portafolio</a>
+      <p class="brand">Picantería Chimborazo <span class="demo-tag">Demo con datos ficticios</span></p>
+      <nav class="roles" aria-label="Vista por rol">
+        <a href="#/menu" data-route="menu">Menú</a>
+        <a href="#/mesero" data-route="mesero">Mesero</a>
+        <a href="#/cocina" data-route="cocina">Cocina <span class="badge" id="badge" hidden></span></a>
+        <a href="#/admin" data-route="admin">Admin</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="app" tabindex="-1"></main>
+
+  <dialog id="dlg" aria-labelledby="dlg-title"></dialog>
+  <div id="live" class="visually-hidden" role="status" aria-live="polite"></div>
+
+  <noscript><p class="nojs">Este panel necesita JavaScript para funcionar.</p></noscript>
+
+  <script src="data.js"></script>
+  <script src="logic.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
