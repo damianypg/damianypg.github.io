@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://damianypg.github.io/sitemap.xml
+Sitemap: https://yosefpuetate.com/sitemap.xml
