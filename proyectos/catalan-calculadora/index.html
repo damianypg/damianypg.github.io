@@ -455,8 +455,13 @@ button { font: inherit; color: inherit; }
 .card .idx { justify-self: start; font: 600 12px/1 var(--f-ui); color: var(--muted); }
 .card svg { width: 100%; height: auto; display: block; }
 
+/* Movimiento reducido: se apaga solo lo decorativo (nubes, pulsos, destellos, entradas).
+   La construcción de las cordilleras se mantiene porque solo ocurre cuando la persona pulsa Generar o Un paso. */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+  .panel, .lcd-val.pop, .caret, .climber .halo, .card.slot.next, .card.fresh, .stage-draw.hit, #vz-terrain.glow,
+  .plus.go, .tally-n b.bump, .cell.now, .trail .new { animation: none; }
+  .seq-list button::before, .key, .btn, .cell { transition: none; }
+  .plus.go { opacity: 0; }
   .cloud { animation: none; left: 12%; }
   .cloud.c2 { left: 58%; } .cloud.c3 { left: 80%; }
 }
@@ -1109,7 +1114,8 @@ function generar(n) {
     setTimeout(() => fx.remove(), 1200);
   }
 
-  function setViz(n) {
+  // start: arrancar la animación al elegir n. Con movimiento reducido no arranca sola; espera a que se pulse Generar.
+  function setViz(n, start = !reduceMotion) {
     if (P) clearTimeout(P.timer);
     vizN = n;
     document.querySelectorAll("#viz-sel button").forEach((b) => b.setAttribute("aria-pressed", String(Number(b.dataset.n) === n)));
@@ -1124,8 +1130,7 @@ function generar(n) {
       `<div class="card slot${i === 0 ? " next" : ""}">${cardHTML(i, null, n)}</div>`).join("");
     renderStage(null, false);
     syncControls();
-    if (reduceMotion) finishAll();
-    else if (vizVisible()) play();
+    if (start && vizVisible()) play();
   }
 
   function apply(e, anim) {
@@ -1215,7 +1220,7 @@ function generar(n) {
   }
   function play() {
     if (P.playing) return;
-    if (P.i >= P.ev.length) { setViz(P.n); return; }   // repetir desde cero
+    if (P.i >= P.ev.length) { setViz(P.n, true); return; }   // repetir desde cero, también con movimiento reducido
     P.playing = true;
     syncControls();
     tick();
