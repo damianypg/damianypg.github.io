@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calculadora de Catalan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<style>
+/* Dirección visual: "cartografía alpina". Las cordilleras de la pestaña 3 son el hilo conductor:
+   papel mineral, curvas de nivel, roca con cara iluminada y cara en sombra, nieve en las cimas.
+   Archivo (ancho variable) para la interfaz, Source Serif para la prosa y las fórmulas, Plex Mono solo para código y cifras. */
+:root {
+  --paper: #E6EBE5; --surface: #F6F8F3; --ink: #14251F; --muted: #55675F; --line: #C8D2CA; --line-soft: #DCE3DC;
+  --accent: #1C6A86; --accent-soft: #D5E5E9; --hot: #B4512A; --hot-soft: #F1DDD0; --ok: #2A7748; --ok-soft: #D6EBDC;
+  --mark: #F2C04A; --mark-ink: #2B2000; --shadow: rgba(20, 37, 31, .2);
+  --sky-top: #CFE0E4; --sky-low: #EEF3EE; --cloud: rgba(255, 255, 255, .85);
+  --rock-lit-hi: #93AC9F; --rock-lit-lo: #4E6B5E; --rock-sh-hi: #5F786D; --rock-sh-lo: #2D443A;
+  --snow: #FBFCF9; --contour: rgba(255, 255, 255, .2);
+  --device: #1D2D27; --device-edge: #13201B; --lcd: #AEBB9C; --lcd-ink: #1B2617; --lcd-dim: #5E6C51; --lcd-ghost: rgba(27, 38, 23, .07);
+  --key: #2B3C35; --key-ink: #EEF2EC; --key-fn: #3E5249; --key-alt: #1C6A86;
+  --code-bg: #10201B; --code-ink: #D5E0D9; --code-kw: #8FCBE0; --code-num: #F2C04A; --code-com: #74897F; --code-line: #1E302A;
+  --c1: #1C6A86; --c2: #8A6400; --c3: #2A7748; --c4: #B4512A; --c5: #7A3EB8;
+  --k1: #8FCBE0; --k2: #E9C84A; --k3: #5FCB8D; --k4: #FF9566; --k5: #C79BFF;
+  --f-ui: "Archivo", "Segoe UI", system-ui, sans-serif;
+  --f-text: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --f-mono: "IBM Plex Mono", Consolas, "Courier New", monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0E1815; --surface: #14211D; --ink: #E2EAE4; --muted: #95A69D; --line: #2A3C35; --line-soft: #1F2E29;
+    --accent: #6DB9D4; --accent-soft: #17323A; --hot: #E88D5F; --hot-soft: #3A2419; --ok: #5FCB8D; --ok-soft: #173427;
+    --mark: #E9C84A; --mark-ink: #1E1800; --shadow: rgba(0, 0, 0, .55);
+    --sky-top: #142A33; --sky-low: #15231F; --cloud: rgba(200, 225, 230, .1);
+    --rock-lit-hi: #6E897D; --rock-lit-lo: #2F473D; --rock-sh-hi: #4A6157; --rock-sh-lo: #1D2E27;
+    --snow: #E8EFEA; --contour: rgba(255, 255, 255, .12);
+    --device: #1A2924; --device-edge: #2C4038; --key-alt: #24799A;
+    --code-bg: #0A1411; --code-line: #192923;
+    --c1: #6DB9D4; --c2: #E9C84A; --c3: #5FCB8D; --c4: #E88D5F; --c5: #C79BFF;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0E1815; --surface: #14211D; --ink: #E2EAE4; --muted: #95A69D; --line: #2A3C35; --line-soft: #1F2E29;
+  --accent: #6DB9D4; --accent-soft: #17323A; --hot: #E88D5F; --hot-soft: #3A2419; --ok: #5FCB8D; --ok-soft: #173427;
+  --mark: #E9C84A; --mark-ink: #1E1800; --shadow: rgba(0, 0, 0, .55);
+  --sky-top: #142A33; --sky-low: #15231F; --cloud: rgba(200, 225, 230, .1);
+  --rock-lit-hi: #6E897D; --rock-lit-lo: #2F473D; --rock-sh-hi: #4A6157; --rock-sh-lo: #1D2E27;
+  --snow: #E8EFEA; --contour: rgba(255, 255, 255, .12);
+  --device: #1A2924; --device-edge: #2C4038; --key-alt: #24799A;
+  --code-bg: #0A1411; --code-line: #192923;
+  --c1: #6DB9D4; --c2: #E9C84A; --c3: #5FCB8D; --c4: #E88D5F; --c5: #C79BFF;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--paper); color: var(--ink);
+  font: 400 17px/1.6 var(--f-text);
+  font-optical-sizing: auto;
+}
+.page { max-width: 1640px; margin: 0 auto; padding: 0 clamp(16px, 2.2vw, 36px) 72px; }
+h1, h2, h3 { font-family: var(--f-ui); line-height: 1.08; text-wrap: balance; margin: 0; }
+p { margin: 0; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+::selection { background: var(--mark); color: var(--mark-ink); }
+
+/* ---------- Encabezado: título + perfil de la sucesión ---------- */
+.hero {
+  position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end;
+  gap: 24px 48px; padding: 44px 0 30px; margin-bottom: 30px; border-bottom: 2px solid var(--ink);
+}
+.hero-text { display: grid; gap: 14px; max-width: 40rem; }
+.topbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; grid-column: 1 / -1; margin-bottom: 8px; }
+.course { font: italic 400 1rem/1.3 var(--f-text); color: var(--muted); }
+.hero h1 {
+  font-size: clamp(2.8rem, 7vw, 5.4rem); font-weight: 850; font-stretch: 118%; letter-spacing: -.035em; line-height: .92;
+}
+.hero p.lede { color: var(--muted); font-size: 1.12rem; max-width: 36rem; }
+.seq { display: grid; gap: 10px; justify-items: end; min-width: 0; max-width: 100%; }
+.seq-label { font: 500 .88rem/1.3 var(--f-ui); color: var(--muted); text-align: right; }
+.seq-list { display: flex; align-items: flex-end; gap: 2px; overflow-x: auto; max-width: 100%; padding: 4px 2px 2px; scrollbar-width: thin; }
+.seq-list button {
+  --h: 0; position: relative; display: grid; justify-items: center; align-content: end; gap: 6px;
+  min-width: 40px; padding: 0 2px 6px; border: 0; background: none; cursor: pointer; color: var(--ink);
+  font: 600 .82rem/1 var(--f-mono); font-variant-numeric: tabular-nums; border-radius: 6px;
+}
+.seq-list button::before {
+  content: ""; width: calc(22px + var(--h) * 26px); height: calc(5px + var(--h) * 62px);
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  background: linear-gradient(90deg, var(--rock-lit-hi) 50%, var(--rock-sh-hi) 50%);
+  transition: background .2s, transform .25s cubic-bezier(.2, .9, .3, 1.3); transform-origin: 50% 100%;
+}
+.seq-list button:hover:not(:disabled)::before { transform: scaleY(1.08); background: linear-gradient(90deg, var(--accent) 50%, color-mix(in srgb, var(--accent) 70%, var(--ink)) 50%); }
+.seq-list button:disabled { cursor: default; color: var(--muted); }
+.seq-list button:disabled::before { display: none; }
+.seq-list button[aria-current="true"]::before { background: linear-gradient(90deg, var(--mark) 50%, color-mix(in srgb, var(--mark) 72%, var(--ink)) 50%); }
+.seq-list button[aria-current="true"] { color: var(--ink); text-decoration: underline 2px var(--mark); text-underline-offset: 4px; }
+.seq-list button small { font: 500 .66rem/1 var(--f-ui); color: var(--muted); }
+.theme-btn {
+  font: 600 .85rem/1 var(--f-ui); padding: 8px 12px; border-radius: 999px; cursor: pointer;
+  border: 1px solid var(--line); background: var(--surface); color: var(--muted); transition: color .15s, border-color .15s;
+}
+.theme-btn:hover { color: var(--ink); border-color: var(--ink); }
+@media (max-width: 860px) {
+  .hero { grid-template-columns: minmax(0, 1fr); padding-top: 28px; }
+  .seq { justify-items: start; }
+  .seq-label { text-align: left; }
+}
+
+/* ---------- Distribución principal ---------- */
+.layout { display: grid; grid-template-columns: minmax(340px, 380px) minmax(0, 1fr); gap: clamp(28px, 3vw, 48px); align-items: start; }
+.calc-col { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 18px); display: grid; gap: 16px; }
+@media (max-width: 980px) {
+  .layout { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .calc-col { position: static; max-width: 460px; width: 100%; margin-inline: auto; }
+}
+@media (max-width: 420px) {
+  .calc { padding: 18px 16px 22px; gap: 18px; }
+  .keys { gap: 10px; }
+  .key { height: 58px; }
+}
+
+/* ---------- Calculadora: objeto físico con pantalla LCD reflectiva ---------- */
+.calc {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--device) 88%, #fff) 0, var(--device) 60px);
+  border: 1px solid var(--device-edge); border-radius: 30px 30px 38px 38px; padding: 24px 24px 28px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.08), inset 0 -3px 0 rgba(0,0,0,.25), 0 30px 50px -30px rgba(8, 20, 15, .7);
+  display: grid; gap: 22px;
+}
+.calc-brand { display: flex; justify-content: space-between; align-items: baseline; color: #9DB0A6; font: 500 .85rem/1 var(--f-ui); padding-inline: 6px; }
+.calc-brand b { color: #EEF2EC; font: 800 1.2rem/1 var(--f-ui); font-stretch: 120%; letter-spacing: .01em; }
+.lcd {
+  position: relative; background: linear-gradient(170deg, color-mix(in srgb, var(--lcd) 92%, #fff), var(--lcd) 55%);
+  border-radius: 12px; padding: 16px 18px 12px; height: 196px; overflow: hidden;
+  display: flex; flex-direction: column; gap: 8px; color: var(--lcd-ink);
+  box-shadow: inset 0 3px 8px rgba(0,0,0,.35), 0 0 0 6px #0F1A16, 0 0 0 7px rgba(255,255,255,.06);
+  margin: 6px;
+}
+.lcd::after { /* reflejo del vidrio */
+  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+  background: linear-gradient(115deg, rgba(255,255,255,.28) 0 18%, transparent 18.5%);
+  mix-blend-mode: soft-light;
+}
+.lcd-expr { font: 500 16px/1.2 var(--f-mono); color: var(--lcd-dim); text-align: right; min-height: 1.2em; }
+.lcd-val {
+  flex: 1; display: flex; align-items: flex-end; justify-content: flex-end; text-align: right;
+  font: 600 2.9rem/1.12 var(--f-mono); font-variant-numeric: tabular-nums; letter-spacing: -.02em;
+  word-break: break-all; overflow: hidden; min-height: 0;
+  text-shadow: 1px 1px 0 var(--lcd-ghost), 2px 2px 0 var(--lcd-ghost);
+}
+.lcd-val.s1 { font-size: 2.1rem; } .lcd-val.s2 { font-size: 1.45rem; } .lcd-val.s3 { font-size: 1.08rem; }
+.lcd-val.placeholder { color: var(--lcd-dim); font: 500 1.05rem/1.2 var(--f-ui); }
+.lcd-val.pop { animation: lcdPop .45s steps(4, end); }
+@keyframes lcdPop { from { opacity: .1; } }
+.caret { display: inline-block; width: .55ch; height: 1em; background: var(--lcd-ink); vertical-align: -.12em; margin-left: 2px; animation: blink 1s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+.lcd-foot { display: flex; justify-content: space-between; gap: 10px; font: 500 13px/1.3 var(--f-mono); color: var(--lcd-dim); }
+.lcd-foot .warn { color: var(--lcd-ink); font-weight: 600; }
+
+.keys { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+.key {
+  height: 66px; border: 0; border-radius: 14px 14px 16px 16px; cursor: pointer;
+  background: var(--key); color: var(--key-ink); font: 600 1.55rem/1 var(--f-mono);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.1), inset 0 -2px 0 rgba(0,0,0,.2), 0 3px 0 rgba(0,0,0,.4);
+  transition: transform .06s, filter .12s, box-shadow .06s;
+}
+.key:hover { filter: brightness(1.15); }
+.key:active, .key.pressed { transform: translateY(2px); box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 1px 0 rgba(0,0,0,.4); filter: brightness(1.25); }
+.key.fn { background: var(--key-fn); font: 650 1.1rem/1 var(--f-ui); }
+.key.alt { background: var(--key-alt); font: 700 1.02rem/1 var(--f-ui); }
+.key.go { background: var(--mark); color: var(--mark-ink); grid-row: span 3; height: auto; font: 850 1.7rem/1 var(--f-ui); font-stretch: 110%; }
+.key.zero { grid-column: span 3; }
+.calc-hint { display: grid; grid-template-columns: repeat(2, auto); justify-content: center; gap: 6px 22px; font: 500 .86rem/1.5 var(--f-ui); color: var(--muted); margin: 0; padding: 0; list-style: none; }
+.calc-hint kbd { font: 600 .74rem/1 var(--f-mono); padding: 2px 6px; border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 5px; background: var(--surface); color: var(--ink); }
+
+/* ---------- Pestañas ---------- */
+.content { min-width: 0; display: grid; gap: 0; }
+.tabs { display: flex; gap: 4px; padding-left: 14px; overflow-x: auto; scrollbar-width: none; }
+@media (max-width: 560px) { .tabs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); padding-left: 0; gap: 2px; } .tab { padding: 10px 8px; font-size: .86rem; gap: 6px; text-align: left; line-height: 1.15; } .tab span { flex: none; } }
+.tab {
+  position: relative; background: none; border: 1px solid transparent; border-bottom: 0; border-radius: 12px 12px 0 0;
+  padding: 12px 18px 12px 14px; cursor: pointer; color: var(--muted);
+  font: 650 1rem/1.2 var(--f-ui); display: flex; gap: 10px; align-items: center; transition: color .15s, background .15s;
+}
+.tab span {
+  display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%;
+  border: 1.5px solid currentColor; font: 700 .72rem/1 var(--f-ui);
+}
+.tab:hover { color: var(--ink); background: color-mix(in srgb, var(--surface) 50%, transparent); }
+.tab[aria-selected="true"] { color: var(--ink); background: var(--surface); border-color: var(--line); margin-bottom: -1px; z-index: 1; }
+.tab[aria-selected="true"] span { background: var(--ink); border-color: var(--ink); color: var(--surface); }
+
+.panel {
+  position: relative; background: var(--surface); border: 1px solid var(--line); border-radius: 18px;
+  padding: clamp(18px, 3.2vw, 36px); display: grid; gap: 28px; min-width: 0;
+  animation: panelIn .3s ease-out;
+}
+@keyframes panelIn { from { opacity: 0; } }
+.ph { display: grid; gap: 10px; }
+.ph h2 { font-size: clamp(1.7rem, 3vw, 2.4rem); font-weight: 800; font-stretch: 108%; letter-spacing: -.02em; }
+.ph h3 { font-size: 1.35rem; font-weight: 750; letter-spacing: -.01em; }
+.ph p { color: var(--muted); max-width: 64ch; }
+
+.split { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 24px; align-items: start; }
+@media (max-width: 1180px) { .split { grid-template-columns: minmax(0, 1fr); } }
+.col-label { font: 650 .92rem/1 var(--f-ui); color: var(--ink); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+.col-label::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+.col-label.prog { color: var(--muted); }
+
+/* ---------- Notación matemática ---------- */
+.mathbox { display: grid; gap: 18px; overflow-x: auto; }
+.eq { font: 400 1.2rem/1.5 var(--f-text); display: flex; flex-wrap: wrap; align-items: center; gap: .35em; }
+.eq.big { font-size: 1.5rem; }
+.eq .v { font-style: italic; }
+.step { border-left: 2px solid var(--line); padding-left: 16px; display: grid; gap: 6px; }
+.step-k { font: 600 .86rem/1.2 var(--f-ui); color: var(--muted); }
+.frac { display: inline-flex; flex-direction: column; text-align: center; vertical-align: middle; line-height: 1.25; }
+.frac > span:first-child { border-bottom: 1.5px solid currentColor; padding: 0 .3em .1em; }
+.frac > span:last-child { padding: .1em .3em 0; }
+.binom { display: inline-flex; align-items: center; }
+.binom .paren { font-size: 2.4em; font-weight: 300; line-height: 1; transform: scaleX(.7); }
+.binom .stack { display: inline-flex; flex-direction: column; text-align: center; line-height: 1.2; }
+.sigma { display: inline-flex; flex-direction: column; align-items: center; line-height: 1; vertical-align: middle; }
+.sigma .sym { font-size: 2em; line-height: .95; }
+.sigma .lim { font-size: .62em; font-style: italic; }
+.num { font-family: var(--f-mono); font-size: .9em; font-variant-numeric: tabular-nums; word-break: break-all; }
+.num small { font-family: var(--f-ui); color: var(--muted); }
+.mk { background: var(--mark); color: var(--mark-ink); padding: .05em .35em; border-radius: 4px; font-weight: 700; box-decoration-break: clone; }
+
+/* ---------- Código ---------- */
+.code { background: var(--code-bg); border-radius: 12px; overflow: hidden; min-width: 0; box-shadow: 0 1px 0 rgba(255,255,255,.04) inset; }
+.code-h { display: flex; justify-content: space-between; gap: 10px; padding: 10px 16px; border-bottom: 1px solid var(--code-line); font: 500 12px/1.2 var(--f-ui); color: var(--code-com); }
+.code-h span:first-child { font-family: var(--f-mono); color: var(--code-ink); }
+.code pre { margin: 0; padding: 14px 16px 16px; overflow-x: auto; font: 13px/1.7 var(--f-mono); color: var(--code-ink); tab-size: 2; }
+.code .kw { color: var(--code-kw); } .code .nu { color: var(--code-num); } .code .co { color: var(--code-com); font-style: italic; }
+
+/* ---------- Puente matemática / programación ---------- */
+.bridge { border-top: 1px solid var(--line); padding-top: 22px; display: grid; gap: 14px; }
+.bridge h3 { font-size: 1.15rem; font-weight: 750; }
+.bridge-rows { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 0 32px; }
+.brow { display: grid; grid-template-columns: auto minmax(16px, 1fr) auto; align-items: baseline; gap: 10px; padding: 10px 0; border-bottom: 1px dotted var(--line); }
+.brow .m { font: 600 1rem/1.35 var(--f-text); }
+.brow .a { border-bottom: 1px dashed var(--line); align-self: center; }
+.brow .p { font: 500 .84rem/1.4 var(--f-mono); color: var(--accent); text-align: right; }
+
+/* ---------- Recurrencia ---------- */
+.cells { display: flex; flex-wrap: wrap; gap: 6px; }
+.cell {
+  min-width: 58px; border: 1px solid var(--line); border-radius: 8px; padding: 6px 8px; text-align: center;
+  display: grid; gap: 2px; transition: background .2s, border-color .2s, transform .2s;
+}
+.cell .ci { font: 500 11px/1 var(--f-mono); color: var(--muted); }
+.cell .cv { font: 600 14px/1.2 var(--f-mono); font-variant-numeric: tabular-nums; word-break: break-all; }
+.cell.target { border: 1.5px dashed var(--ink); }
+.cell.hl { background: var(--accent-soft); border-color: var(--accent); transform: translateY(-2px); }
+.cell.now { background: var(--mark); color: var(--mark-ink); border-color: var(--mark); border-style: solid; animation: settle .5s cubic-bezier(.2, .9, .3, 1.4); }
+.cell.now .ci { color: var(--mark-ink); }
+@keyframes settle { from { transform: translateY(-10px) scale(1.1); } }
+.row-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.btn {
+  border: 1.5px solid var(--ink); background: var(--ink); color: var(--surface); border-radius: 999px;
+  padding: 10px 18px; font: 650 .95rem/1 var(--f-ui); cursor: pointer;
+  transition: background .15s, color .15s, transform .1s;
+}
+.btn:hover:not(:disabled) { background: color-mix(in srgb, var(--ink) 85%, var(--accent)); }
+.btn:active:not(:disabled) { transform: translateY(1px); }
+.btn.ghost { background: transparent; color: var(--ink); border-color: var(--line); }
+.btn.ghost:hover:not(:disabled) { background: var(--paper); border-color: var(--ink); }
+.btn:disabled { opacity: .4; cursor: not-allowed; }
+.caption { font: 500 .95rem/1.45 var(--f-ui); color: var(--ink); min-height: 1.45em; overflow-wrap: anywhere; padding: 12px 16px; border-left: 3px solid var(--mark); background: color-mix(in srgb, var(--mark) 12%, transparent); border-radius: 0 8px 8px 0; }
+.note { font-size: .95rem; color: var(--muted); }
+
+/* ---------- Recurrencia -> código ---------- */
+.ok { color: var(--ok); font-weight: 700; }
+.pc { display: inline-flex; align-items: center; padding: .08em .32em; border-radius: 6px; border-bottom: 3px solid currentColor; transition: background .15s; }
+.p1 { color: var(--c1); } .p2 { color: var(--c2); } .p3 { color: var(--c3); } .p4 { color: var(--c4); } .p5 { color: var(--c5); }
+.pc.on { background: var(--accent-soft); }
+.code .ln { display: block; margin-inline: -16px; padding-inline: 12px 16px; border-left: 4px solid transparent; transition: background .15s; }
+.code .ln.l1 { border-left-color: var(--k1); } .code .ln.l2 { border-left-color: var(--k2); } .code .ln.l3 { border-left-color: var(--k3); }
+.code .ln.l4 { border-left-color: var(--k4); } .code .ln.l5 { border-left-color: var(--k5); }
+.code .ln.on { background: rgba(255, 255, 255, .09); }
+.code .ln.act { background: rgba(242, 192, 74, .22); }
+.maprows { display: grid; }
+.maphead, .maprow { display: grid; grid-template-columns: minmax(140px, 1fr) minmax(200px, 1.3fr) minmax(0, 2fr); gap: 18px; align-items: center; }
+.maphead { padding: 0 14px 10px; font: 650 .86rem/1 var(--f-ui); color: var(--muted); border-bottom: 2px solid var(--ink); }
+.maprow { padding: 14px; border-bottom: 1px solid var(--line); transition: background .15s; }
+.maprow.on { background: var(--accent-soft); }
+.maprow .mm { font: 600 1.05rem/1.3 var(--f-text); }
+.maprow code { justify-self: start; font: 13px/1.5 var(--f-mono); background: var(--code-bg); color: var(--code-ink); padding: 4px 9px; border-radius: 6px; border-left: 4px solid; white-space: pre-wrap; }
+.maprow .mx { color: var(--muted); font-size: .96rem; }
+@media (max-width: 760px) { .maphead { display: none; } .maprow { grid-template-columns: minmax(0, 1fr); gap: 6px; padding-inline: 0; } }
+.trace { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px; align-items: start; }
+@media (max-width: 1180px) { .trace { grid-template-columns: minmax(0, 1fr); } }
+.trace-side { display: grid; gap: 16px; min-width: 0; }
+.rep-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; }
+.rep { border-collapse: collapse; width: 100%; font: 14px/1.2 var(--f-mono); font-variant-numeric: tabular-nums; }
+.rep th, .rep td { padding: 10px 12px; text-align: center; white-space: nowrap; }
+.rep thead th { color: var(--muted); font: 600 .82rem/1.2 var(--f-ui); border-bottom: 1px solid var(--line); }
+.rep tbody tr + tr td { border-top: 1px solid var(--line-soft); }
+.rep .rc { color: var(--accent); font-weight: 700; }
+.rep tr.new td { background: var(--accent-soft); }
+.rep td.empty { color: var(--muted); font-family: var(--f-text); font-style: italic; }
+.note:empty { display: none; }
+.step p { max-width: 60ch; }
+
+/* ---------- Montañas ---------- */
+.nsel { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.nsel span { font: italic 1.1rem/1 var(--f-text); color: var(--ink); margin-right: 6px; }
+.nsel button { width: 42px; height: 40px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface); cursor: pointer; font: 600 15px/1 var(--f-mono); transition: border-color .15s, color .15s, background .15s; }
+.nsel button:hover { border-color: var(--ink); }
+.nsel button[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--surface); }
+
+.viz-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 20px; }
+.player { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.speed { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; overflow: hidden; }
+.speed button { border: 0; background: transparent; color: var(--muted); padding: 10px 14px; font: 600 .85rem/1 var(--f-ui); cursor: pointer; transition: background .15s, color .15s; }
+.speed button + button { border-left: 1px solid var(--line); }
+.speed button[aria-pressed="true"] { background: var(--paper); color: var(--ink); }
+
+.stage { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 20px; align-items: start; }
+@media (max-width: 1180px) { .stage { grid-template-columns: minmax(0, 1fr); } }
+.stage-draw {
+  position: relative; isolation: isolate; overflow: hidden; display: grid; gap: 12px; min-width: 0;
+  padding: 16px 16px 18px; border-radius: 16px; border: 1px solid var(--line);
+  background: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-low) 62%, var(--surface) 82%);
+}
+.stage-draw.hit { animation: hit .8s ease-out; }
+@keyframes hit { 0% { box-shadow: 0 0 0 0 var(--ok); border-color: var(--ok); } 100% { box-shadow: 0 0 0 18px transparent; } }
+.sky { position: absolute; inset: 0 0 auto; height: 60%; z-index: -1; pointer-events: none; }
+.cloud { position: absolute; left: -140px; height: 18px; width: 90px; border-radius: 99px; background: var(--cloud); animation: drift 70s linear infinite; }
+.cloud::before, .cloud::after { content: ""; position: absolute; bottom: 6px; border-radius: 50%; background: inherit; }
+.cloud::before { width: 38px; height: 30px; left: 16px; }
+.cloud::after { width: 28px; height: 22px; left: 46px; }
+.cloud.c1 { top: 22%; animation-delay: -12s; }
+.cloud.c2 { top: 44%; width: 120px; animation-duration: 95s; animation-delay: -55s; opacity: .7; }
+.cloud.c3 { top: 12%; width: 70px; animation-duration: 58s; animation-delay: -38s; opacity: .55; }
+@keyframes drift { to { left: calc(100% + 140px); } }
+
+.stage-top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px; }
+.stage-top .col-label { margin: 0; }
+.stage-top .col-label::after { display: none; }
+.stage-stats { display: flex; gap: 14px; font: 600 13px/1 var(--f-mono); color: var(--muted); font-variant-numeric: tabular-nums; }
+.stage-stats .su { color: var(--accent); } .stage-stats .sd { color: var(--hot); }
+.stage-svg { display: block; width: 100%; height: clamp(200px, 28vw, 320px); overflow: visible; }
+.stage-svg text { font: 500 12px var(--f-mono); fill: var(--muted); }
+.gridln { stroke: var(--ink); stroke-opacity: .08; stroke-width: 1; }
+.ground { stroke: var(--ink); stroke-width: 3; stroke-linecap: round; }
+.soil { fill: var(--ink); fill-opacity: .06; }
+
+/* Terreno: cada paso levanta una franja de roca desde el suelo; la cara que sube está iluminada y la que baja en sombra */
+.col { transform-box: fill-box; transform-origin: 50% 100%; }
+.col.rise { animation: rise var(--step, 220ms) cubic-bezier(.18, .9, .25, 1.18) both; }
+.col.sink { animation: sink var(--step, 220ms) ease-in forwards; }
+@keyframes rise { from { transform: scaleY(0); } }
+@keyframes sink { to { transform: scaleY(0); opacity: .3; } }
+.contour { stroke: var(--contour); stroke-width: 1; }
+.contour.minor { stroke-dasharray: 2 4; }
+.snowcap { fill: var(--snow); }
+.col.rise .snowcap { animation: snowIn calc(var(--step, 220ms) * 2) ease-out both; }
+@keyframes snowIn { 0%, 55% { opacity: 0; transform: translateY(-4px); } }
+.sg { stroke-linecap: round; fill: none; }
+.sg.up { stroke: var(--accent); } .sg.down { stroke: var(--hot); }
+.sg.drawing { stroke-dasharray: var(--len); animation: draw var(--step, 200ms) ease-out both; }
+.sg.gone { stroke-dasharray: var(--len); animation: erase var(--step, 200ms) ease-in forwards; }
+@keyframes draw { from { stroke-dashoffset: var(--len); } to { stroke-dashoffset: 0; } }
+@keyframes erase { from { stroke-dashoffset: 0; } to { stroke-dashoffset: var(--len); opacity: .25; } }
+.ex { stroke: var(--ink); stroke-opacity: .35; stroke-width: 2; stroke-dasharray: 2 6; stroke-linecap: round; }
+.vx { fill: var(--surface); stroke: var(--ink); stroke-width: 2; transform-box: fill-box; transform-origin: center; }
+.vx.pop { animation: dotIn var(--step, 200ms) ease-out both; }
+.vx.gone { animation: dotOut var(--step, 200ms) ease-in forwards; }
+@keyframes dotIn { 0%, 60% { transform: scale(0); } 100% { transform: scale(1); } }
+@keyframes dotOut { to { transform: scale(0); } }
+.climber { transition: transform var(--step, 200ms) cubic-bezier(.3, .7, .3, 1); }
+.climber .halo { fill: var(--mark); transform-box: fill-box; transform-origin: center; animation: halo 1.4s ease-out infinite; }
+@keyframes halo { from { transform: scale(.6); opacity: .7; } to { transform: scale(1.8); opacity: 0; } }
+/* Cordillera completa: la silueta se eleva con una bandera en la cima mientras se guarda */
+.lift { animation: lift 1.1s cubic-bezier(.2, .7, .3, 1) forwards; }
+.lift polyline { fill: none; stroke: var(--ok); stroke-width: 4; stroke-linejoin: round; stroke-linecap: round; }
+.lift .flag { fill: var(--ok); }
+.lift .pole { stroke: var(--ink); stroke-width: 2; }
+@keyframes lift { 0% { opacity: 0; transform: translateY(6px); } 20% { opacity: 1; transform: none; } 100% { opacity: 0; transform: translateY(-34px); } }
+#vz-terrain.glow { animation: glow .8s ease-out; }
+@keyframes glow { 30% { filter: brightness(1.25) saturate(1.2); } }
+
+.trail { display: flex; flex-wrap: wrap; align-items: center; gap: 5px; min-height: 34px; }
+.trail span { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 8px; font: 700 16px/1 var(--f-mono); }
+.trail .up { background: var(--accent-soft); color: var(--accent); }
+.trail .down { background: var(--hot-soft); color: var(--hot); }
+.trail .slot { border: 1.5px dashed var(--line); }
+.trail .new { animation: chipIn .3s cubic-bezier(.2, .9, .3, 1.4) both; }
+.trail .empty { width: auto; padding-inline: 10px; border: 1.5px dashed var(--line); color: var(--muted); font: 13px/1 var(--f-mono); }
+@keyframes chipIn { from { transform: scale(.3) translateY(8px); opacity: 0; } }
+.decision { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; min-height: 2.9em; font: 13.5px/1.5 var(--f-mono); overflow-wrap: anywhere; }
+.decision .tag { font: 700 .8rem/1 var(--f-ui); padding: 5px 9px; border-radius: 99px; white-space: nowrap; }
+.t-start, .t-pop { background: var(--paper); color: var(--muted); }
+.t-up { background: var(--accent-soft); color: var(--accent); }
+.t-down { background: var(--hot-soft); color: var(--hot); }
+.t-done, .t-end { background: var(--ok-soft); color: var(--ok); }
+.plus { position: absolute; top: 46px; right: 24px; font: 850 2rem/1 var(--f-ui); color: var(--ok); opacity: 0; pointer-events: none; }
+.plus.go { animation: plus .9s ease-out; }
+@keyframes plus { 0% { opacity: 0; transform: translateY(10px) scale(.7); } 25% { opacity: 1; transform: none; } 100% { opacity: 0; transform: translateY(-26px); } }
+
+.stage-side { display: grid; gap: 16px; min-width: 0; }
+.tally { display: grid; gap: 10px; padding: 18px 18px 16px; border: 1px solid var(--line); border-radius: 16px; }
+.tally-k { font: 600 .9rem/1.2 var(--f-ui); color: var(--muted); }
+.tally-k code { font: 500 .82rem/1 var(--f-mono); }
+.tally-n { display: flex; align-items: baseline; gap: 8px; font-variant-numeric: tabular-nums; }
+.tally-n b { display: inline-block; font: 850 clamp(2.8rem, 6vw, 4rem)/1 var(--f-ui); font-stretch: 112%; letter-spacing: -.03em; transition: color .3s; }
+.tally-n b.bump { animation: bump .45s cubic-bezier(.2, .9, .3, 1.5); }
+@keyframes bump { 40% { transform: scale(1.22); color: var(--ok); } }
+.tally-n span { font: 600 1.2rem/1 var(--f-mono); color: var(--muted); }
+.tally.complete .tally-n b { color: var(--ok); }
+/* barra de avance dibujada como un perfil de cumbres */
+.bar { position: relative; height: 12px; background: var(--line-soft); overflow: hidden; clip-path: polygon(0 100%, 0 40%, 4% 0, 8% 40%, 12% 10%, 16% 50%, 20% 0, 26% 45%, 31% 5%, 36% 50%, 41% 15%, 46% 40%, 52% 0, 57% 45%, 62% 10%, 68% 50%, 73% 5%, 78% 40%, 83% 0, 88% 45%, 93% 10%, 97% 40%, 100% 20%, 100% 100%); }
+.bar i { display: block; width: 0; height: 100%; background: var(--ok); transition: width .4s ease-out; }
+.math-row { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.verdict { font-size: 1.05rem; }
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 12px; }
+.viz-legend { display: flex; flex-wrap: wrap; gap: 10px 22px; font: 500 .9rem/1 var(--f-ui); color: var(--muted); }
+.viz-legend span { display: inline-flex; align-items: center; gap: 8px; }
+.viz-legend span::before { content: ""; display: inline-block; width: 20px; height: 4px; border-radius: 2px; background: currentColor; }
+.viz-legend .lu { color: var(--accent); font-weight: 650; } .viz-legend .ld { color: var(--hot); font-weight: 650; }
+.viz-legend .lr::before { width: 16px; height: 12px; border-radius: 0; clip-path: polygon(50% 0, 100% 100%, 0 100%); background: linear-gradient(90deg, var(--rock-lit-hi) 50%, var(--rock-sh-hi) 50%); }
+.viz-legend .lx::before { background: repeating-linear-gradient(90deg, currentColor 0 2px, transparent 2px 6px); }
+.viz-legend .lg::before { width: 12px; height: 12px; border: 1px solid var(--line); background: none; border-radius: 2px; }
+.card-top { width: 100%; display: flex; justify-content: space-between; align-items: center; }
+.card .count { font: 600 12px/1 var(--f-mono); color: var(--muted); display: flex; gap: 8px; }
+.cu { color: var(--accent); } .cd { color: var(--hot); }
+.steps { width: 100%; display: flex; justify-content: space-between; gap: 2px; font: 700 15px/1 var(--f-mono); padding-inline: 2px; }
+.steps .up { color: var(--accent); } .steps .down { color: var(--hot); }
+.steps.empty { justify-content: center; color: var(--muted); font-weight: 400; font-size: 13px; }
+.zero-note { padding: 14px 16px; border-radius: 0 10px 10px 0; border-left: 3px solid var(--accent); background: var(--accent-soft); max-width: 70ch; }
+.card {
+  border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px 12px; display: grid; gap: 8px; align-content: end; min-width: 0;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--sky-top) 45%, var(--surface)), var(--surface) 70%); transition: opacity .3s;
+}
+.card.slot { border-style: dashed; opacity: .5; background: transparent; }
+.card.slot.next { opacity: 1; border-color: var(--ink); animation: slotPulse 1.2s ease-in-out infinite; }
+@keyframes slotPulse { 50% { box-shadow: 0 0 0 4px var(--line-soft); } }
+.card.fresh { animation: cardIn .7s cubic-bezier(.2, .9, .3, 1.2) both; }
+@keyframes cardIn {
+  0% { transform: scale(.92); opacity: .4; box-shadow: 0 0 0 0 var(--ok); border-color: var(--ok); }
+  45% { transform: scale(1.03); opacity: 1; box-shadow: 0 0 0 6px var(--ok-soft); border-color: var(--ok); }
+}
+.drawin .sg { stroke-dasharray: var(--len); animation: draw .4s ease-out both; animation-delay: var(--d); }
+.drawin .vx { animation: dotIn .4s ease-out both; animation-delay: var(--d); }
+.drawin .col { animation: rise .5s cubic-bezier(.18, .9, .25, 1.18) both; animation-delay: var(--d); }
+.drawin .snowcap { animation: snowIn .7s ease-out both; animation-delay: var(--d); }
+.steps.ghost span { color: var(--line); }
+.card .idx { justify-self: start; font: 600 12px/1 var(--f-ui); color: var(--muted); }
+.card svg { width: 100%; height: auto; display: block; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+  .cloud { animation: none; left: 12%; }
+  .cloud.c2 { left: 58%; } .cloud.c3 { left: 80%; }
+}
+</style>
+
+</head>
+<body>
+<div class="page">
+  <header class="hero">
+    <div class="topbar">
+      <span class="course">Matemáticas Discretas aplicadas a la programación</span>
+      <button class="theme-btn" id="theme" type="button" aria-label="Cambiar entre tema claro y oscuro">◐ Tema</button>
+    </div>
+    <div class="hero-text">
+      <h1>Números de Catalan</h1>
+      <p class="lede">Una calculadora que muestra, paso a paso, cómo una sucesión, su término general y sus sumatorias se convierten en código.</p>
+    </div>
+    <div class="seq">
+      <span class="seq-label">La sucesión crece como una cordillera. Toca un término para calcularlo.</span>
+      <div class="seq-list" id="seq"></div>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside class="calc-col">
+      <div class="calc" role="group" aria-label="Calculadora">
+        <div class="calc-brand"><b>Catalan C(n)</b><span>n hasta 1000</span></div>
+        <div class="lcd" aria-live="polite">
+          <div class="lcd-expr" id="lcd-expr"></div>
+          <div class="lcd-val" id="lcd-val"></div>
+          <div class="lcd-foot"><span id="lcd-info"></span><span id="lcd-msg"></span></div>
+        </div>
+        <div class="keys" id="keys">
+          <button class="key fn" data-k="ac" type="button">AC</button>
+          <button class="key fn" data-k="back" type="button" aria-label="Borrar">←</button>
+          <button class="key fn" data-k="dec" type="button">n−1</button>
+          <button class="key fn" data-k="inc" type="button">n+1</button>
+          <button class="key" data-k="7" type="button">7</button>
+          <button class="key" data-k="8" type="button">8</button>
+          <button class="key" data-k="9" type="button">9</button>
+          <button class="key alt" data-k="copy" type="button">Copiar</button>
+          <button class="key" data-k="4" type="button">4</button>
+          <button class="key" data-k="5" type="button">5</button>
+          <button class="key" data-k="6" type="button">6</button>
+          <button class="key go" data-k="eq" type="button" aria-label="Calcular C de n">C(n)</button>
+          <button class="key" data-k="1" type="button">1</button>
+          <button class="key" data-k="2" type="button">2</button>
+          <button class="key" data-k="3" type="button">3</button>
+          <button class="key zero" data-k="0" type="button">0</button>
+        </div>
+      </div>
+      <ul class="calc-hint" aria-label="Atajos de teclado">
+        <li><kbd>0–9</kbd> escribir</li><li><kbd>Enter</kbd> calcular</li><li><kbd>Esc</kbd> borrar</li><li><kbd>↑</kbd> <kbd>↓</kbd> n ± 1</li>
+      </ul>
+    </aside>
+
+    <main class="content">
+      <div class="tabs" role="tablist" aria-label="Secciones">
+        <button class="tab" role="tab" id="t-formula" aria-controls="p-formula" aria-selected="true" type="button"><span>1</span>Fórmula</button>
+        <button class="tab" role="tab" id="t-comp" aria-controls="p-comp" aria-selected="false" type="button"><span>2</span>Sucesión → código</button>
+        <button class="tab" role="tab" id="t-viz" aria-controls="p-viz" aria-selected="false" type="button"><span>3</span>Montañas</button>
+      </div>
+
+      <!-- 1. Formula cerrada -->
+      <section class="panel" id="p-formula" role="tabpanel" aria-labelledby="t-formula">
+        <div class="ph">
+          <h2>El término general</h2>
+          <p>Los números de Catalan forman una sucesión. Su término general da cualquier término directamente, sin calcular los anteriores: usa factoriales y el coeficiente binomial, y divide entre n + 1.</p>
+        </div>
+        <div class="split">
+          <div><div class="col-label">Matemática</div><div class="mathbox" id="formula-math"></div></div>
+          <div><div class="col-label prog">Programación</div><div class="code"><div class="code-h"><span>formula.js</span><span>JavaScript</span></div><pre id="code-formula"></pre></div></div>
+        </div>
+        <div class="bridge">
+          <h3>De la matemática al código</h3>
+          <div class="bridge-rows" id="bridge-formula"></div>
+        </div>
+      </section>
+
+      <!-- 3. Recurrencia en el codigo -->
+      <section class="panel" id="p-comp" role="tabpanel" aria-labelledby="t-comp" hidden>
+        <div class="ph">
+          <h2>Cómo la sucesión se convierte en código</h2>
+          <p>Cada término de la sucesión se calcula con una sumatoria de los términos anteriores. Cada parte de esa fórmula se vuelve una línea del programa. El mismo color marca la misma idea en la matemática y en el código. Pasa el cursor sobre una parte para ver su pareja.</p>
+        </div>
+        <div class="split">
+          <div><div class="col-label">Matemática</div><div class="mathbox" id="map-math"></div></div>
+          <div><div class="col-label prog">Programación</div><div class="code"><div class="code-h"><span>tabla.js</span><span>JavaScript</span></div><pre id="map-code"></pre></div></div>
+        </div>
+        <div class="maprows" id="map-rows"></div>
+        <div class="ph">
+          <h3 id="tr-title">Prueba de escritorio</h3>
+          <p>Seguimos el programa línea por línea mientras calcula un valor, igual que en una prueba de escritorio. Usa el n de la calculadora.</p>
+          <p class="note" id="tr-note"></p>
+        </div>
+        <div class="trace">
+          <div class="code"><div class="code-h"><span>tabla.js</span><span>en amarillo, la línea que se ejecuta</span></div><pre id="tr-code"></pre></div>
+          <div class="trace-side">
+            <div><div class="col-label">Tabla en memoria</div><div class="cells" id="tr-mem"></div></div>
+            <div class="rep-wrap"><table class="rep" id="tr-table"></table></div>
+          </div>
+        </div>
+        <p class="caption" id="tr-caption"></p>
+        <div class="row-actions">
+          <button class="btn" id="tr-next" type="button">Siguiente paso</button>
+          <button class="btn ghost" id="tr-all" type="button">Ver todo</button>
+          <button class="btn ghost" id="tr-reset" type="button">Reiniciar</button>
+        </div>
+      </section>
+
+      <!-- 4. Biyecciones -->
+      <section class="panel" id="p-viz" role="tabpanel" aria-labelledby="t-viz" hidden>
+        <div class="ph">
+          <h2>¿Qué cuenta C(n)?</h2>
+          <p>C(n) es el número de cordilleras que se pueden dibujar con n subidas ↗ y n bajadas ↘ sin pasar nunca por debajo del suelo. El programa las dibuja todas y las cuenta.</p>
+        </div>
+        <div class="viz-bar">
+          <div class="nsel" id="viz-sel"><span>n =</span></div>
+          <div class="player">
+            <button class="btn" id="vz-play" type="button">▶ Generar</button>
+            <button class="btn ghost" id="vz-step" type="button">Un paso</button>
+            <button class="btn ghost" id="vz-all" type="button">Ver todas</button>
+            <div class="speed" id="vz-speed" role="group" aria-label="Velocidad">
+              <button type="button" data-s="lento" aria-pressed="false">Lento</button>
+              <button type="button" data-s="normal" aria-pressed="true">Normal</button>
+              <button type="button" data-s="rapido" aria-pressed="false">Rápido</button>
+            </div>
+          </div>
+        </div>
+        <p class="zero-note" id="viz-zero" hidden>Con n = 0 no hay subidas ni bajadas. La única cordillera posible es no dibujar nada: quedarse en el suelo. Eso cuenta como <b>1 forma</b>, y por eso C(0) = 1. Es el primer término de la sucesión, el que usan la fórmula y el programa.</p>
+        <div class="stage">
+          <div class="stage-draw" id="vz-stage">
+            <div class="sky" aria-hidden="true"><span class="cloud c1"></span><span class="cloud c2"></span><span class="cloud c3"></span></div>
+            <div class="stage-top"><span class="col-label">El programa levanta la cordillera</span><span class="stage-stats" id="vz-stats"></span></div>
+            <svg class="stage-svg" id="vz-svg" aria-hidden="true"></svg>
+            <div class="trail" id="vz-trail"></div>
+            <p class="decision" id="vz-decision"></p>
+            <span class="plus" id="vz-plus" aria-hidden="true">+1</span>
+          </div>
+          <div class="stage-side">
+            <div class="tally" id="vz-tally">
+              <span class="tally-k">Cordilleras encontradas, <code>out.length</code></span>
+              <div class="tally-n"><b id="vz-count">0</b><span id="vz-total">/ 14</span></div>
+              <div class="bar"><i id="vz-bar"></i></div>
+              <p class="verdict" id="viz-verdict" aria-live="polite"></p>
+            </div>
+            <div class="code"><div class="code-h"><span>generar.js</span><span>en amarillo, la línea que se ejecuta</span></div><pre id="code-bt"></pre></div>
+          </div>
+        </div>
+        <div class="viz-legend"><span class="lu">↗ subida</span><span class="ld">↘ bajada</span><span class="lr">roca levantada por el camino actual</span><span class="lx">camino ya explorado</span><span class="lg">cada cuadrito es un paso</span></div>
+        <div class="cards" id="viz-cards"></div>
+        <div><div class="col-label">Matemática</div><div class="mathbox math-row">
+          <div class="step"><span class="step-k">Regla</span><div class="eq">n pasos ↗ &nbsp;y&nbsp; n pasos ↘</div></div>
+          <div class="step"><span class="step-k">Restricción</span><div class="eq">en cada momento: &nbsp;#↗ ≥ #↘</div><p class="note">Contando desde la izquierda, nunca hay más bajadas que subidas: el camino no pasa bajo el suelo.</p></div>
+          <div class="step"><span class="step-k">Resultado</span><div class="eq">número de cordilleras = <span class="mk">C(n)</span></div></div>
+        </div></div>
+        <div class="bridge">
+          <h3>De la matemática al código</h3>
+          <div class="bridge-rows" id="bridge-viz"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+
+<script>
+(() => {
+  "use strict";
+  const MAX_N = 1000;
+  const $ = (s) => document.querySelector(s);
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ===================== Matemática (BigInt: enteros sin límite) ===================== */
+  function factorial(n) {               // n! = 1 · 2 · ... · n
+    let r = 1n;
+    for (let k = 2n; k <= n; k++) r *= k;
+    return r;
+  }
+  function catalan(n) {                 // C(k+1) = C(k) · 2(2k+1) / (k+2), división exacta
+    let c = 1n;
+    for (let k = 0n; k < BigInt(n); k++) c = c * 2n * (2n * k + 1n) / (k + 2n);
+    return c;
+  }
+  function tablaCatalan(n) {            // programación dinámica con la recurrencia Σ
+    const C = [1n];
+    for (let m = 1; m <= n; m++) {
+      let suma = 0n;
+      for (let i = 0; i < m; i++) suma += C[i] * C[m - 1 - i];
+      C[m] = suma;
+    }
+    return C;
+  }
+  function generar(n) {                 // backtracking: cordilleras de n subidas y n bajadas
+    const out = [];
+    (function bt(camino, subidas, bajadas) {
+      if (camino.length === 2 * n) { out.push(camino); return; }
+      if (subidas < n) bt(camino + "↗", subidas + 1, bajadas);
+      if (bajadas < subidas) bt(camino + "↘", subidas, bajadas + 1);
+    })("", 0, 0);
+    return out;
+  }
+
+  /* ===================== Código que se muestra ===================== */
+  const CODE = {
+    formula:
+`// n! = 1 · 2 · 3 · … · n
+function factorial(n) {
+  let r = 1n;                 // BigInt: enteros sin límite
+  for (let k = 2n; k <= n; k++) r *= k;
+  return r;
+}
+
+// C(n) = (2n)! / ((n+1)! · n!)
+function catalanFormula(n) {
+  return factorial(2n * n) /
+         (factorial(n + 1n) * factorial(n));
+}`,
+    bt:
+`// Todas las cordilleras con n subidas y n bajadas
+function generar(n) {
+  const out = [];
+  function bt(camino, subidas, bajadas) {
+    if (camino.length === 2 * n) {   // cordillera completa
+      out.push(camino);
+      return;
+    }
+    if (subidas < n)                 // aún puedo subir
+      bt(camino + "↗", subidas + 1, bajadas);
+    if (bajadas < subidas)           // bajar sin pasar el suelo
+      bt(camino + "↘", subidas, bajadas + 1);
+  }
+  bt("", 0, 0);
+  return out;                        // out.length === C(n)
+}`
+  };
+
+  const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  function highlight(code) {
+    return esc(code).replace(/(\/\/.*$)|\b(function|let|const|for|if|return)\b|\b(\d+n?)\b/gm,
+      (m, co, kw, nu) => co ? `<span class="co">${co}</span>` : kw ? `<span class="kw">${kw}</span>` : `<span class="nu">${nu}</span>`);
+  }
+  $("#code-formula").innerHTML = highlight(CODE.formula);
+  $("#code-bt").innerHTML = CODE.bt.split("\n").map((t) => `<span class="ln">${highlight(t)}</span>`).join("");
+
+  const BRIDGES = {
+    formula: [["n! (factorial)", "bucle que multiplica"], ["C(2n, n) binomial", "factorial(2n) / (n!·n!)"], ["Números enormes", "BigInt (sufijo n)"], ["División exacta", "operador / sin decimales"]],
+    viz: [["Cada paso ↗ o ↘", "llamada recursiva"], ["#↗ ≥ #↘", "if (bajadas < subidas)"], ["Cordillera completa", "camino.length === 2n"], ["Total = C(n)", "out.length"]]
+  };
+  for (const [k, rows] of Object.entries(BRIDGES)) {
+    $("#bridge-" + k).innerHTML = rows.map(([m, p]) =>
+      `<div class="brow"><span class="m">${esc(m)}</span><span class="a" aria-hidden="true"></span><span class="p">${esc(p)}</span></div>`).join("");
+  }
+
+  /* ===================== Formato ===================== */
+  const group = (s) => s.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  function short(b, max = 34) {
+    const s = b.toString();
+    if (s.length <= max) return group(s);
+    return `${s.slice(0, 10)}…${s.slice(-6)} <small>(${s.length} dígitos)</small>`;
+  }
+  const num = (b, max) => `<span class="num">${short(b, max)}</span>`;
+  const frac = (a, b) => `<span class="frac"><span>${a}</span><span>${b}</span></span>`;
+  const binom = (a, b) => `<span class="binom"><span class="paren">(</span><span class="stack"><span>${a}</span><span>${b}</span></span><span class="paren">)</span></span>`;
+  const sigma = (top, bot) => `<span class="sigma"><span class="lim">${top}</span><span class="sym">Σ</span><span class="lim">${bot}</span></span>`;
+  /* ===================== Tema claro / oscuro (útil con proyectores) ===================== */
+  const root = document.documentElement;
+  try { const t = localStorage.getItem("catalan-theme"); if (t) root.dataset.theme = t; } catch (e) {}
+  $("#theme").addEventListener("click", () => {
+    const dark = root.dataset.theme ? root.dataset.theme === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
+    root.dataset.theme = dark ? "light" : "dark";
+    try { localStorage.setItem("catalan-theme", root.dataset.theme); } catch (e) {}
+  });
+
+  const SUP = { "0": "⁰", "1": "¹", "2": "²", "3": "³", "4": "⁴", "5": "⁵", "6": "⁶", "7": "⁷", "8": "⁸", "9": "⁹" };
+  const sup = (k) => String(k).split("").map((d) => SUP[d]).join("");
+
+  /* ===================== Calculadora ===================== */
+  let entry = "5";
+  let current = 5;
+  let showing = true;
+  let resultText = "";
+  let msgTimer = null;
+
+  function flash(text) {
+    const m = $("#lcd-msg");
+    m.textContent = text; m.className = "warn";
+    clearTimeout(msgTimer);
+    msgTimer = setTimeout(() => { m.textContent = ""; }, 2600);
+  }
+
+  function renderDisplay() {
+    const expr = $("#lcd-expr"), val = $("#lcd-val"), info = $("#lcd-info");
+    val.className = "lcd-val";
+    if (showing) {
+      expr.textContent = `C(${current}) =`;
+      const s = resultText;
+      // La pantalla tiene alto fijo: los números muy largos se muestran por sus extremos (Copiar da el número completo)
+      const LCD_MAX = 72;
+      val.textContent = s.length > LCD_MAX ? `${s.slice(0, 24)}…${s.slice(-12)}` : group(s);
+      if (s.length > 40) val.classList.add("s3");
+      else if (s.length > 16) val.classList.add("s2");
+      else if (s.length > 10) val.classList.add("s1");
+      info.textContent = s.length > LCD_MAX ? `${s.length} dígitos, se ven los extremos` : `${s.length} ${s.length === 1 ? "dígito" : "dígitos"}`;
+    } else {
+      expr.innerHTML = `n = ${esc(entry)}<span class="caret"></span>`;
+      val.textContent = entry === "" ? "Escribe n" : "Pulsa C(n)";
+      val.classList.add("placeholder");
+      info.textContent = `máx. n = ${MAX_N}`;
+    }
+    document.querySelectorAll("#seq button").forEach((b) =>
+      b.setAttribute("aria-current", String(showing && Number(b.dataset.n) === current)));
+  }
+
+  function compute(n) {
+    current = n; entry = String(n); showing = true;
+    resultText = catalan(n).toString();
+    renderDisplay();
+    const val = $("#lcd-val");
+    void val.offsetWidth; val.classList.add("pop");
+    renderFormula(n);
+    renderTrace(n);
+    if (n <= 5) setViz(n);
+  }
+
+  function press(k) {
+    if (/^\d$/.test(k)) {
+      if (showing) { entry = ""; showing = false; }
+      const next = entry === "0" ? k : entry + k;
+      if (Number(next) > MAX_N) { flash(`máximo n = ${MAX_N}`); return; }
+      entry = next; renderDisplay(); return;
+    }
+    switch (k) {
+      case "ac": entry = ""; showing = false; renderDisplay(); break;
+      case "back": showing = false; entry = entry.slice(0, -1); renderDisplay(); break;
+      case "eq":
+        if (entry === "") { flash("escribe un valor de n"); return; }
+        compute(Number(entry)); break;
+      case "inc": {
+        const n = entry === "" ? -1 : Number(entry);
+        if (n >= MAX_N) { flash(`máximo n = ${MAX_N}`); return; }
+        compute(n + 1); break;
+      }
+      case "dec": {
+        const n = entry === "" ? 0 : Number(entry);
+        if (n <= 0) { flash("n no puede ser negativo"); return; }
+        compute(n - 1); break;
+      }
+      case "copy": copyResult(); break;
+    }
+  }
+
+  function copyResult() {
+    if (!showing) { flash("primero calcula C(n)"); return; }
+    const done = () => flash("copiado");
+    const fallback = () => {            // la pantalla puede estar abreviada: se copia el número completo
+      const t = document.createElement("textarea");
+      t.value = resultText; t.setAttribute("readonly", ""); t.style.cssText = "position:fixed;opacity:0";
+      document.body.appendChild(t); t.select();
+      let ok = false;
+      try { ok = document.execCommand("copy"); } catch (e) {}
+      t.remove();
+      flash(ok ? "copiado" : "no se pudo copiar");
+    };
+    try {
+      navigator.clipboard.writeText(resultText).then(done, fallback);
+    } catch (e) { fallback(); }
+  }
+
+  $("#keys").addEventListener("click", (e) => {
+    const b = e.target.closest(".key");
+    if (b) press(b.dataset.k);
+  });
+
+  const KEYMAP = { Enter: "eq", "=": "eq", Backspace: "back", Escape: "ac", Delete: "ac", ArrowUp: "inc", ArrowDown: "dec", "+": "inc", "-": "dec" };
+  document.addEventListener("keydown", (e) => {
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    const onButton = e.target.closest && e.target.closest("button");
+    if (onButton && (e.key === "Enter" || e.key === " ")) return;
+    if ((e.key === "ArrowUp" || e.key === "ArrowDown") && onButton && onButton.closest(".tabs")) return;
+    const k = /^\d$/.test(e.key) ? e.key : KEYMAP[e.key];
+    if (!k) return;
+    e.preventDefault();
+    press(k);
+    const btn = document.querySelector(`.key[data-k="${k}"]`);
+    if (btn) { btn.classList.add("pressed"); setTimeout(() => btn.classList.remove("pressed"), 110); }
+  });
+
+  // Sucesión en el encabezado
+  // Cada término es una cumbre cuya altura crece con log C(n): se ve el crecimiento sin que los últimos aplasten a los primeros
+  const LOG_TOP = Math.log10(Number(catalan(10)) + 1);
+  $("#seq").innerHTML = Array.from({ length: 11 }, (_, i) => {
+    const c = catalan(i), h = (Math.log10(Number(c) + 1) / LOG_TOP).toFixed(3);
+    return `<button type="button" data-n="${i}" style="--h:${h}" aria-label="C(${i}) = ${c}">${c}<small>n=${i}</small></button>`;
+  }).join("") + `<button type="button" disabled aria-label="la sucesión continúa">…</button>`;
+  $("#seq").addEventListener("click", (e) => {
+    const b = e.target.closest("button[data-n]");
+    if (b) compute(Number(b.dataset.n));
+  });
+
+  /* ===================== 1. Fórmula ===================== */
+  function renderFormula(n) {
+    const N = BigInt(n);
+    const f2n = factorial(2n * N), fn = factorial(N);
+    const b = f2n / (fn * fn), c = b / (N + 1n);
+    $("#formula-math").innerHTML = `
+      <div class="step"><span class="step-k">La sucesión</span>
+        <div class="eq">C(0), C(1), C(2), C(3), C(4), … = <span class="num">1, 1, 2, 5, 14, …</span></div></div>
+      <div class="step"><span class="step-k">Término general</span><div class="eq big"><span class="v">C(n)</span> = ${frac("1", "n + 1")} · ${binom("2n", "n")} = ${frac("(2n)!", "(n + 1)! · n!")}</div></div>
+      <div class="step"><span class="step-k">Paso 1 · sustituir n = ${n}</span>
+        <div class="eq">C(${n}) = ${frac(1, n + 1)} · ${binom(2 * n, n)}</div></div>
+      <div class="step"><span class="step-k">Paso 2 · coeficiente binomial</span>
+        <div class="eq">${binom(2 * n, n)} = ${frac(`${2 * n}!`, `${n}! · ${n}!`)} = ${frac(num(f2n), `${num(fn)} · ${num(fn)}`)} = <b>${num(b)}</b></div></div>
+      <div class="step"><span class="step-k">Paso 3 · dividir entre n + 1</span>
+        <div class="eq">C(${n}) = ${frac(num(b), n + 1)} = <span class="mk num">${short(c)}</span></div></div>`;
+  }
+
+  /* ===================== 3. Recurrencia -> código ===================== */
+  const MAP_LINES = [
+    ["function catalanTabla(n) {", 0],
+    ["  const C = [1n];          // C(0) = 1", 1],
+    ["  for (let m = 1; m <= n; m++) { // m = 1…n", 2],
+    ["    let suma = 0n;         // Σ empieza en 0", 3],
+    ["    for (let i = 0; i < m; i++) // i = 0…m−1", 3],
+    ["      suma += C[i] * C[m - 1 - i];", 4],
+    ["    C[m] = suma;           // guarda C(m)", 5],
+    ["  }", 0],
+    ["  return C[n];", 0],
+    ["}", 0]
+  ];
+  const codeLines = () => MAP_LINES.map(([t, c]) =>
+    `<span class="ln${c ? " l" + c : ""}"${c ? ` data-p="${c}"` : ""}>${highlight(t)}</span>`).join("");
+  $("#map-code").innerHTML = codeLines();
+  $("#tr-code").innerHTML = codeLines();
+  $("#map-math").innerHTML = `
+    <div class="step"><span class="step-k">Primer término</span>
+      <div class="eq big"><span class="pc p1" data-p="1">C(0) = 1</span></div></div>
+    <div class="step"><span class="step-k">Cada término sale de los anteriores</span>
+      <div class="eq big"><span class="pc p5" data-p="5">C(m)</span> = <span class="pc p3" data-p="3">${sigma("m−1", "i = 0")}</span><span class="pc p4" data-p="4">C(i) · C(m−1−i)</span></div>
+      <div class="eq"><span class="pc p2" data-p="2">para m = 1, 2, …, n</span></div>
+      <p class="note">La Σ es una sumatoria: suma productos de términos anteriores de la misma sucesión.</p></div>`;
+
+  const MAP_ROWS = [
+    [1, "C(0) = 1", "const C = [1n];", "Primer término: la tabla empieza con el único valor que conocemos sin calcular. Sin él, el programa no tendría por dónde empezar."],
+    [2, "m = 1, 2, …, n", "for (let m = 1; m <= n; m++)", "Calcula los términos de la sucesión en orden, porque cada uno necesita a los anteriores."],
+    [3, "Σ desde i = 0 hasta m−1", "let suma = 0n;\nfor (let i = 0; i < m; i++)", "La sumatoria (Σ) se vuelve un bucle que acumula: la suma empieza en 0 y el for recorre cada valor de i."],
+    [4, "C(i) · C(m−1−i)", "suma += C[i] * C[m - 1 - i];", "Cada sumando multiplica dos términos anteriores que ya están guardados en la tabla."],
+    [5, "C(m) = …", "C[m] = suma;", "El resultado se guarda en la tabla para que los siguientes valores lo puedan usar."]
+  ];
+  $("#map-rows").innerHTML = `<div class="maphead"><span>Matemática</span><span>Código</span><span>Qué hace</span></div>` +
+    MAP_ROWS.map(([c, m, code, x]) => `<div class="maprow" data-p="${c}" tabindex="0">
+      <span class="mm p${c}">${esc(m)}</span><code style="border-left-color:var(--k${c})">${esc(code)}</code><span class="mx">${esc(x)}</span></div>`).join("");
+
+  const mapPanel = $("#p-comp");
+  const setOn = (p, on) => mapPanel.querySelectorAll(`[data-p="${p}"]`).forEach((el) => el.classList.toggle("on", on));
+  ["mouseover", "focusin"].forEach((ev) => mapPanel.addEventListener(ev, (e) => {
+    const t = e.target.closest("[data-p]"); if (t) setOn(t.dataset.p, true);
+  }));
+  ["mouseout", "focusout"].forEach((ev) => mapPanel.addEventListener(ev, (e) => {
+    const t = e.target.closest("[data-p]"); if (t) setOn(t.dataset.p, false);
+  }));
+
+  // Prueba de escritorio
+  let tr = { m: 1, step: 0, C: [1n, 1n] };
+  function renderTrace(n) {
+    const m = Math.max(1, Math.min(n, 7));
+    tr = { m, step: 0, C: tablaCatalan(m) };
+    $("#tr-note").textContent = n === 0
+      ? "C(0) es el primer término: ya está en la tabla y no se calcula. Aquí se muestra C(1)."
+      : n > 7 ? `Se muestra C(7) para que la tabla quepa en pantalla (tu n es ${n}).` : "";
+    $("#tr-title").textContent = `Prueba de escritorio: calcular C(${m})`;
+    $("#tr-mem").innerHTML = tr.C.slice(0, m).map((v, i) =>
+      `<div class="cell" id="trc${i}"><span class="ci">C[${i}]</span><span class="cv">${v}</span></div>`).join("") +
+      `<div class="cell target" id="trc${m}"><span class="ci">C[${m}]</span><span class="cv">?</span></div>`;
+    drawTrace();
+  }
+  function drawTrace() {
+    const { m, step, C } = tr;
+    let rows = "", suma = 0n;
+    for (let i = 0; i < Math.min(step, m); i++) {
+      const a = C[i], b = C[m - 1 - i], prod = a * b;
+      suma += prod;
+      rows += `<tr class="${i === step - 1 ? "new" : ""}"><td>${i}</td><td>${a}</td><td>${b}</td><td>${a} · ${b} = ${prod}</td><td class="rc">${suma}</td></tr>`;
+    }
+    $("#tr-table").innerHTML = `<thead><tr><th>i</th><th>C[i]</th><th>C[${m}−1−i]</th><th>producto</th><th>suma</th></tr></thead>` +
+      `<tbody>${rows || `<tr><td colspan="5" class="empty">suma = 0 · todavía no hay términos</td></tr>`}</tbody>`;
+    const active = step === 0 ? [3] : step <= m ? [4, 5] : [6];
+    document.querySelectorAll("#tr-code .ln").forEach((el, k) => el.classList.toggle("act", active.includes(k)));
+    document.querySelectorAll("#tr-mem .cell").forEach((c) => c.classList.remove("hl", "now"));
+    const target = $("#trc" + m);
+    let cap;
+    if (step === 0) {
+      cap = `Queremos C[${m}]. La tabla ya tiene C[0] … C[${m - 1}]. Primero: suma = 0.`;
+      target.querySelector(".cv").textContent = "?";
+    } else if (step <= m) {
+      const i = step - 1, a = C[i], b = C[m - 1 - i];
+      $("#trc" + i).classList.add("hl"); $("#trc" + (m - 1 - i)).classList.add("hl");
+      cap = `i = ${i}: lee C[${i}] = ${a} y C[${m - 1 - i}] = ${b} de la tabla, los multiplica (${a * b}) y lo suma: suma = ${suma}.`;
+      target.querySelector(".cv").textContent = "?";
+    } else {
+      target.classList.add("now");
+      target.querySelector(".cv").textContent = String(suma);
+      cap = `Terminó el for: C[${m}] = ${suma} y se guarda en la tabla.${suma === catalan(m) ? " Coincide con la calculadora ✓" : ""}`;
+    }
+    $("#tr-caption").textContent = cap;
+    $("#tr-next").disabled = step > m;
+  }
+  $("#tr-next").addEventListener("click", () => { if (tr.step <= tr.m) { tr.step++; drawTrace(); } });
+  $("#tr-all").addEventListener("click", () => { tr.step = tr.m + 1; drawTrace(); });
+  $("#tr-reset").addEventListener("click", () => { tr.step = 0; drawTrace(); });
+
+  /* ===================== 4. Biyecciones ===================== */
+  let vizN = 4;
+  $("#viz-sel").insertAdjacentHTML("beforeend",
+    [0, 1, 2, 3, 4, 5].map((k) => `<button type="button" data-n="${k}" aria-pressed="false">${k}</button>`).join(""));
+  $("#viz-sel").addEventListener("click", (e) => {
+    const b = e.target.closest("button[data-n]");
+    if (b) setViz(Number(b.dataset.n));
+  });
+
+  /* --- Terreno: cada paso levanta una franja de roca desde el suelo --- */
+  let rockId = 0;
+  function rockDefs(id, yTop, yBase) {
+    const grad = (name, hi, lo) => `<linearGradient id="${id}-${name}" gradientUnits="userSpaceOnUse" x1="0" x2="0" y1="${yTop}" y2="${yBase}">` +
+      `<stop offset="0" style="stop-color:var(${hi})"/><stop offset="1" style="stop-color:var(${lo})"/></linearGradient>`;
+    return `<defs>${grad("lit", "--rock-lit-hi", "--rock-lit-lo")}${grad("sh", "--rock-sh-hi", "--rock-sh-lo")}</defs>`;
+  }
+  // Franja bajo el paso (a, b0) -> (a + 1, b1). La cara que sube recibe luz, la que baja queda en sombra.
+  // peak: el paso anterior subía, así que en x = a hay una cima y lleva nieve.
+  function colInner(a, b0, b1, X, Y, u, id, peak) {
+    const up = b1 > b0, o = .6, hi = Math.max(b0, b1), lo = Math.min(b0, b1);
+    let g = `<polygon points="${X(a) - o},${Y(0)} ${X(a) - o},${Y(b0)} ${X(a + 1) + o},${Y(b1)} ${X(a + 1) + o},${Y(0)}" style="fill:url(#${id}-${up ? "lit" : "sh"})"/>`;
+    for (let L = .5; L < hi; L += .5) {          // curvas de nivel cada media altura
+      let x0 = X(a), x1 = X(a + 1);
+      if (L > lo) { const f = (hi - L) * u; if (up) x0 = X(a + 1) - f; else x1 = X(a) + f; }
+      g += `<line class="contour${L % 1 ? " minor" : ""}" x1="${x0}" x2="${x1}" y1="${Y(L)}" y2="${Y(L)}"/>`;
+    }
+    if (peak) {
+      const px = X(a), py = Y(b0), d = u * .34;
+      g += `<polygon class="snowcap" points="${[[-d, d], [0, 0], [d, d], [d * .5, d * .72], [d * .12, d * .98], [-d * .28, d * .7], [-d * .62, d * .9]]
+        .map(([dx, dy]) => `${px + dx},${py + dy}`).join(" ")}"/>`;
+    }
+    return g;
+  }
+
+  // w === null: marco vacío de una cordillera que el programa todavía no encuentra
+  function dyckSVG(w, n) {
+    if (n === 0) {                     // cordillera vacía: solo el suelo
+      return `<svg viewBox="0 0 160 70" aria-hidden="true">
+        <line class="ground" style="stroke-width:2" x1="20" x2="140" y1="50" y2="50"/>
+        <circle class="vx" cx="80" cy="50" r="5"/>
+        ${w === null ? "" : `<text x="80" y="28" text-anchor="middle" style="font:500 12px var(--f-ui);fill:var(--muted)">inicio = fin</text>`}</svg>`;
+    }
+    const u = 24, pad = 12, len = (u * Math.SQRT2).toFixed(1);
+    const W = 2 * n * u + 2 * pad, H = n * u + 2 * pad;
+    const X = (a) => pad + a * u, Y = (b) => H - pad - b * u;
+    let h = 0;
+    const pts = [[0, 0]];
+    [...(w || "")].forEach((ch, k) => { h += ch === "↗" ? 1 : -1; pts.push([k + 1, h]); });
+    const id = "rk" + (++rockId);
+    let g = rockDefs(id, Y(n), Y(0));
+    // cuadricula para poder contar pasos y alturas
+    for (let a = 0; a <= 2 * n; a++) g += `<line class="gridln" x1="${X(a)}" x2="${X(a)}" y1="${Y(0)}" y2="${Y(n)}"/>`;
+    for (let b = 1; b <= n; b++) g += `<line class="gridln" x1="${X(0)}" x2="${X(2 * n)}" y1="${Y(b)}" y2="${Y(b)}"/>`;
+    // roca: una franja por paso que se levanta desde el suelo (--d escalona la aparición)
+    for (let k = 1; k < pts.length; k++) {
+      const peak = k > 1 && w[k - 2] === "↗" && w[k - 1] === "↘";
+      g += `<g class="col" style="--d:${k * 55}ms">${colInner(pts[k - 1][0], pts[k - 1][1], pts[k][1], X, Y, u, id, peak)}</g>`;
+    }
+    g += `<line class="ground" style="stroke-width:2" x1="${X(0)}" x2="${X(2 * n)}" y1="${Y(0)}" y2="${Y(0)}"/>`;
+    // cada paso con su color: subida azul glaciar, bajada siena
+    for (let k = 1; k < pts.length; k++) {
+      const [a0, b0] = pts[k - 1], [a1, b1] = pts[k];
+      g += `<line class="sg ${b1 > b0 ? "up" : "down"}" style="--len:${len}px;--d:${k * 55 + 120}ms" x1="${X(a0)}" y1="${Y(b0)}" x2="${X(a1)}" y2="${Y(b1)}" stroke-width="3.5"/>`;
+    }
+    if (w) g += pts.map(([a, b], k) => `<circle class="vx" style="--d:${k * 55 + 120}ms;stroke-width:1.5" cx="${X(a)}" cy="${Y(b)}" r="3"/>`).join("");
+    return `<svg viewBox="0 0 ${W} ${H}" aria-hidden="true">${g}</svg>`;
+  }
+  function stepsHTML(w) {
+    if (w === "") return `<div class="steps empty">sin pasos</div>`;
+    return `<div class="steps">${[...w].map((ch) => `<span class="${ch === "↗" ? "up" : "down"}">${ch}</span>`).join("")}</div>`;
+  }
+
+  function cardHTML(i, w, n) {
+    const found = w !== null;
+    const steps = found ? stepsHTML(w) : n === 0 ? `<div class="steps empty">sin pasos</div>`
+      : `<div class="steps ghost">${"<span>·</span>".repeat(2 * n)}</div>`;
+    return `<div class="card-top"><span class="idx">#${i + 1}</span><span class="count">${found
+      ? `<b class="cu">${n} ↗</b><b class="cd">${n} ↘</b>` : "por encontrar"}</span></div>${dyckSVG(w, n)}${steps}`;
+  }
+
+  /* --- Reproductor: repite el backtracking de generar(n) evento por evento --- */
+  // Cada llamada recursiva produce eventos: "up"/"down" (agrega un paso), "pop" (vuelve atrás), "done" (out.push)
+  function eventos(n) {
+    const ev = [];
+    (function bt(camino, subidas, bajadas) {
+      if (camino.length === 2 * n) { ev.push({ t: "done", w: camino }); return; }
+      if (subidas < n) { ev.push({ t: "up" }); bt(camino + "↗", subidas + 1, bajadas); ev.push({ t: "pop" }); }
+      if (bajadas < subidas) { ev.push({ t: "down" }); bt(camino + "↘", subidas, bajadas + 1); ev.push({ t: "pop" }); }
+    })("", 0, 0);
+    while (ev.length && ev[ev.length - 1].t === "pop") ev.pop();   // la última cordillera queda dibujada
+    return ev;
+  }
+
+  const SVGNS = "http://www.w3.org/2000/svg";
+  const SU = 44, SPAD = { l: 34, r: 16, t: 18, b: 16 };
+  const SEG_LEN = (SU * Math.SQRT2).toFixed(1) + "px";
+  const SPEED = { lento: 2.4, normal: 1, rapido: .35 };
+  const CODE_HL = { start: [13], up: [8, 9], down: [10, 11], pop: [12], done: [4, 5], end: [14] };
+  let speed = "normal";
+  let P = null;
+
+  const svgEl = (tag, attrs) => {
+    const el = document.createElementNS(SVGNS, tag);
+    for (const k in attrs) el.setAttribute(k, attrs[k]);
+    return el;
+  };
+  const restart = (el, cls) => { el.classList.remove(cls); void el.getBoundingClientRect(); el.classList.add(cls); };
+  const vizVisible = () => !$("#p-viz").hidden;
+
+  function stageFrame(n) {
+    const nn = Math.max(n, 1);
+    const W = 2 * nn * SU + SPAD.l + SPAD.r, H = nn * SU + SPAD.t + SPAD.b;
+    const X = (a) => SPAD.l + a * SU, Y = (b) => H - SPAD.b - b * SU;
+    let g = rockDefs("vz", Y(nn), Y(0));
+    for (let a = 0; a <= 2 * nn; a++) g += `<line class="gridln" x1="${X(a)}" x2="${X(a)}" y1="${Y(0)}" y2="${Y(nn)}"/>`;
+    for (let b = 0; b <= nn; b++) {
+      if (b) g += `<line class="gridln" x1="${X(0)}" x2="${X(2 * nn)}" y1="${Y(b)}" y2="${Y(b)}"/>`;
+      g += `<text x="${X(0) - 12}" y="${Y(b) + 4}" text-anchor="end">${b}</text>`;
+    }
+    g += `<rect class="soil" x="${X(0)}" y="${Y(0)}" width="${X(2 * nn) - X(0)}" height="${SPAD.b}"/>`;
+    g += `<g id="vz-explored"></g><g id="vz-terrain"></g>`;
+    g += `<line class="ground" x1="${X(0)}" x2="${X(2 * nn)}" y1="${Y(0)}" y2="${Y(0)}"/>`;
+    g += `<g id="vz-segs"></g><circle class="vx" cx="${X(0)}" cy="${Y(0)}" r="5"/><g id="vz-dots"></g><g id="vz-fx"></g>`;
+    g += `<g id="vz-climber" class="climber" style="transform:translate(${X(0)}px,${Y(0)}px)"><circle class="halo" r="15"/><circle r="8" style="fill:var(--mark);stroke:var(--ink);stroke-width:2"/></g>`;
+    const svg = $("#vz-svg");
+    svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+    svg.innerHTML = g;
+    return { X, Y };
+  }
+
+  // Al completar una cordillera, su silueta se eleva con una bandera en la cumbre más alta
+  function liftRidge() {
+    const { X, Y } = P.geo;
+    const [ta, tb] = P.pts.reduce((m, p) => (p[1] > m[1] ? p : m));
+    const x = X(ta), y = Y(tb);
+    const fx = svgEl("g", { class: "lift" });
+    fx.innerHTML = `<polyline points="${P.pts.map(([a, b]) => X(a) + "," + Y(b)).join(" ")}"/>` +
+      `<line class="pole" x1="${x}" x2="${x}" y1="${y}" y2="${y - 32}"/><polygon class="flag" points="${x},${y - 32} ${x + 22},${y - 25} ${x},${y - 18}"/>`;
+    $("#vz-fx").appendChild(fx);
+    setTimeout(() => fx.remove(), 1200);
+  }
+
+  function setViz(n) {
+    if (P) clearTimeout(P.timer);
+    vizN = n;
+    document.querySelectorAll("#viz-sel button").forEach((b) => b.setAttribute("aria-pressed", String(Number(b.dataset.n) === n)));
+    const ev = eventos(n), total = Number(catalan(n));
+    P = { n, ev, total, i: 0, found: 0, pts: [[0, 0]], word: "", explored: new Set(), timer: null, playing: false, resume: false, d: 200 };
+    P.geo = stageFrame(n);
+    $("#viz-zero").hidden = n !== 0;
+    $("#vz-total").textContent = `/ ${total}`;
+    $("#vz-tally").classList.remove("complete");
+    $("#viz-verdict").textContent = `Buscando todas las cordilleras con n = ${n}. Deben salir C(${n}) = ${total}.`;
+    $("#viz-cards").innerHTML = Array.from({ length: total }, (_, i) =>
+      `<div class="card slot${i === 0 ? " next" : ""}">${cardHTML(i, null, n)}</div>`).join("");
+    renderStage(null, false);
+    syncControls();
+    if (reduceMotion) finishAll();
+    else if (vizVisible()) play();
+  }
+
+  function apply(e, anim) {
+    const { X, Y } = P.geo;
+    if (e.t === "up" || e.t === "down") {
+      const [a, b] = P.pts[P.pts.length - 1], nb = b + (e.t === "up" ? 1 : -1);
+      const peak = e.t === "down" && P.word.slice(-1) === "↗";
+      P.pts.push([a + 1, nb]);
+      P.word += e.t === "up" ? "↗" : "↘";
+      const key = `${a},${b},${nb}`;
+      if (!P.explored.has(key)) {         // rastro punteado de todo lo que el programa ya probó
+        P.explored.add(key);
+        $("#vz-explored").appendChild(svgEl("line", { x1: X(a), y1: Y(b), x2: X(a + 1), y2: Y(nb), class: "ex" }));
+      }
+      const col = svgEl("g", { class: `col${anim ? " rise" : ""}` });
+      col.innerHTML = colInner(a, b, nb, X, Y, SU, "vz", peak);
+      $("#vz-terrain").appendChild(col);
+      $("#vz-segs").appendChild(svgEl("line", { x1: X(a), y1: Y(b), x2: X(a + 1), y2: Y(nb), "stroke-width": 6,
+        class: `sg ${e.t}${anim ? " drawing" : ""}`, style: `--len:${SEG_LEN}` }));
+      $("#vz-dots").appendChild(svgEl("circle", { cx: X(a + 1), cy: Y(nb), r: 5, class: `vx${anim ? " pop" : ""}` }));
+    } else if (e.t === "pop") {
+      P.pts.pop();
+      P.word = P.word.slice(0, -1);
+      const segs = $("#vz-segs").querySelectorAll(".sg:not(.gone)"), dots = $("#vz-dots").querySelectorAll(".vx:not(.gone)");
+      const cols = $("#vz-terrain").querySelectorAll(".col:not(.sink)"), col = cols[cols.length - 1];
+      const gone = [segs[segs.length - 1], dots[dots.length - 1]];
+      if (anim) {                         // la franja se hunde de vuelta al suelo mientras se borra el trazo
+        gone.forEach((el) => el.classList.add("gone"));
+        col.classList.remove("rise"); col.classList.add("sink");
+        setTimeout(() => [...gone, col].forEach((el) => el.remove()), P.d + 60);
+      } else [...gone, col].forEach((el) => el.remove());
+    } else {
+      P.found++;
+      const card = $("#viz-cards").children[P.found - 1];
+      card.className = "card" + (anim ? " fresh drawin" : "");
+      card.innerHTML = cardHTML(P.found - 1, e.w, P.n);
+      const next = $("#viz-cards").children[P.found];
+      if (next) next.classList.add("next");
+      if (anim) {
+        restart($("#vz-stage"), "hit"); restart($("#vz-plus"), "go"); restart($("#vz-count"), "bump");
+        restart($("#vz-terrain"), "glow"); liftRidge();
+      }
+    }
+    renderStage(e, anim);
+  }
+
+  function renderStage(e, anim) {
+    const { n, pts, word } = P, { X, Y } = P.geo;
+    const last = pts[pts.length - 1];
+    $("#vz-climber").style.transform = `translate(${X(last[0])}px, ${Y(last[1])}px)`;
+    const s = [...word].filter((c) => c === "↗").length, b = word.length - s;
+    $("#vz-stats").innerHTML = n ? `<span class="su">↗ ${s}/${n}</span><span class="sd">↘ ${b}/${n}</span><span>altura ${last[1]}</span>` : "<span>n = 0</span>";
+    const grew = anim && e && (e.t === "up" || e.t === "down");
+    $("#vz-trail").innerHTML = n === 0 ? `<span class="empty">camino = ""</span>` :
+      Array.from({ length: 2 * n }, (_, k) => k < word.length
+        ? `<span class="${word[k] === "↗" ? "up" : "down"}${grew && k === word.length - 1 ? " new" : ""}">${word[k]}</span>`
+        : `<span class="slot"></span>`).join("");
+    const kind = e ? e.t : "start";
+    const [tag, txt] = {
+      start: ["inicio", `bt("", 0, 0): el camino está vacío, en el suelo`],
+      up: ["sube ↗", `subidas = ${s - 1} &lt; n = ${n}, así que llama bt(camino + "↗")`],
+      down: ["baja ↘", `bajadas = ${b - 1} &lt; subidas = ${s}, así que llama bt(camino + "↘")`],
+      pop: ["retrocede", "backtracking: vuelve un paso atrás para probar la otra opción"],
+      done: ["¡completa!", `camino.length = ${2 * n}: out.push(camino) guarda la cordillera #${P.found}`]
+    }[kind];
+    $("#vz-decision").innerHTML = `<span class="tag t-${kind}">${tag}</span><span>${txt}</span>`;
+    setCodeHL(CODE_HL[kind]);
+    $("#vz-count").textContent = P.found;
+    $("#vz-bar").style.width = (P.found / P.total * 100) + "%";
+  }
+
+  function setCodeHL(lines) {
+    document.querySelectorAll("#code-bt .ln").forEach((el, k) => el.classList.toggle("act", lines.includes(k)));
+  }
+
+  function stepTime() {                 // ~11 s de trazo por n, ajustado por la velocidad elegida
+    return Math.round(Math.min(420, Math.max(60, 11000 / P.ev.length)) * SPEED[speed]);
+  }
+  function tick() {
+    const e = P.ev[P.i++];
+    P.d = stepTime();
+    $("#vz-stage").style.setProperty("--step", P.d + "ms");
+    apply(e, true);
+    if (P.i >= P.ev.length) { finished(); return; }
+    const wait = e.t === "done" ? P.d * 2 + 350 : e.t === "pop" ? P.d * .75 : P.d;
+    P.timer = setTimeout(tick, wait);
+  }
+  function play() {
+    if (P.playing) return;
+    if (P.i >= P.ev.length) { setViz(P.n); return; }   // repetir desde cero
+    P.playing = true;
+    syncControls();
+    tick();
+  }
+  function pause() {
+    clearTimeout(P.timer);
+    P.playing = false;
+    syncControls();
+  }
+  function stepOnce() {
+    if (P.i >= P.ev.length) return;
+    pause();
+    P.d = Math.max(stepTime(), 320);
+    $("#vz-stage").style.setProperty("--step", P.d + "ms");
+    apply(P.ev[P.i++], true);
+    if (P.i >= P.ev.length) finished(); else syncControls();
+  }
+  function finishAll() {
+    clearTimeout(P.timer);
+    while (P.i < P.ev.length) apply(P.ev[P.i++], false);
+    finished();
+  }
+  function finished() {
+    P.playing = false;
+    $("#vz-tally").classList.add("complete");
+    $("#vz-decision").innerHTML = `<span class="tag t-end">fin</span><span>return out: el programa encontró ${P.found} ${P.found === 1 ? "cordillera" : "cordilleras"}</span>`;
+    setCodeHL(CODE_HL.end);
+    const okk = P.found === P.total;
+    $("#viz-verdict").innerHTML = `El programa dibujó <b class="num">${P.found}</b> cordilleras distintas y C(${P.n}) = <b class="num">${P.total}</b> ${okk ? `<span class="ok">✓ coinciden</span>` : ""}`;
+    syncControls();
+  }
+  function syncControls() {
+    const end = P.i >= P.ev.length;
+    $("#vz-play").textContent = P.playing ? "❚❚ Pausa" : end ? "↻ Repetir" : P.i ? "▶ Continuar" : "▶ Generar";
+    $("#vz-step").disabled = end;
+    $("#vz-all").disabled = end;
+  }
+  // Al salir de la pestaña se pausa; al volver continúa (o empieza si aún no arrancó)
+  function onTab(id) {
+    if (!P) return;
+    if (id === "t-viz") {
+      if (P.resume) { P.resume = false; play(); }
+      else if (P.i === 0 && !P.playing && !reduceMotion) {
+        const mine = P;
+        setTimeout(() => { if (P === mine && vizVisible() && P.i === 0 && !P.playing) play(); }, 450);
+      }
+    } else if (P.playing) { pause(); P.resume = true; }
+  }
+
+  $("#vz-play").addEventListener("click", () => (P.playing ? pause() : play()));
+  $("#vz-step").addEventListener("click", stepOnce);
+  $("#vz-all").addEventListener("click", finishAll);
+  $("#vz-speed").addEventListener("click", (e) => {
+    const b = e.target.closest("button[data-s]");
+    if (!b) return;
+    speed = b.dataset.s;
+    $("#vz-speed").querySelectorAll("button").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+  });
+
+  /* ===================== Pestañas ===================== */
+  const tabs = [...document.querySelectorAll(".tab")];
+  function selectTab(t, focus) {
+    tabs.forEach((x) => {
+      const on = x === t;
+      x.setAttribute("aria-selected", String(on));
+      x.tabIndex = on ? 0 : -1;
+      document.getElementById(x.getAttribute("aria-controls")).hidden = !on;
+    });
+    if (focus) t.focus();
+    try { localStorage.setItem("catalan-tab", t.id); } catch (e) {}
+    onTab(t.id);
+  }
+  tabs.forEach((t, i) => {
+    t.addEventListener("click", () => selectTab(t));
+    t.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowRight") { e.preventDefault(); e.stopPropagation(); selectTab(tabs[(i + 1) % tabs.length], true); }
+      if (e.key === "ArrowLeft") { e.preventDefault(); e.stopPropagation(); selectTab(tabs[(i - 1 + tabs.length) % tabs.length], true); }
+    });
+  });
+
+  /* ===================== Inicio ===================== */
+  compute(5);
+  setViz(4);
+  const hashMap = { formula: "t-formula", recurrencia: "t-comp", complejidad: "t-comp", codigo: "t-comp", biyecciones: "t-viz", montanas: "t-viz", sucesion: "t-comp" };
+  let startTab = hashMap[location.hash.slice(1)];
+  if (!startTab) { try { startTab = localStorage.getItem("catalan-tab"); } catch (e) {} }
+  const st = startTab && document.getElementById(startTab);
+  selectTab(st || tabs[0]);
+})();
+</script>
+
+</body>
+</html>
